@@ -112,12 +112,3 @@
 
 .stats-skeleton .skeleton-card  { height: 110px; }
 .stats-skeleton .skeleton-chart { height: 280px; }
-
-/* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 768px) {
-    .stats-overview-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 480px) {
-    .stats-overview-grid { grid-template-columns: 1fr 1fr; }
-}
