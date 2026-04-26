@@ -4,11 +4,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin'); // NEW
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const PATHS = {
-    src: path.join(__dirname, 'src')
+    src:    path.resolve(__dirname, 'src'),
+    styles: path.resolve(__dirname, 'styles'),   // root-level, not src/styles
 };
 
 module.exports = (env, argv) => {
@@ -57,11 +58,18 @@ module.exports = (env, argv) => {
             },
         },
         devServer: {
-            static: {
-                directory: path.resolve(__dirname, 'src'),
-                publicPath: '/',
-                watch: true, // Live-reload when template HTML files change
-            },
+            static: [
+                {
+                    directory: PATHS.src,       // GET /ui/pages/X.html → src/ui/pages/X.html
+                    publicPath: '/',
+                    watch: true,
+                },
+                {
+                    directory: PATHS.styles,    // GET /styles/fontawesome/... → styles/fontawesome/...
+                    publicPath: '/styles',
+                    watch: true,
+                },
+            ],
             historyApiFallback: true,
             port: 3000,
             hot: true,
@@ -78,25 +86,25 @@ module.exports = (env, argv) => {
             new MiniCssExtractPlugin({
                 filename: 'css/[name].[contenthash].css',
             }),
+
             new CopyWebpackPlugin({
                 patterns: [
                     {
-                        from: path.resolve(__dirname, 'src/ui'),
+                        from: path.join(PATHS.src, 'ui'),
                         to:   path.resolve(__dirname, 'dist/ui'),
                         globOptions: {
-                            ignore: ['**/*.js'], // Bundled by webpack; don't duplicate
+                            ignore: ['**/*.js'],
                         },
                         noErrorOnMissing: true,
                     },
                     {
-                        from: path.resolve(__dirname, 'src/styles'),
-                        to:   path.resolve(__dirname, 'dist/styles'),
+                        from: PATHS.styles,                           // root styles/
+                        to:   path.resolve(__dirname, 'dist/styles'), // → dist/styles/
                         noErrorOnMissing: true,
                     },
                 ],
             }),
 
-            // PurgeCSS only in production — keep dev builds fast
             ...(isProduction ? [
                 new PurgeCSSPlugin({
                     paths: glob.sync([

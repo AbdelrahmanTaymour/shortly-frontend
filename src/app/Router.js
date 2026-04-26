@@ -2,22 +2,6 @@
  * Router — URL Routing and Page Navigation
  *
  * RESPONSIBILITY: Match URL to route config, load templates, manage history.
- *
- * ALLOWED:
- *   ✅ Match URL to route configuration (including dynamic :param segments)
- *   ✅ Load and cache HTML templates
- *   ✅ Manage browser history (pushState, popstate)
- *   ✅ Emit NAVIGATION_STARTED / NAVIGATION_COMPLETED on the EventBus
- *   ✅ Enforce an Auth guard via an injected predicate function
- *   ✅ Handle 404 / fallback routes
- *
- * FORBIDDEN:
- *   ❌ Manipulate page DOM
- *   ❌ Make API calls
- *   ❌ Manage application state
- *   ❌ Know about business logic
- *   ❌ Import or reference any service class (AuthService, LinksService, etc.)
- *   ❌ Contain page-specific methods
  */
 class Router {
     constructor(eventBus) {
