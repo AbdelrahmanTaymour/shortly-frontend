@@ -1,0 +1,373 @@
+<header class="header">
+    <nav class="nav">
+        <a data-link href="/">
+            <div class="logo-text-base">Shortly</div>
+        </a>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a class="btn btn-outline" data-link href="/login" id="login-btn"
+                >Login</a
+                >
+                <a class="btn btn-primary" data-link href="/register" id="register-btn"
+                >Register</a
+                >
+            </div>
+            <div class="header-right">
+                <div id="user-profile-slot"></div>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="main-base">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1 class="hero-title">Shorten Your URLs<br/>Track Your Success</h1>
+        <p class="hero-subtitle">
+            Transform your long, messy URLs into clean, shareable links that make an
+            impact
+        </p>
+        <div class="url-form">
+            <div class="form-tabs">
+                <button class="tab-btn active" data-tab="url">
+                    <i class="fas fa-link"></i> Shorten URL
+                </button>
+                <button class="tab-btn" data-tab="qr">
+                    <i class="fas fa-qrcode"></i> Generate QR Code
+                </button>
+            </div>
+            <div class="tab-content" id="urlTab">
+                <div class="form-group-base form-group-horizontal-base">
+                    <input
+                            class="form-input"
+                            id="urlInput"
+                            placeholder="Paste your long URL here..."
+                            type="url"
+                    />
+                    <button class="btn btn-primary" id="urlShortenButton">
+                        <span class="btn-text">Shorten</span>
+                        <div class="loading-inline"></div>
+                    </button>
+                </div>
+                <div class="error-message">Invalid URL</div>
+                <div class="result" id="result">
+                    <div class="result-url">
+                        <div class="short-url" id="shortUrl">https://short.ly/abc123</div>
+                        <button class="copy-btn"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <small style="color: var(--text-secondary)"
+                    >Your shortened URL is ready to share!</small
+                    >
+                </div>
+            </div>
+            <div class="tab-content" id="qrTab" style="display: none">
+                <div class="form-group-base form-group-horizontal-base">
+                    <input
+                            class="form-input"
+                            id="qrUrlInput"
+                            placeholder="Paste URL to generate QR code..."
+                            type="url"
+                    />
+                    <button class="btn btn-primary" id="qrGenerateButton">
+                        <span class="btn-text">Generate QR</span>
+                        <div class="loading-inline"></div>
+                    </button>
+                </div>
+                <div class="error-message">Invalid URL</div>
+                <div class="result" id="qrResult">
+                    <div class="qr-container">
+                        <div class="qr-code" id="qrCode">
+                            <canvas
+                                    height="200"
+                                    style="
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  background: white;
+                "
+                                    width="200"
+                            ></canvas>
+                        </div>
+                        <div class="qr-actions">
+                            <button class="copy-btn">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                    <small style="color: var(--text-secondary)"
+                    >Your QR code is ready to download!</small
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2>Why Choose Shortly?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Lightning Fast</h3>
+                <p>
+                    Generate short URLs in milliseconds with our optimized infrastructure
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Analytics</h3>
+                <p>Track clicks, locations, and engagement with detailed analytics</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Secure & Safe</h3>
+                <p>
+                    Enterprise-grade security with spam protection and malware scanning
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                <h3>Customizable</h3>
+                <p>Create branded short URLs with custom domains and aliases</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile Ready</h3>
+                <p>Perfect experience across all devices and platforms</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-code"></i></div>
+                <h3>Developer API</h3>
+                <p>Integrate our service with powerful REST API and webhooks</p>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container-base">
+            <h2>Choose Your Plan</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3>Free</h3>
+                        <div class="price">
+                            <span class="currency">$</span> <span class="amount">0</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p class="plan-description">Try it out for free</p>
+                    </div>
+                    <div class="plan-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i> <span>5 Links per month</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i> <span>2 QR Codes per month</span>
+                        </div>
+                        <div class="feature-item disabled">
+                            <i class="fas fa-times"></i> <span>No click data retention</span>
+                        </div>
+                        <div class="feature-item disabled">
+                            <i class="fas fa-times"></i> <span>No analytics</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary plan-btn">Get Started</button>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-header">
+                        <h3>Starter</h3>
+                        <div class="price">
+                            <span class="currency">$</span> <span class="amount">10</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p class="plan-description">Unlock powerful data</p>
+                    </div>
+                    <div class="plan-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i> <span>100 Links per month</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i> <span>5 QR Codes per month</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i> <span>30 days data retention</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Link analysis & custom codes</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary plan-btn">Start Free Trial</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3>Professional</h3>
+                        <div class="price">
+                            <span class="currency">$</span> <span class="amount">50</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p class="plan-description">Create memorable brand experiences</p>
+                    </div>
+                    <div class="plan-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i> <span>500 Links per month</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i> <span>10 QR Codes per month</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i> <span>120 days data retention</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Bulk creation & link protection</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary plan-btn">Choose Professional</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 id="urlCount">1M+</h3>
+                <p>URLs Shortened</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="clickCount">10M+</h3>
+                <p>Clicks Tracked</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="userCount">50K+</h3>
+                <p>Happy Users</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="uptime">100%</h3>
+                <p>Uptime</p>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container-base">
+            <h2>Get in Touch</h2>
+            <p class="contact-subtitle">
+                Have questions? We'd love to hear from you.
+            </p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-details">
+                            <h4>Email Us</h4>
+                            <p>hello@linksnap.com</p>
+                            <small>We'll respond within 24 hours</small>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-details">
+                            <h4>Call Us</h4>
+                            <p>+1 (555) 123-4567</p>
+                            <small>Mon-Fri 9AM-6PM EST</small>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-comments"></i></div>
+                        <div class="contact-details">
+                            <h4>Live Chat</h4>
+                            <p>Available 24/7</p>
+                            <small>Click the chat icon below</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group-base">
+                            <input placeholder="Your Name" required type="text"/>
+                            <input placeholder="Your Email" required type="email"/>
+                        </div>
+                        <div class="form-group-base">
+                            <select required>
+                                <option value="">Select Subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="partnership">Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group-base">
+                            <textarea placeholder="Your Message" required rows="5"></textarea>
+                        </div>
+                        <button class="contact-btn" type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <div class="logo-text-base footer-logo">Shortly</div>
+            <p class="footer-description">
+                The modern way to shorten URLs and generate QR codes. Trusted by 50,000+
+                users worldwide.
+            </p>
+            <div class="social-links-base">
+                <a href="https://instagram.com/abdelrahman_taymour/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/abdelrahman.taymour.9" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://linkedin.com/in/ataymour/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/AbdelrahmanTaymour" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Product</h4>
+            <ul>
+                <li><a href="#">URL Shortener</a></li>
+                <li><a href="#">QR Code Generator</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">API Documentation</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press Kit</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom-base footer-bottom">
+        <div class="footer-bottom-content">
+            <p>
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+                Shortly. All rights reserved.
+            </p>
+            <div class="footer-badges">
+                <span class="badge">SOC 2 Compliant</span>
+                <span class="badge">GDPR Ready</span>
+                <span class="badge">99.9% Uptime</span>
+            </div>
+        </div>
+    </div>
+</footer>

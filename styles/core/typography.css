@@ -1,0 +1,101 @@
+/* ============================================================
+   TYPOGRAPHY — Base font scale, body text, headings, links.
+   These rules define the global reading experience.
+   If you delete a component, these styles MUST stay.
+   ============================================================ */
+
+/* --- Body --- */
+body {
+    background:    var(--dark-bg);
+    color:         var(--text-primary);
+    font-family:   "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height:   1.6;
+    min-height:    100vh;
+    overflow-x:    hidden;
+}
+
+/* Animated radial background — decorative, belongs to the global canvas */
+body::before {
+    animation: float 20s ease-in-out infinite;
+    background:
+            radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.1) 0, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(79,  172, 254, 0.1) 0, transparent 50%);
+    content:  "";
+    height:   100%;
+    left:     0;
+    position: fixed;
+    top:      0;
+    width:    100%;
+    z-index:  -1;
+}
+
+@keyframes float {
+    0%,  100% { transform: translate(0)             rotate(0deg);   }
+    33%        { transform: translate(30px, -30px)   rotate(120deg); }
+    66%        { transform: translate(-20px,  20px)  rotate(240deg); }
+}
+
+/* --- Headings --- */
+h1, h2, h3, h4 {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem;  }
+h2 { font-size: 2rem;    }
+h3 { font-size: 1.5rem;  }
+h4 { font-size: 1.25rem; }
+
+/* --- Paragraph --- */
+p { line-height: 1.6; }
+
+/* --- Links --- */
+a { transition: var(--transition-base); }
+
+/* --- Type scale utilities --- */
+.text-base {
+    font-size:   1rem;
+    line-height: 1.5rem;
+}
+
+.text-lg {
+    font-size:   1.125rem;
+    line-height: 1.75rem;
+}
+
+/* --- Text colour utilities --- */
+.text-center  { text-align: center; }
+.text-muted   { color: var(--text-muted);    }
+.text-success { color: var(--success-color); }
+.text-warning { color: var(--warning-color); }
+
+/* !important overrides used in analytics context */
+.text-success { color: var(--accent-green)  !important; }
+.text-danger  { color: var(--error-color, #f87171) !important; }
+
+/* hidden labels without broken the accessibility tree*/
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; /* prevent line breaks */
+    border: 0;
+}
+
+/* --- Global animation --- */
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}

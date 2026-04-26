@@ -1,0 +1,224 @@
+/* ============================================================
+   LINK FORM — Create / Edit link modal form.
+   Lives at: src/ui/features/links/forms/LinkForm.css
+   Scope: .create-link-form, .form-field, advanced options,
+          mode toggle (custom/random slug), toggle switches.
+   ============================================================ */
+
+/* ── Form wrapper ────────────────────────────────────────── */
+.create-link-form {
+    display:        flex;
+    flex-direction: column;
+    gap:            1.125rem;
+}
+
+/* ── Individual field ────────────────────────────────────── */
+.form-field {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.4rem;
+}
+
+.form-field label {
+    color:       var(--text-primary);
+    font-size:   0.82rem;
+    font-weight: 500;
+}
+
+.form-field label .required {
+    color:       var(--error-color);
+    margin-left: 0.2rem;
+}
+
+.form-field label .optional {
+    color:       var(--text-muted);
+    font-size:   0.72rem;
+    font-weight: 400;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    background:    hsla(0, 0%, 100%, 0.03);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    box-sizing:    border-box;
+    color:         var(--text-primary);
+    font-family:   inherit;
+    font-size:     0.875rem;
+    outline:       none;
+    padding:       0.7rem 0.9rem;
+    transition:    border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+    width:         100%;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    background:   hsla(0, 0%, 100%, 0.055);
+    border-color: #667eea;
+    box-shadow:   0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--text-muted); }
+
+.form-field textarea {
+    line-height: 1.5;
+    min-height:  76px;
+    resize:      vertical;
+}
+
+.form-field input:disabled,
+.form-field select:disabled,
+.input-disabled {
+    cursor:  not-allowed;
+    opacity: 0.45;
+}
+
+/* ── Hint text ───────────────────────────────────────────── */
+.form-hint {
+    color:       var(--text-muted);
+    font-size:   0.72rem;
+    line-height: 1.4;
+}
+
+/* ── Inline two-column row ───────────────────────────────── */
+.form-row-inline {
+    display:               grid;
+    gap:                   0.875rem;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* ── Mode toggle (Custom slug / Random slug) ─────────────── */
+.mode-toggle {
+    background:    hsla(0, 0%, 100%, 0.03);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    display:       flex;
+    margin-bottom: 0.5rem;
+    padding:       0.2rem;
+}
+
+.mode-toggle-btn {
+    background:    transparent;
+    border:        none;
+    border-radius: calc(var(--radius-sm) - 2px);
+    color:         var(--text-secondary);
+    cursor:        pointer;
+    flex:          1;
+    font-family:   inherit;
+    font-size:     0.82rem;
+    padding:       0.55rem 1rem;
+    transition:    background var(--t-fast), color var(--t-fast);
+}
+
+.mode-toggle-btn.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color:      #fff;
+}
+
+.mode-toggle-btn:hover:not(.active) {
+    background: hsla(0, 0%, 100%, 0.05);
+    color:      var(--text-primary);
+}
+
+/* ── Advanced options toggle ─────────────────────────────── */
+.advanced-options-toggle {
+    align-items:     center;
+    background:      transparent;
+    border:          1px dashed hsla(0, 0%, 100%, 0.12);
+    border-radius:   var(--radius-sm);
+    color:           var(--text-secondary);
+    cursor:          pointer;
+    display:         flex;
+    font-family:     inherit;
+    font-size:       0.82rem;
+    gap:             0.45rem;
+    justify-content: center;
+    padding:         0.65rem;
+    transition:      color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+    width:           100%;
+}
+
+.advanced-options-toggle:hover {
+    background:   hsla(0, 0%, 100%, 0.025);
+    border-color: hsla(0, 0%, 100%, 0.22);
+    color:        var(--text-primary);
+}
+
+.advanced-options-toggle i { transition: transform var(--t-base); }
+.advanced-options-toggle[aria-expanded="true"] i { transform: rotate(180deg); }
+
+/* ── Advanced options body ───────────────────────────────── */
+.advanced-options {
+    border-top:     1px solid var(--border-color);
+    display:        none;
+    flex-direction: column;
+    gap:            1.125rem;
+    margin-top:     0.75rem;
+    padding-top:    1rem;
+}
+
+.advanced-options.visible { display: flex; }
+
+/* ── Toggle switch row ───────────────────────────────────── */
+.toggle-switch-wrapper {
+    align-items:     center;
+    background:      hsla(0, 0%, 100%, 0.02);
+    border:          1px solid var(--border-color);
+    border-radius:   var(--radius-sm);
+    cursor:          pointer;
+    display:         flex;
+    gap:             1rem;
+    justify-content: space-between;
+    padding:         0.7rem 0.9rem;
+    transition:      background var(--t-fast), border-color var(--t-fast);
+}
+
+.toggle-switch-wrapper:hover {
+    background:   hsla(0, 0%, 100%, 0.04);
+    border-color: hsla(0, 0%, 100%, 0.12);
+}
+
+.toggle-switch-label {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.1rem;
+}
+
+.toggle-switch-label span  { color: var(--text-primary); font-size: 0.875rem; }
+.toggle-switch-label small { color: var(--text-muted);   font-size: 0.72rem;  }
+
+/* ── Toggle pill ─────────────────────────────────────────── */
+.toggle-switch {
+    background:    hsla(0, 0%, 100%, 0.12);
+    border-radius: 11px;
+    flex-shrink:   0;
+    height:        22px;
+    position:      relative;
+    transition:    background var(--t-base);
+    width:         40px;
+}
+
+.toggle-switch.active { background: linear-gradient(135deg, #667eea, #764ba2); }
+
+.toggle-switch::after {
+    background:    #fff;
+    border-radius: 50%;
+    box-shadow:    0 1px 3px rgba(0, 0, 0, 0.3);
+    content:       "";
+    height:        18px;
+    left:          2px;
+    position:      absolute;
+    top:           2px;
+    transition:    transform var(--t-base);
+    width:         18px;
+}
+
+.toggle-switch.active::after { transform: translateX(18px); }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .form-row-inline { grid-template-columns: 1fr; }
+}

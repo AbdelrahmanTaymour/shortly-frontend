@@ -1,0 +1,197 @@
+/* ============================================================
+   ENGAGEMENT PANEL — Click engagement metrics + DoW bar chart.
+   Lives at: src/ui/features/analytics/EngagementPanel/EngagementPanel.css
+   Scope: .engagement-*, .dow-*, .peak-*
+   ============================================================ */
+
+/* ── Grid ────────────────────────────────────────────────── */
+.engagement-grid {
+    display:               grid;
+    gap:                   1rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-bottom:         1.25rem;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.engagement-card {
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-md, 12px);
+    padding:       1rem;
+    text-align:    center;
+    transition:    transform var(--transition-fast);
+}
+
+.engagement-card:hover { transform: translateY(-2px); }
+
+/* ── Icon ────────────────────────────────────────────────── */
+.engagement-icon {
+    align-items:     center;
+    border-radius:   var(--radius-sm, 8px);
+    display:         flex;
+    font-size:       0.9rem;
+    height:          36px;
+    justify-content: center;
+    margin:          0 auto 0.625rem;
+    width:           36px;
+}
+
+.engagement-icon.accent-amber  { background: rgba(251, 191,  36, 0.12); color: #fbbf24; }
+.engagement-icon.accent-purple { background: rgba(102, 126, 234, 0.12); color: #667eea; }
+.engagement-icon.accent-blue   { background: rgba(79,  172, 254, 0.12); color: #4facfe; }
+.engagement-icon.accent-teal   { background: rgba(74,  222, 128, 0.10); color: #34d399; }
+
+/* ── Text ────────────────────────────────────────────────── */
+.engagement-value {
+    color:                var(--text-primary);
+    font-size:            1.35rem;
+    font-variant-numeric: tabular-nums;
+    font-weight:          700;
+    margin-bottom:        0.15rem;
+}
+
+.engagement-label {
+    color:          var(--text-muted);
+    font-size:      0.72rem;
+    font-weight:    600;
+    letter-spacing: 0.06em;
+    margin-bottom:  0.15rem;
+    text-transform: uppercase;
+}
+
+.engagement-desc {
+    color:       var(--text-secondary);
+    font-size:   0.72rem;
+    line-height: 1.4;
+}
+
+/* ── Empty state ─────────────────────────────────────────── */
+.engagement-empty-state {
+    align-items:   center;
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color:         var(--text-muted);
+    display:       flex;
+    flex-direction: column;
+    gap:           0.5rem;
+    margin-bottom: 1.375rem;
+    padding:       2rem 1rem;
+    text-align:    center;
+}
+
+.engagement-empty-state i   { font-size: 2rem; opacity: 0.5; }
+.engagement-empty-state p   { color: var(--text-secondary); font-size: 0.875rem; margin: 0; }
+.engagement-hint            { color: var(--text-muted); font-size: 0.75rem; }
+
+/* ── Peak hour tags ──────────────────────────────────────── */
+.peak-tags {
+    align-items: center;
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         0.5rem;
+}
+
+.peak-tag {
+    align-items:   center;
+    background:    rgba(102, 126, 234, 0.1);
+    border:        1px solid rgba(102, 126, 234, 0.25);
+    border-radius: 100px;
+    color:         #a78bfa;
+    display:       inline-flex;
+    font-size:     0.72rem;
+    gap:           0.3rem;
+    padding:       0.2rem 0.55rem;
+    white-space:   nowrap;
+}
+
+.peak-tag i { font-size: 0.65rem; }
+
+/* ── Day-of-week bar chart ───────────────────────────────── */
+.dow-chart {
+    align-items: flex-end;
+    display:     flex;
+    gap:         0.5rem;
+    height:      140px;
+    padding:     0.5rem 0;
+}
+
+.dow-col {
+    align-items:    center;
+    display:        flex;
+    flex:           1;
+    flex-direction: column;
+    gap:            0.35rem;
+    height:         100%;
+}
+
+.dow-bar-track {
+    align-items:     flex-end;
+    background:      hsla(0, 0%, 100%, 0.04);
+    border-radius:   4px 4px 0 0;
+    display:         flex;
+    flex:            1;
+    justify-content: center;
+    min-height:      0;
+    overflow:        hidden;
+    padding-bottom:  0;
+    width:           100%;
+}
+
+.dow-bar-fill {
+    background:    rgba(102, 126, 234, 0.3);
+    border-radius: 4px 4px 0 0;
+    max-width:     36px;
+    min-height:    4px;
+    transition:    height 0.5s ease;
+    width:         100%;
+}
+
+.dow-bar-fill.peak {
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    box-shadow: 0 0 12px rgba(102, 126, 234, 0.4);
+}
+
+.dow-label {
+    color:          var(--text-muted);
+    font-size:      0.65rem;
+    letter-spacing: 0.04em;
+    margin-top:     6px;
+    text-transform: uppercase;
+    white-space:    nowrap;
+}
+
+.dow-value {
+    color:                var(--text-secondary);
+    font-size:            0.65rem;
+    font-variant-numeric: tabular-nums;
+    height:               14px;
+    min-height:           0.875rem;
+}
+
+.dow-peak .dow-label,
+.dow-peak .dow-value { color: var(--accent-purple); }
+
+.dow-peak .dow-label { font-weight: 700; }
+
+.dow-empty {
+    align-items:     center;
+    color:           var(--text-muted);
+    display:         flex;
+    font-size:       0.82rem;
+    gap:             0.5rem;
+    justify-content: center;
+    padding:         2rem 1rem;
+}
+
+.dow-empty i { font-size: 1.2rem; opacity: 0.5; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .engagement-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+    .engagement-grid { grid-template-columns: 1fr; }
+    .dow-chart       { height: 100px; }
+}

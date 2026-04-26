@@ -1,0 +1,145 @@
+<!--
+    HomePage.html — Dashboard Home page.
+-->
+
+<div class="home-page animate-fade-in">
+
+    <!-- ── 1. Welcome Banner ──────────────────────────────────────────── -->
+    <div class="home-welcome-banner stats-chart-card">
+        <div class="home-welcome-left">
+            <h1 class="home-greeting" id="welcomeTitle">Welcome back!</h1>
+            <p class="home-date" id="homeDate"></p>
+        </div>
+        <button
+                aria-label="Create new short link"
+                class="btn btn-primary home-welcome-cta"
+                id="createNewLinkBtnHeader"
+                type="button"
+        >
+            <i aria-hidden="true" class="fa-solid fa-plus"></i>
+            Create Link
+        </button>
+    </div>
+
+    <!-- ── 2. KPI Cards ───────────────────────────────────────────────── -->
+    <!--
+        Skeleton cards are visible while #loadDashboardData() runs.
+        HomePage.js replaces innerHTML with StatCard() HTML once data arrives.
+    -->
+    <div aria-label="Key metrics" class="stats-overview-grid home-kpi-grid" id="statsGrid">
+        <div aria-hidden="true" class="stats-overview-card home-stat-skeleton"></div>
+        <div aria-hidden="true" class="stats-overview-card home-stat-skeleton"></div>
+        <div aria-hidden="true" class="stats-overview-card home-stat-skeleton"></div>
+        <div aria-hidden="true" class="stats-overview-card home-stat-skeleton"></div>
+    </div>
+
+    <!-- ── 3. Content Grid (2 columns) ───────────────────────────────── -->
+    <div class="home-content-grid">
+
+        <!-- Left column: Recent Links -->
+        <div class="stats-chart-card home-recent-card">
+            <div class="chart-card-header">
+                <h2 class="home-section-title">Recent Links</h2>
+                <div class="section-header-actions" id="recentLinksHeaderActions">
+                    <button
+                            aria-label="Refresh recent links"
+                            class="btn btn-outline btn-sm"
+                            id="refreshLinksBtn"
+                            title="Refresh"
+                            type="button"
+                    >
+                        <i aria-hidden="true" class="fa-solid fa-rotate-right"></i>
+                    </button>
+                    <button
+                            aria-label="Create new link"
+                            class="btn btn-primary btn-sm"
+                            id="createNewLinkBtn"
+                            title="New link"
+                            type="button"
+                    >
+                        <i aria-hidden="true" class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div aria-live="polite" id="homeEmptyStateContainer"></div>
+
+            <div
+                    aria-atomic="false"
+                    aria-live="polite"
+                    id="recentLinksContainer"
+            ></div>
+
+            <div class="home-card-footer" id="viewAllLinksFooter" style="display:none">
+                <button class="btn btn-outline btn-sm" id="viewAllLinksBtn" type="button">
+                    View all links
+                    <i aria-hidden="true" class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right column: Quick Actions -->
+        <div class="stats-chart-card home-actions-card">
+            <div class="chart-card-header">
+                <h2 class="home-section-title">Quick Actions</h2>
+            </div>
+            <div class="home-quick-actions">
+                <button class="home-quick-action-btn" id="bulkCreationBtn" type="button">
+                    <div aria-hidden="true" class="home-qa-icon accent-purple">
+                        <i class="fa-solid fa-envelopes-bulk"></i>
+                    </div>
+                    <div class="home-qa-text">
+                        <span class="home-qa-title">Bulk Creation</span>
+                        <span class="home-qa-sub">Create multiple URLs at once</span>
+                    </div>
+                    <i aria-hidden="true" class="fa-solid fa-chevron-right home-qa-arrow"></i>
+                </button>
+
+                <button class="home-quick-action-btn" id="downloadAnalyticsBtn" type="button">
+                    <div aria-hidden="true" class="home-qa-icon accent-blue">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="home-qa-text">
+                        <span class="home-qa-title">Analytics</span>
+                        <span class="home-qa-sub">View detailed reports</span>
+                    </div>
+                    <i aria-hidden="true" class="fa-solid fa-chevron-right home-qa-arrow"></i>
+                </button>
+
+                <button class="home-quick-action-btn" id="manageLinksBtn" type="button">
+                    <div aria-hidden="true" class="home-qa-icon accent-teal">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+                    <div class="home-qa-text">
+                        <span class="home-qa-title">Manage Links</span>
+                        <span class="home-qa-sub">View, edit and organize links</span>
+                    </div>
+                    <i aria-hidden="true" class="fa-solid fa-chevron-right home-qa-arrow"></i>
+                </button>
+
+                <button class="home-quick-action-btn" id="organizationBtn" type="button">
+                    <div aria-hidden="true" class="home-qa-icon accent-amber">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                    <div class="home-qa-text">
+                        <span class="home-qa-title">My Organization</span>
+                        <span class="home-qa-sub">Team settings and members</span>
+                    </div>
+                    <i aria-hidden="true" class="fa-solid fa-chevron-right home-qa-arrow"></i>
+                </button>
+            </div>
+        </div>
+
+    </div><!-- /.Home-content-grid -->
+
+</div><!-- /.Home-page -->
+
+<!--
+    ── Modal Mount Points ────────────────────────────────────────────────────
+    Outside .Home-page so overlays cover the full viewport.
+    Still inside #contentContainer so BasePage.querySelector() finds them.
+    Wired ONCE in #wireModalContainerEvents() — never re-wired per open.
+-->
+<div aria-label="Create link dialog" id="homeCreateModalContainer" role="region"></div>
+<div aria-label="Edit link dialog" id="homeEditModalContainer" role="region"></div>
+<div aria-label="Confirm action dialog" id="homeConfirmModalContainer" role="region"></div>

@@ -1,0 +1,34 @@
+<!-- LoginPage.html
+     Structure: top-nav + centered form card.
+     Page-level content (title, subtitle) lives here.
+     Dynamic content (form fields, social buttons, footer link)
+     is rendered by AuthForm into .Auth-form-container.
+-->
+
+<div class="top-nav" role="banner">
+    <div class="container">
+        <a aria-label="Shortly — go to home page" class="nav-logo-base" data-link href="/" id="homeLink">
+            <span aria-hidden="true" class="logo-text-base">Shortly</span>
+        </a>
+    </div>
+</div>
+
+<div class="flex-container">
+    <div class="form-side-base">
+        <div class="form-container-base">
+
+            <div class="form-header-base">
+                <h1 class="form-title-base">Welcome Back</h1>
+                <p class="form-subtitle-base">Sign in to your account to continue</p>
+            </div>
+
+            <!--
+                AuthForm mounts here.
+                It renders: error box, form fields, divider,
+                social buttons, and the sign-up footer link.
+            -->
+            <div aria-label="Sign in form" class="auth-form-container"></div>
+
+        </div>
+    </div>
+</div>

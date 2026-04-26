@@ -1,0 +1,123 @@
+/* ============================================================
+   USER OVERVIEW CARDS — KPI stat cards row in analytics.
+   Lives at: src/ui/features/analytics/UserOverviewCards/UserOverviewCards.css
+   Scope: .stats-overview-grid, .stats-overview-card, .overview-*
+   ============================================================ */
+
+/* ── Grid ────────────────────────────────────────────────── */
+.stats-overview-grid {
+    display:               grid;
+    gap:                   1rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin-bottom:         1.5rem;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.stats-overview-card {
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-md, 12px);
+    overflow:      hidden;
+    padding:       1.25rem 1.125rem 1rem;
+    position:      relative;
+    transition:    transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.stats-overview-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform:  translateY(-2px);
+}
+
+/* Top accent bar */
+.stats-overview-card::before {
+    border-radius: 2px 2px 0 0;
+    content:       "";
+    height:        2px;
+    left:          0;
+    position:      absolute;
+    right:         0;
+    top:           0;
+}
+
+.stats-overview-card.accent-purple::before { background: var(--accent-purple); }
+.stats-overview-card.accent-blue::before   { background: var(--accent-blue);   }
+.stats-overview-card.accent-teal::before   { background: var(--accent-teal);   }
+.stats-overview-card.accent-amber::before  { background: var(--accent-amber);  }
+
+/* ── Icon wrap ───────────────────────────────────────────── */
+.overview-icon-wrap {
+    align-items:     center;
+    border-radius:   var(--radius-sm, 8px);
+    display:         flex;
+    font-size:       0.95rem;
+    height:          34px;
+    justify-content: center;
+    margin-bottom:   0.75rem;
+    width:           34px;
+}
+
+.accent-purple .overview-icon-wrap { background: rgba(102, 126, 234, 0.15); color: var(--accent-purple); }
+.accent-blue   .overview-icon-wrap { background: rgba(79,  172, 254, 0.15); color: var(--accent-blue);   }
+.accent-teal   .overview-icon-wrap { background: rgba(45,  212, 191, 0.15); color: var(--accent-teal);   }
+.accent-amber  .overview-icon-wrap { background: rgba(251, 191,  36, 0.15); color: var(--accent-amber);  }
+
+/* ── Text ────────────────────────────────────────────────── */
+.overview-value {
+    color:               var(--text-primary);
+    font-size:           clamp(1.4rem, 3.5vw, 1.9rem);
+    font-variant-numeric: tabular-nums;
+    font-weight:         700;
+    line-height:         1.1;
+    margin-bottom:       0.2rem;
+}
+
+.overview-label {
+    color:          var(--text-secondary);
+    font-size:      0.72rem;
+    font-weight:    600;
+    letter-spacing: 0.06em;
+    margin-bottom:  0.2rem;
+    text-transform: uppercase;
+}
+
+.overview-sub {
+    color:     var(--text-muted);
+    font-size: 0.73rem;
+}
+
+/* ── Skeleton ────────────────────────────────────────────── */
+.stats-skeleton .skeleton-header {
+    animation:       shimmer 1.4s linear infinite;
+    background:      linear-gradient(90deg, hsla(0, 0%, 100%, 0.04) 25%, hsla(0, 0%, 100%, 0.1) 50%, hsla(0, 0%, 100%, 0.04) 75%);
+    background-size: 800px 100%;
+    border-radius:   var(--radius-md, 12px);
+    height:          72px;
+    margin-bottom:   1.25rem;
+}
+
+.stats-skeleton .skeleton-cards {
+    display:               grid;
+    gap:                   0.875rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom:         1.25rem;
+}
+
+.stats-skeleton .skeleton-card,
+.stats-skeleton .skeleton-chart {
+    animation:       shimmer 1.4s linear infinite;
+    background:      linear-gradient(90deg, hsla(0, 0%, 100%, 0.04) 25%, hsla(0, 0%, 100%, 0.1) 50%, hsla(0, 0%, 100%, 0.04) 75%);
+    background-size: 800px 100%;
+    border-radius:   var(--radius-md, 12px);
+}
+
+.stats-skeleton .skeleton-card  { height: 110px; }
+.stats-skeleton .skeleton-chart { height: 280px; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .stats-overview-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+    .stats-overview-grid { grid-template-columns: 1fr 1fr; }
+}

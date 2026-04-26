@@ -1,0 +1,282 @@
+/* ============================================================
+   PROFILE PAGE — User profile view.
+   Lives at: src/ui/pages/ProfilePage/ProfilePage.css
+   Scope: .profile-page, .profile-layout, .profile-card (avatar
+          card), .profile-tabs-nav. Delegates field styles to
+          ProfileEditForm.css and QuotaStatusCard.css.
+   ============================================================ */
+
+/* ── Page root ───────────────────────────────────────────── */
+.profile-page {
+    animation:  fadeIn 0.35s ease;
+    min-height: 400px;
+    position:   relative;
+}
+
+/* ── Page header ─────────────────────────────────────────── */
+.profile-page-header {
+    align-items:     center;
+    display:         flex;
+    flex-wrap:       wrap;
+    gap:             1rem;
+    justify-content: space-between;
+    margin-bottom:   1.75rem;
+}
+
+/* ── Two-column layout ───────────────────────────────────── */
+.profile-layout {
+    align-items:           start;
+    display:               grid;
+    gap:                   1.5rem;
+    grid-template-columns: 300px 1fr;
+}
+
+.profile-left  { position: sticky; top: 90px; }
+.profile-right { min-width: 0; }
+
+/* ── Profile card (left column) ──────────────────────────── */
+.profile-card {
+    align-items:   center;
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: 16px;
+    display:       flex;
+    flex-direction: column;
+    gap:           0.5rem;
+    padding:       2rem 1.5rem;
+    text-align:    center;
+    transition:    border-color var(--transition-base);
+}
+
+.profile-card:hover { border-color: rgba(102, 126, 234, 0.25); }
+
+/* ── Avatar ──────────────────────────────────────────────── */
+.profile-avatar-wrap {
+    height:   96px;
+    margin-bottom: 0.5rem;
+    position: relative;
+    width:    96px;
+}
+
+.profile-avatar-img,
+.profile-avatar-initials {
+    border-radius: 50%;
+    height:        96px;
+    object-fit:    cover;
+    width:         96px;
+}
+
+.profile-avatar-initials {
+    align-items:     center;
+    background:      var(--primary-gradient);
+    color:           #fff;
+    display:         flex;
+    font-size:       2rem;
+    font-weight:     700;
+    justify-content: center;
+    letter-spacing:  0.02em;
+    user-select:     none;
+}
+
+.profile-avatar-badge {
+    background:    var(--success-color, #4ade80);
+    border:        2px solid var(--dark-bg, #0f0f0f);
+    border-radius: 50%;
+    bottom:        4px;
+    height:        18px;
+    position:      absolute;
+    right:         4px;
+    width:         18px;
+}
+
+/* ── Identity block ──────────────────────────────────────── */
+.profile-card-identity { margin-top: 0.5rem; width: 100%; }
+
+.profile-card-name {
+    color:       var(--text-primary);
+    font-size:   1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    word-break:  break-word;
+}
+
+.profile-card-email {
+    align-items:     center;
+    color:           var(--text-muted);
+    display:         flex;
+    font-size:       0.82rem;
+    gap:             0.4rem;
+    justify-content: center;
+}
+
+.profile-card-bio {
+    color:       var(--text-secondary);
+    font-size:   0.85rem;
+    line-height: 1.5;
+    margin-top:  0.6rem;
+    word-break:  break-word;
+}
+
+.profile-card-bio--empty { color: var(--text-muted); font-style: italic; }
+
+/* ── Meta tags row ───────────────────────────────────────── */
+.profile-card-meta {
+    display:         flex;
+    flex-wrap:       wrap;
+    gap:             0.4rem;
+    justify-content: center;
+    margin-top:      0.75rem;
+    width:           100%;
+}
+
+.profile-meta-tag {
+    align-items:   center;
+    background:    hsla(0, 0%, 100%, 0.04);
+    border:        1px solid var(--border-color);
+    border-radius: 100px;
+    color:         var(--text-secondary);
+    display:       inline-flex;
+    font-size:     0.75rem;
+    gap:           0.3rem;
+    max-width:     180px;
+    overflow:      hidden;
+    padding:       0.25rem 0.6rem;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+}
+
+.profile-meta-tag--link {
+    color:           var(--accent-blue, #4facfe);
+    text-decoration: none;
+    transition:      background var(--transition-fast);
+}
+
+.profile-meta-tag--link:hover { background: rgba(79, 172, 254, 0.08); }
+
+.profile-card-updated {
+    align-items: center;
+    color:       var(--text-muted);
+    display:     flex;
+    font-size:   0.72rem;
+    gap:         0.3rem;
+    margin-top:  0.5rem;
+}
+
+/* ── Right column tabs ───────────────────────────────────── */
+.profile-tabs-nav {
+    border-bottom: 1px solid var(--border-color);
+    display:       flex;
+    gap:           0.25rem;
+    margin-bottom: 1.25rem;
+    overflow-x:    auto;
+    scrollbar-width: none;
+}
+
+.profile-tabs-nav::-webkit-scrollbar { display: none; }
+
+.profile-tab-btn {
+    align-items:   center;
+    background:    transparent;
+    border:        none;
+    border-bottom: 2px solid transparent;
+    color:         var(--text-muted);
+    cursor:        pointer;
+    display:       flex;
+    font-family:   inherit;
+    font-size:     0.875rem;
+    font-weight:   500;
+    gap:           0.45rem;
+    margin-bottom: -1px;
+    padding:       0.65rem 1.1rem;
+    transition:    color var(--transition-fast), border-color var(--transition-fast);
+    white-space:   nowrap;
+}
+
+.profile-tab-btn:hover,
+.profile-tab-btn.active  { color: var(--text-primary); }
+.profile-tab-btn.active  { border-bottom-color: #667eea; }
+
+/* ── Skeleton ────────────────────────────────────────────── */
+.profile-skeleton       { pointer-events: none; }
+.profile-layout--skeleton { opacity: 0.6; }
+
+.skeleton-page-header { margin-bottom: 1.75rem; }
+
+.skeleton-block {
+    animation:       shimmer 1.5s infinite;
+    background:      linear-gradient(90deg, hsla(0, 0%, 100%, 0.04) 25%, hsla(0, 0%, 100%, 0.09) 50%, hsla(0, 0%, 100%, 0.04) 75%);
+    background-size: 200% 100%;
+    border-radius:   8px;
+    margin-bottom:   0.5rem;
+}
+
+.skeleton-block--title  { height: 28px; width: 200px; }
+.skeleton-block--name   { height: 20px; margin: 0 auto; width: 60%; }
+.skeleton-block--line   { height: 14px; margin: 0 auto; width: 80%; }
+.skeleton-block--short  { width: 50%; }
+.skeleton-block--label  { height: 12px; width: 80px; }
+.skeleton-block--input  { border-radius: 10px; height: 40px; width: 100%; }
+.skeleton-block--btn    { border-radius: 10px; height: 40px; margin-left: auto; width: 120px; }
+.skeleton-block--tags   { border-radius: 100px; height: 24px; margin: 0.5rem auto; width: 70%; }
+
+.skeleton-avatar {
+    animation:       shimmer 1.5s infinite;
+    background:      linear-gradient(90deg, hsla(0, 0%, 100%, 0.04) 25%, hsla(0, 0%, 100%, 0.09) 50%, hsla(0, 0%, 100%, 0.04) 75%);
+    background-size: 200% 100%;
+    border-radius:   50%;
+    height:          96px;
+    margin:          0 auto 0.75rem;
+    width:           96px;
+}
+
+.skeleton-card {
+    align-items:   center;
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: 16px;
+    display:       flex;
+    flex-direction: column;
+    padding:       1.75rem;
+}
+
+.skeleton-card--form { align-items: flex-start; }
+
+.skeleton-grid {
+    display:               grid;
+    gap:                   1rem;
+    grid-template-columns: 1fr 1fr;
+    margin-top:            0.5rem;
+    width:                 100%;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) { .profile-layout { grid-template-columns: 260px 1fr; } }
+
+@media (max-width: 768px) {
+    .profile-layout { grid-template-columns: 1fr; }
+    .profile-left   { position: static; }
+
+    .profile-card {
+        align-items:    flex-start;
+        flex-direction: row;
+        gap:            1.25rem;
+        padding:        1.25rem;
+        text-align:     left;
+    }
+
+    .profile-avatar-wrap { flex-shrink: 0; }
+
+    .profile-card-email,
+    .profile-card-meta  { justify-content: flex-start; }
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        align-items:    center;
+        flex-direction: column;
+        text-align:     center;
+    }
+
+    .profile-card-email,
+    .profile-card-meta { justify-content: center; }
+}

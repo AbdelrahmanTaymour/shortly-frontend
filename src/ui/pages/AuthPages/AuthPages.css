@@ -1,0 +1,171 @@
+/* ============================================================
+   LOGIN / REGISTER / FORGOT PASSWORD PAGES
+   Lives at: src/ui/pages/LoginPage/LoginPage.css
+   Scope: Page-specific layout that wraps the AuthForm component.
+          Covers LoginPage, RegisterPage, ForgotPasswordPage.
+   ============================================================ */
+
+/* ── Full-viewport centering wrapper ─────────────────────── */
+.centered-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* ── Remember me + forgot password row ───────────────────── */
+.form-options {
+    align-items: center;
+    display: flex;
+    font-size: 0.9rem;
+    justify-content: space-between;
+}
+
+.remember-me {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    transition: var(--transition-base);
+}
+
+.remember-me:hover {
+    color: var(--text-primary);
+}
+
+/* ── Password field wrapper ──────────────────────────────── */
+.password-group {
+    position: relative;
+}
+
+.password-group .password-toggle {
+    top: calc(50% - 20px);
+}
+
+/* ── Password strength hint ──────────────────────────────── */
+.password-strength {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* ── Terms checkbox row ──────────────────────────────────── */
+.terms-group {
+    align-items: flex-start;
+    cursor: pointer;
+    display: flex;
+    gap: 0.8rem;
+    transition: var(--transition-base);
+}
+
+.terms-group:hover {
+    color: var(--text-primary);
+}
+
+.terms-group .custom-checkbox {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.terms-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.terms-link {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--text-primary);
+    font-weight: 500;
+    text-decoration: none;
+    -webkit-text-fill-color: transparent;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+/* ── Register disabled state ─────────────────────────────── */
+.register-btn:disabled {
+    background: var(--border-color);
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── Forgot password page ────────────────────────────────── */
+.forgot-password-header {
+    margin-bottom: 30px;
+}
+
+.forgot-password-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.forgot-password-description {
+    line-height: 1.5;
+}
+
+.forgot-password {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.forgot-password:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+/* ── Back link ───────────────────────────────────────────── */
+.back-link {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.back-link a {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    position: relative;
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.back-link a:hover {
+    color: var(--text-primary);
+}
+
+.back-link a::after {
+    background: var(--primary-gradient);
+    bottom: -2px;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    transition: width var(--transition-base);
+    width: 0;
+}
+
+.back-link a:hover::after {
+    width: 100%;
+}
+
+/* ── Action buttons (forgot password success) ────────────── */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .form-options {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

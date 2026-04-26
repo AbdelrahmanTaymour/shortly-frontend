@@ -1,0 +1,40 @@
+/* ============================================================
+   STATS DATE FILTER — Preset date-range tab strip.
+   Lives at: src/ui/features/analytics/StatsDateFilter/StatsDateFilter.css
+   Scope: .stats-date-filter, .date-preset-btn
+   ============================================================ */
+
+.stats-date-filter {
+    align-items:   center;
+    background:    hsla(0, 0%, 100%, 0.04);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-sm, 8px);
+    display:       flex;
+    flex-shrink:   0;
+    gap:           0.25rem;
+    padding:       0.25rem;
+}
+
+.date-preset-btn {
+    background:    transparent;
+    border:        none;
+    border-radius: 6px;
+    color:         var(--text-muted);
+    cursor:        pointer;
+    font-family:   inherit;
+    font-size:     0.78rem;
+    font-weight:   500;
+    padding:       0.4rem 0.8rem;
+    transition:    color var(--transition-fast), background var(--transition-fast);
+    white-space:   nowrap;
+}
+
+.date-preset-btn:hover {
+    background: hsla(0, 0%, 100%, 0.06);
+    color:      var(--text-primary);
+}
+
+.date-preset-btn.active {
+    background: var(--primary-gradient);
+    color:      #fff;
+}

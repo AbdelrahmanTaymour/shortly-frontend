@@ -1,0 +1,275 @@
+/* ============================================================
+   SETTINGS PAGE — Account settings page shell + sidebar nav.
+   Lives at: src/ui/pages/SettingsPage/SettingsPage.css
+   Scope: .settings-page, .settings-layout, .settings-sidebar,
+          .settings-nav-item, .settings-card shell, skeleton.
+          Per-card field styles live in their own feature files.
+   ============================================================ */
+
+/* ── Page root ───────────────────────────────────────────── */
+.settings-page {
+    animation:  fadeIn 0.35s ease;
+    min-height: 400px;
+    position:   relative;
+}
+
+/* ── Page header ─────────────────────────────────────────── */
+.settings-page-header {
+    align-items:     center;
+    display:         flex;
+    flex-wrap:       wrap;
+    gap:             1rem;
+    justify-content: space-between;
+    margin-bottom:   1.75rem;
+}
+
+/* ── Two-column layout ───────────────────────────────────── */
+.settings-layout {
+    align-items:           start;
+    display:               grid;
+    gap:                   1.5rem;
+    grid-template-columns: 220px 1fr;
+}
+
+.settings-sidebar { position: sticky; top: 90px; }
+
+/* ── Desktop sidebar nav ─────────────────────────────────── */
+.settings-desktop-nav {
+    background:     var(--card-bg);
+    border:         1px solid var(--border-color);
+    border-radius:  16px;
+    display:        flex;
+    flex-direction: column;
+    gap:            0.2rem;
+    overflow:       hidden;
+    padding:        0.75rem;
+}
+
+.settings-nav-item {
+    align-items:   center;
+    background:    transparent;
+    border:        none;
+    border-radius: 10px;
+    color:         var(--text-secondary);
+    cursor:        pointer;
+    display:       flex;
+    font-family:   inherit;
+    font-size:     0.875rem;
+    font-weight:   500;
+    gap:           0.75rem;
+    padding:       0.75rem 1rem;
+    position:      relative;
+    text-align:    left;
+    transition:    background var(--transition-fast), color var(--transition-fast);
+    width:         100%;
+}
+
+.settings-nav-item i:first-child {
+    flex-shrink: 0;
+    font-size:   0.9rem;
+    text-align:  center;
+    width:       18px;
+}
+
+.settings-nav-label { flex: 1; }
+
+.settings-nav-arrow {
+    color:      var(--text-muted);
+    font-size:  0.65rem;
+    margin-left: auto;
+    opacity:    0;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.settings-nav-item:hover {
+    background: rgba(102, 126, 234, 0.08);
+    color:      var(--text-primary);
+}
+
+.settings-nav-item:hover .settings-nav-arrow {
+    opacity:   1;
+    transform: translateX(2px);
+}
+
+.settings-nav-item.active {
+    background: rgba(102, 126, 234, 0.12);
+    color:      var(--text-primary);
+}
+
+.settings-nav-item.active .settings-nav-arrow { opacity: 1; }
+
+/* Active left accent bar */
+.settings-nav-item.active::before {
+    background:    var(--primary-gradient);
+    border-radius: 0 2px 2px 0;
+    bottom:        0;
+    content:       "";
+    left:          0;
+    position:      absolute;
+    top:           0;
+    width:         3px;
+}
+
+/* Danger variant */
+.settings-nav-item--danger { color: var(--error-color, #f87171); }
+
+.settings-nav-item--danger:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color:      #f87171;
+}
+
+.settings-nav-item--danger.active {
+    background: rgba(239, 68, 68, 0.12);
+    color:      #f87171;
+}
+
+.settings-nav-item--danger.active::before {
+    background: linear-gradient(180deg, #ef4444, #b91c1c);
+}
+
+/* Divider between nav sections */
+.settings-nav-divider {
+    background: var(--border-color);
+    height:     1px;
+    margin:     0.4rem 0.5rem;
+}
+
+/* Mobile tabs (hidden on desktop) */
+.settings-mobile-tabs { display: none; }
+
+/* ── Main content area ───────────────────────────────────── */
+.settings-main {
+    display:        flex;
+    flex-direction: column;
+    gap:            1.25rem;
+    min-width:      0;
+}
+
+.settings-section {
+    display:        flex;
+    flex-direction: column;
+    gap:            1.25rem;
+}
+
+.settings-section.hidden { display: none; }
+.settings-section.active { display: flex; }
+
+/* ── Settings card shell ─────────────────────────────────── */
+.settings-card {
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: 16px;
+    overflow:      hidden;
+    transition:    border-color var(--transition-base);
+}
+
+.settings-card:hover         { border-color: rgba(102, 126, 234, 0.2); }
+.settings-card--danger       { border-color: rgba(239, 68, 68, 0.2);   }
+.settings-card--danger:hover { border-color: rgba(239, 68, 68, 0.4);   }
+
+/* ── Card header ─────────────────────────────────────────── */
+.settings-card-header {
+    align-items:   flex-start;
+    border-bottom: 1px solid var(--border-color);
+    display:       flex;
+    gap:           1rem;
+    padding:       1.4rem 1.5rem;
+}
+
+.settings-card-icon {
+    align-items:     center;
+    border-radius:   12px;
+    display:         flex;
+    flex-shrink:     0;
+    font-size:       1.1rem;
+    height:          44px;
+    justify-content: center;
+    width:           44px;
+}
+
+.settings-card-icon--blue   { background: rgba(99,  102, 241, 0.15); color: #818cf8; }
+.settings-card-icon--purple { background: rgba(139,  92, 246, 0.15); color: #a78bfa; }
+.settings-card-icon--green  { background: rgba(74,  222, 128, 0.15); color: #4ade80; }
+.settings-card-icon--orange { background: rgba(249, 115,  22, 0.15); color: #fb923c; }
+.settings-card-icon--red    { background: rgba(239,  68,  68, 0.15); color: #f87171; }
+.settings-card-icon--teal   { background: rgba(20,  184, 166, 0.15); color: #2dd4bf; }
+
+.settings-card-title {
+    color:       var(--text-primary);
+    font-size:   1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.danger-title { color: #f87171; }
+
+.settings-card-desc {
+    color:       var(--text-secondary);
+    font-size:   0.82rem;
+    line-height: 1.45;
+}
+
+/* ── Card body ───────────────────────────────────────────── */
+.settings-card-body {
+    display:        flex;
+    flex-direction: column;
+    gap:            1rem;
+    padding:        1.4rem 1.5rem;
+}
+
+/* ── Skeleton ────────────────────────────────────────────── */
+.settings-skeleton { pointer-events: none; }
+
+.skeleton-block--nav-item {
+    border-radius: 10px;
+    height:        44px;
+    margin-bottom: 0.3rem;
+    width:         100%;
+}
+
+.skeleton-block--nav-danger { opacity: 0.5; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .settings-layout { grid-template-columns: 180px 1fr; }
+}
+
+@media (max-width: 768px) {
+    .settings-layout  { grid-template-columns: 1fr; }
+    .settings-sidebar { position: static; }
+    .settings-desktop-nav { display: none; }
+
+    .settings-mobile-tabs {
+        background:      var(--card-bg);
+        border:          1px solid var(--border-color);
+        border-radius:   12px;
+        display:         flex;
+        gap:             0.4rem;
+        overflow-x:      auto;
+        padding:         0.5rem;
+        scrollbar-width: none;
+    }
+
+    .settings-mobile-tabs::-webkit-scrollbar { display: none; }
+
+    .settings-mobile-tabs .settings-nav-item {
+        border-radius: 8px;
+        flex-shrink:   0;
+        padding:       0.5rem 0.875rem;
+        white-space:   nowrap;
+    }
+
+    .settings-mobile-tabs .settings-nav-item.active {
+        background: rgba(102, 126, 234, 0.15);
+    }
+
+    .settings-mobile-tabs .settings-nav-item::before,
+    .settings-nav-label   { display: none; }
+
+    .settings-card-header { flex-direction: column; padding: 1rem; }
+    .settings-card-body   { padding: 1rem; }
+}
+
+@media (max-width: 480px) {
+    .settings-mobile-tabs .settings-nav-item i:first-child { margin-right: 0.3rem; }
+}

@@ -1,0 +1,15 @@
+/* ============================================================
+   ANALYTICS PAGE — Global analytics dashboard page.
+   Lives at: src/ui/pages/AnalyticsPage/AnalyticsPage.css
+   Scope: .analytics-page, .analytics-tab-panel, two-column
+          layouts specific to the analytics page view.
+   ============================================================ */
+
+.analytics-page {
+    min-height: 400px;
+    position:   relative;
+}
+
+/* ── Tab panels ──────────────────────────────────────────── */
+.analytics-tab-panel        { display: none; }
+.analytics-tab-panel.active { display: block; }

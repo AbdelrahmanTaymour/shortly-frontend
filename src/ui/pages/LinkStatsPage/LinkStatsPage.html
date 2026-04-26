@@ -1,0 +1,154 @@
+<!-- Link Statistics Page -->
+<div class="stats-page">
+    <!-- Header with Link Info -->
+    <div class="stats-page-header">
+        <button class="stats-back-btn" id="backBtn" title="Back to links">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <div class="stats-link-info">
+            <div class="stats-link-favicon" id="statsFavicon">
+                <i class="fa-solid fa-link default-icon"></i>
+            </div>
+            <div class="stats-link-details">
+                <h2 id="statsLinkTitle">Link Title</h2>
+                <a href="#" id="statsShortUrl" target="_blank">short.ly/abc123</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="stats-summary-grid">
+        <div class="stats-summary-card">
+            <div class="value" id="statsTotalClicks">0</div>
+            <div class="label">Total Clicks</div>
+        </div>
+        <div class="stats-summary-card">
+            <div class="value" id="statsUniqueVisitors">0</div>
+            <div class="label">Unique Visitors</div>
+        </div>
+        <div class="stats-summary-card">
+            <div class="value" id="statsTopCountry">--</div>
+            <div class="label">Top Country</div>
+        </div>
+        <div class="stats-summary-card">
+            <div class="value" id="statsTopReferrer">--</div>
+            <div class="label">Top Referrer</div>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="stats-nav-tabs" role="tablist">
+        <button class="stats-nav-tab active" data-tab="summary" role="tab">
+            <i class="fa-solid fa-chart-line"></i> Summary
+        </button>
+        <button class="stats-nav-tab" data-tab="countries" role="tab">
+            <i class="fa-solid fa-globe"></i> Countries & Cities
+        </button>
+        <button class="stats-nav-tab" data-tab="traffic" role="tab">
+            <i class="fa-solid fa-share-nodes"></i> Traffic Sources
+        </button>
+        <button class="stats-nav-tab" data-tab="devices" role="tab">
+            <i class="fa-solid fa-mobile-screen"></i> Devices
+        </button>
+        <button class="stats-nav-tab" data-tab="campaigns" role="tab">
+            <i class="fa-solid fa-bullhorn"></i> Campaigns
+        </button>
+    </div>
+
+    <!-- Summary Tab -->
+    <div class="stats-content-section active" id="summaryTab" role="tabpanel">
+        <div class="stats-chart-card">
+            <h3>Clicks Over Time</h3>
+            <div class="stats-chart-placeholder" id="clicksChart">
+                <span>Chart loading...</span>
+            </div>
+        </div>
+
+        <div class="stats-chart-card">
+            <h3>Recent Activity</h3>
+            <div class="activity-list" id="recentActivity">
+                <!-- Activity items will be rendered by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Countries & Cities Tab -->
+    <div class="stats-content-section" id="countriesTab" role="tabpanel">
+        <div class="stats-two-column">
+            <div class="stats-chart-card">
+                <h3>Visitors Map</h3>
+                <div class="stats-chart-placeholder" id="visitorMap">
+                    <span>Interactive map</span>
+                </div>
+            </div>
+            <div class="stats-chart-card">
+                <h3>Top Countries</h3>
+                <div class="stats-list" id="countriesList">
+                    <!-- Countries will be rendered by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-chart-card">
+            <h3>Cities Breakdown</h3>
+            <div class="stats-list" id="citiesList">
+                <!-- Cities will be rendered by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Traffic Sources Tab -->
+    <div class="stats-content-section" id="trafficTab" role="tabpanel">
+        <div class="stats-two-column">
+            <div class="stats-chart-card">
+                <h3>Source Types</h3>
+                <div class="stats-list" id="sourceTypesList">
+                    <!-- Source types will be rendered by JavaScript -->
+                </div>
+            </div>
+            <div class="stats-chart-card">
+                <h3>Top Referrers</h3>
+                <div class="stats-list" id="referrersList">
+                    <!-- Referrers will be rendered by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Devices Tab -->
+    <div class="stats-content-section" id="devicesTab" role="tabpanel">
+        <div class="stats-two-column">
+            <div class="stats-chart-card">
+                <h3>Device Types</h3>
+                <div class="stats-chart-placeholder" id="deviceChart">
+                    <span>Device breakdown chart</span>
+                </div>
+                <div class="stats-list" id="deviceTypesList" style="margin-top: 1rem">
+                    <!-- Device types will be rendered by JavaScript -->
+                </div>
+            </div>
+            <div class="stats-chart-card">
+                <h3>Browsers & OS</h3>
+                <div class="stats-list" id="browsersList">
+                    <!-- Browsers will be rendered by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campaigns Tab -->
+    <div class="stats-content-section" id="campaignsTab" role="tabpanel">
+        <div class="stats-chart-card">
+            <h3>UTM Campaign Performance</h3>
+            <div class="stats-list" id="campaignsList">
+                <!-- Campaigns will be rendered by JavaScript -->
+            </div>
+            <div class="empty-state" id="campaignsEmptyState" style="padding: 2rem">
+                <p>No campaign data available</p>
+                <span class="form-hint"
+                >Add UTM parameters to your links to track campaigns</span
+                >
+            </div>
+        </div>
+    </div>
+</div>

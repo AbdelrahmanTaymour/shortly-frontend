@@ -1,0 +1,345 @@
+/* ============================================================
+   LINK CARD — Single row link item in the links list.
+   Lives at: src/ui/features/links/components/LinkCard/LinkCard.css
+   Scope: .links-list, .link-card and all child elements.
+   ============================================================ */
+
+/* ── List wrapper ────────────────────────────────────────── */
+.links-list {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.625rem;
+    overflow:       visible;
+}
+
+/* ── Card row ────────────────────────────────────────────── */
+.link-card {
+    align-items:  center;
+    background:   var(--card-bg);
+    border:       1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    display:      grid;
+    gap:          0.875rem;
+    grid-template-columns: 28px 44px 1fr auto;
+    overflow:     visible;
+    padding:      0.875rem 1.125rem;
+    transition:   background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.link-card:hover {
+    background:   hsla(0, 0%, 100%, 0.025);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.link-card.selected {
+    background:   rgba(102, 126, 234, 0.08);
+    border-color: rgba(102, 126, 234, 0.4);
+    box-shadow:   inset 3px 0 0 #667eea;
+}
+
+/* ── Checkbox ────────────────────────────────────────────── */
+.link-checkbox-wrapper,
+.link-checkbox {
+    align-items:     center;
+    display:         flex;
+    justify-content: center;
+}
+
+.link-checkbox {
+    background:    transparent;
+    border:        2px solid var(--border-color);
+    border-radius: 4px;
+    cursor:        pointer;
+    flex-shrink:   0;
+    height:        18px;
+    transition:    border-color var(--t-fast), background var(--t-fast);
+    user-select:   none;
+    width:         18px;
+}
+
+.link-checkbox:hover { border-color: #667eea; }
+
+.link-checkbox.checked {
+    background:   linear-gradient(135deg, #667eea, #764ba2);
+    border-color: #667eea;
+}
+
+.link-checkbox.checked::after {
+    border:     2px solid #fff;
+    border-left: none;
+    border-top:  none;
+    content:    "";
+    display:    block;
+    height:     9px;
+    transform:  rotate(45deg) translateY(-1px);
+    width:      5px;
+}
+
+/* ── Favicon ─────────────────────────────────────────────── */
+.link-favicon {
+    align-items:     center;
+    background:      hsla(0, 0%, 100%, 0.05);
+    border-radius:   var(--radius-sm);
+    display:         flex;
+    flex-shrink:     0;
+    height:          36px;
+    justify-content: center;
+    overflow:        hidden;
+    width:           36px;
+}
+
+.link-favicon img          { height: 22px; object-fit: contain; width: 22px; }
+.link-favicon .default-icon { color: var(--text-muted); font-size: 0.95rem; }
+
+/* ── Content ─────────────────────────────────────────────── */
+.link-content {
+    display:        flex;
+    flex:           1;
+    flex-direction: column;
+    gap:            0.2rem;
+    min-width:      0;
+}
+
+.link-title-row {
+    align-items: center;
+    display:     flex;
+    gap:         0.4rem;
+    min-width:   0;
+}
+
+.link-title {
+    color:         var(--text-primary);
+    font-size:     0.9rem;
+    font-weight:   600;
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+}
+
+.link-lock-icon {
+    color:      var(--warning-color);
+    flex-shrink: 0;
+    font-size:  0.7rem;
+}
+
+/* ── Short URL ───────────────────────────────────────────── */
+.link-short-url {
+    align-items:    center;
+    color:          #4facfe;
+    cursor:         pointer;
+    display:        inline-flex;
+    font-family:    Menlo, Monaco, "Courier New", monospace;
+    font-size:      0.8rem;
+    gap:            0.4rem;
+    max-width:      100%;
+    overflow:       hidden;
+    text-overflow:  ellipsis;
+    transition:     color var(--t-fast);
+    white-space:    nowrap;
+    width:          fit-content;
+}
+
+.link-short-url:hover { color: #00f2fe; }
+
+.link-short-url .copy-hint {
+    color:      var(--text-muted);
+    flex-shrink: 0;
+    font-size:  0.65rem;
+    opacity:    0;
+    transition: opacity var(--t-fast);
+}
+
+.link-short-url:hover .copy-hint { opacity: 1; }
+
+/* ── Meta info row ───────────────────────────────────────── */
+.link-meta {
+    align-items: center;
+    color:       var(--text-secondary);
+    display:     flex;
+    flex-wrap:   wrap;
+    font-size:   0.775rem;
+    gap:         0.625rem 1rem;
+    margin-top:  0.15rem;
+}
+
+.link-meta-item {
+    align-items: center;
+    display:     flex;
+    gap:         0.3rem;
+}
+
+.link-meta-item i { color: var(--text-muted); font-size: 0.7rem; }
+
+/* ── Status badge ────────────────────────────────────────── */
+.link-status {
+    align-items:    center;
+    border-radius:  20px;
+    display:        inline-flex;
+    font-size:      0.67rem;
+    font-weight:    500;
+    letter-spacing: 0.04em;
+    line-height:    1.6;
+    padding:        0.1rem 0.5rem;
+    text-transform: uppercase;
+}
+
+.link-status.active   { background: rgba(74,  222, 128, 0.12); color: var(--success-color); }
+.link-status.inactive { background: rgba(251, 191,  36, 0.12); color: var(--warning-color); }
+.link-status.expired  { background: rgba(248, 113, 113, 0.12); color: var(--error-color);   }
+
+/* ── Note indicator ──────────────────────────────────────── */
+.link-note-indicator { cursor: help; position: relative; }
+.link-note-indicator i { color: var(--info-color, #4facfe); font-size: 0.75rem; }
+
+/* ── Action buttons ──────────────────────────────────────── */
+.link-actions {
+    align-items: center;
+    display:     flex;
+    flex-shrink: 0;
+    gap:         0.375rem;
+    overflow:    visible;
+}
+
+.link-action-btn {
+    align-items:     center;
+    background:      transparent;
+    border:          1px solid var(--border-color);
+    border-radius:   var(--radius-sm);
+    color:           var(--text-secondary);
+    cursor:          pointer;
+    display:         flex;
+    font-size:       0.8rem;
+    height:          34px;
+    justify-content: center;
+    transition:      color var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+    width:           34px;
+}
+
+.link-action-btn:hover {
+    background:   hsla(0, 0%, 100%, 0.06);
+    border-color: hsla(0, 0%, 100%, 0.2);
+    color:        var(--text-primary);
+}
+
+.link-action-btn.primary:hover {
+    background:   rgba(102, 126, 234, 0.12);
+    border-color: #667eea;
+    color:        #667eea;
+}
+
+/* ── Dropdown menu ───────────────────────────────────────── */
+.link-dropdown {
+    overflow: visible;
+    position: relative;
+}
+
+.link-dropdown-menu {
+    background:     #1f1e2c;
+    border:         1px solid var(--border-color);
+    border-radius:  var(--radius-md);
+    box-shadow:     0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+    display:        none;
+    min-width:      185px;
+    padding:        0.35rem 0;
+    pointer-events: none;
+    position:       absolute;
+    right:          0;
+    top:            calc(100% + 6px);
+    z-index:        var(--z-card-dropdown);
+}
+
+.link-dropdown-menu.open {
+    animation:      popIn var(--t-fast) forwards;
+    display:        block;
+    pointer-events: auto;
+}
+
+.link-dropdown-menu.drop-up {
+    animation: popUp var(--t-fast) forwards;
+    bottom:    calc(100% + 6px);
+    top:       auto;
+}
+
+.link-dropdown-item {
+    align-items:   center;
+    background:    transparent;
+    border:        none;
+    color:         var(--text-primary);
+    cursor:        pointer;
+    display:       flex;
+    font-family:   inherit;
+    font-size:     0.82rem;
+    gap:           0.65rem;
+    padding:       0.575rem 0.875rem;
+    text-align:    left;
+    transition:    background var(--t-fast), color var(--t-fast);
+    white-space:   nowrap;
+    width:         100%;
+}
+
+.link-dropdown-item:hover { background: rgba(102, 126, 234, 0.1); }
+
+.link-dropdown-item i {
+    color:      var(--text-muted);
+    flex-shrink: 0;
+    font-size:  0.8rem;
+    width:      15px;
+}
+
+.link-dropdown-item.danger,
+.link-dropdown-item.danger i { color: var(--error-color); }
+
+.link-dropdown-item.danger:hover { background: rgba(239, 68, 68, 0.08); }
+
+.link-dropdown-divider { background: var(--border-color); height: 1px; margin: 0.3rem 0; }
+
+/* ── Keyframes ───────────────────────────────────────────── */
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0);     }
+}
+
+@keyframes popUp {
+    from { opacity: 0; transform: scale(0.95) translateY(4px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .link-card {
+        grid-template-columns: 28px 36px 1fr;
+        grid-template-rows:    auto auto;
+    }
+
+    .link-actions {
+        border-top:  1px solid var(--border-color);
+        gap:         0.3rem;
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+        margin-top:  0.25rem;
+        padding-top: 0.625rem;
+    }
+
+    .link-dropdown-menu {
+        left:      auto;
+        max-width: calc(100vw - 1.5rem);
+        right:     0;
+        width:     max-content;
+    }
+}
+
+@media (max-width: 480px) {
+    .link-card {
+        gap:     0.625rem;
+        padding: 0.75rem 0.875rem;
+    }
+
+    .link-meta {
+        align-items:    flex-start;
+        flex-direction: column;
+        gap:            0.35rem;
+    }
+
+    .link-actions    { flex-wrap: wrap; }
+    .link-action-btn { font-size: 0.72rem; height: 30px; width: 30px; }
+}

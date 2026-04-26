@@ -1,0 +1,43 @@
+/* ============================================================
+   CONTAINER — Centering & page-width primitives.
+   These are layout scaffolding, not component styles.
+   ============================================================ */
+
+.container {
+    margin-left:  auto;
+    margin-right: auto;
+    padding-left:  15px;
+    padding-right: 15px;
+}
+
+.container-base {
+    margin:    0 auto;
+    max-width: 1200px;
+}
+
+.flex-container { display: flex; }
+
+/* Pushes content below the fixed header */
+.main-base { padding-top: 100px; }
+
+.centered-container {
+    position: relative;
+    width:     100%;
+    z-index:   1;
+}
+
+/* --- Spacing utilities --- */
+.mt-4 { margin-top:    2rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+    .centered-container { padding: 0 10px; }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding-left:  10px;
+        padding-right: 10px;
+    }
+}

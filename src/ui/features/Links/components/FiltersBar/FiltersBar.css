@@ -1,0 +1,241 @@
+/* ============================================================
+   FILTERS BAR — Links page search + filter toolbar.
+   Lives at: src/ui/features/links/components/FiltersBar/FiltersBar.css
+   Scope: .toolbar-container, .search-box, .filter-popover
+   ============================================================ */
+
+/* ── Mount point z-index anchors ─────────────────────────── */
+.filters-bar-mount  { position: relative; z-index: var(--z-filter-popover); }
+
+/* ── Toolbar row ─────────────────────────────────────────── */
+.toolbar-container {
+    align-items:     center;
+    backdrop-filter: blur(10px);
+    background:      var(--card-bg);
+    border:          1px solid var(--border-color);
+    border-radius:   var(--radius-lg);
+    display:         flex;
+    justify-content: space-between;
+    margin-bottom:   1.5rem;
+    padding:         0.75rem 1rem 0.75rem 0;
+}
+
+.toolbar-left,
+.toolbar-right {
+    align-items: center;
+    display:     flex;
+    gap:         0.75rem;
+}
+
+.toolbar-left { flex: 1; }
+
+/* ── Search box ──────────────────────────────────────────── */
+.search-box {
+    align-items: center;
+    display:     flex;
+    max-width:   360px;
+    position:    relative;
+    width:       100%;
+}
+
+.search-box .search-icon {
+    color:          var(--text-muted);
+    font-size:      0.8rem;
+    left:           0.9rem;
+    pointer-events: none;
+    position:       absolute;
+    z-index:        1;
+}
+
+.search-input {
+    background:    hsla(0, 0%, 100%, 0.03);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color:         var(--text-primary);
+    font-family:   inherit;
+    font-size:     0.875rem;
+    outline:       none;
+    padding:       0.65rem 1rem 0.65rem 2.4rem;
+    transition:    border-color var(--t-base), background var(--t-base), box-shadow var(--t-base);
+    width:         100%;
+}
+
+.search-input::placeholder { color: var(--text-muted); }
+
+.search-input:focus {
+    background:   hsla(0, 0%, 100%, 0.05);
+    border-color: #667eea;
+    box-shadow:   0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* ── Filter count badge ──────────────────────────────────── */
+.filter-count-badge {
+    align-items:     center;
+    background:      #667eea;
+    border-radius:   9px;
+    color:           #fff;
+    display:         inline-flex;
+    font-size:       0.68rem;
+    font-weight:     700;
+    height:          18px;
+    justify-content: center;
+    line-height:     1;
+    margin-left:     0.3rem;
+    min-width:       18px;
+    padding:         0 4px;
+}
+
+.active-filter-btn {
+    border-color: #667eea;
+    color:        #667eea;
+}
+
+/* ── Filter popover ──────────────────────────────────────── */
+.filter-popover {
+    background:     #18172a;
+    border:         1px solid hsla(0, 0%, 100%, 0.1);
+    border-radius:  var(--radius-lg);
+    box-shadow:     0 0 0 1px rgba(0, 0, 0, 0.5), 0 20px 60px rgba(0, 0, 0, 0.7);
+    display:        none;
+    opacity:        1;
+    overflow:       hidden;
+    pointer-events: auto;
+    position:       absolute;
+    right:          0;
+    top:            calc(100% + 8px);
+    width:          min(300px, calc(100vw - 2rem));
+    z-index:        10;
+}
+
+.filter-popover.active { display: block; }
+
+.popover-body {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.875rem;
+    padding:        1rem 1rem 0.5rem;
+}
+
+.pop-group {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.375rem;
+}
+
+.pop-group .filter-label {
+    color:          var(--text-muted);
+    font-size:      0.68rem;
+    font-weight:    600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.pop-date-row {
+    align-items: center;
+    display:     flex;
+    gap:         0.5rem;
+}
+
+.pop-date-row .filter-input-date {
+    flex:      1;
+    min-width: 0;
+}
+
+.date-sep {
+    color:      var(--text-muted);
+    flex-shrink: 0;
+    font-size:  0.8rem;
+}
+
+/* ── Filter inputs ───────────────────────────────────────── */
+.filter-input-date,
+.filter-select {
+    appearance:    none;
+    background:    #1f1e30;
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color:         var(--text-primary);
+    font-family:   inherit;
+    font-size:     0.85rem;
+    outline:       none;
+    padding:       0.55rem 0.85rem;
+    pointer-events: auto;
+    transition:    border-color var(--t-fast), background var(--t-fast);
+    width:         100%;
+}
+
+.filter-select {
+    background-image:    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-position: right 0.75rem center;
+    background-repeat:   no-repeat;
+    background-size:     10px;
+    cursor:              pointer;
+    padding-right:       2.25rem;
+}
+
+.filter-input-date:focus,
+.filter-select:focus {
+    background:   #252440;
+    border-color: #667eea;
+}
+
+.filter-input-date::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.6);
+}
+
+/* ── Popover footer ──────────────────────────────────────── */
+.popover-footer {
+    align-items:     center;
+    border-top:      1px solid var(--border-color);
+    display:         flex;
+    justify-content: space-between;
+    margin-top:      0.25rem;
+    padding:         0.75rem 1rem;
+    pointer-events:  auto;
+    position:        relative;
+    z-index:         1;
+}
+
+.btn-reset {
+    background:    none;
+    border:        none;
+    border-radius: var(--radius-sm);
+    color:         var(--text-secondary);
+    cursor:        pointer;
+    font-family:   inherit;
+    font-size:     0.82rem;
+    padding:       0.4rem 0.5rem;
+    transition:    color var(--t-fast), background var(--t-fast);
+}
+
+.btn-reset:hover {
+    background: hsla(0, 0%, 100%, 0.06);
+    color:      var(--text-primary);
+}
+
+/* ── Popover animation ───────────────────────────────────── */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0);      }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .toolbar-container {
+        align-items:    stretch;
+        flex-direction: column;
+        gap:            0.625rem;
+    }
+
+    .toolbar-left  { max-width: 100%; }
+    .toolbar-right { justify-content: flex-end; }
+    .search-box    { max-width: 100%; }
+
+    .filter-popover {
+        left:      auto;
+        max-width: calc(100vw - 1.5rem);
+        right:     0;
+        width:     max-content;
+    }
+}

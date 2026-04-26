@@ -1,0 +1,230 @@
+/* ============================================================
+   PROFILE EDIT FORM — Inline profile editing form card.
+   Lives at: src/ui/features/profile/ProfileEditForm/ProfileEditForm.css
+   Scope: .pef-* (Profile Edit Form prefix)
+   ============================================================ */
+
+/* ── Form card ───────────────────────────────────────────── */
+.pef-form {
+    background:  var(--card-bg);
+    border:      1px solid var(--border-color);
+    border-radius: 16px;
+    padding:     1.75rem;
+    transition:  border-color var(--transition-base);
+}
+
+.pef-form:hover { border-color: rgba(102, 126, 234, 0.2); }
+
+/* ── Header ──────────────────────────────────────────────── */
+.pef-header {
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.pef-title {
+    align-items: center;
+    color:       var(--text-primary);
+    display:     flex;
+    font-size:   1.05rem;
+    font-weight: 600;
+    gap:         0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.pef-subtitle {
+    color:     var(--text-secondary);
+    font-size: 0.82rem;
+}
+
+/* ── Fields grid ─────────────────────────────────────────── */
+.pef-fields {
+    display:               grid;
+    gap:                   1rem 1.25rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.pef-field {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.35rem;
+}
+
+.pef-field--full { grid-column: 1 / -1; }
+
+/* ── Label ───────────────────────────────────────────────── */
+.pef-label {
+    align-items:    center;
+    color:          var(--text-secondary);
+    display:        flex;
+    font-size:      0.8rem;
+    font-weight:    600;
+    gap:            0.4rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.pef-label-hint {
+    color:       var(--text-muted);
+    font-size:   0.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+/* ── Input wrapper ───────────────────────────────────────── */
+.pef-input-wrap {
+    align-items: center;
+    display:     flex;
+    position:    relative;
+}
+
+.pef-input-icon {
+    color:          var(--text-muted);
+    font-size:      0.85rem;
+    left:           0.875rem;
+    pointer-events: none;
+    position:       absolute;
+    z-index:        1;
+}
+
+/* ── Input ───────────────────────────────────────────────── */
+.pef-input {
+    background:    hsla(0, 0%, 100%, 0.04);
+    border:        1px solid var(--border-color);
+    border-radius: 10px;
+    color:         var(--text-primary);
+    font-family:   inherit;
+    font-size:     0.875rem;
+    outline:       none;
+    padding:       0.65rem 0.875rem 0.65rem 2.4rem;
+    transition:    border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+    width:         100%;
+}
+
+.pef-input:focus {
+    background:   rgba(102, 126, 234, 0.04);
+    border-color: #667eea;
+    box-shadow:   0 0 0 3px rgba(102, 126, 234, 0.12);
+}
+
+.pef-input::placeholder { color: var(--text-muted); }
+
+.pef-textarea {
+    min-height:  80px;
+    padding-left: 0.875rem;
+    resize:      vertical;
+}
+
+.pef-select {
+    -webkit-appearance: none;
+    appearance:         none;
+    background-image:   url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' viewBox='0 0 10 6'%3E%3Cpath stroke='%23888' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m1 1 4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.875rem center;
+    background-repeat:  no-repeat;
+    cursor:             pointer;
+    padding-right:      2.2rem;
+}
+
+/* ── Helpers ─────────────────────────────────────────────── */
+.pef-char-count {
+    align-self: flex-end;
+    color:      var(--text-muted);
+    font-size:  0.72rem;
+    text-align: right;
+}
+
+.pef-field-hint {
+    color:     var(--text-muted);
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
+}
+
+/* ── Actions row ─────────────────────────────────────────── */
+.pef-actions {
+    align-items:     center;
+    border-top:      1px solid var(--border-color);
+    display:         flex;
+    gap:             0.75rem;
+    justify-content: flex-end;
+    margin-top:      1.5rem;
+    padding-top:     1rem;
+}
+
+.pef-cancel-btn {
+    background:    transparent;
+    border:        1px solid var(--border-color);
+    border-radius: 10px;
+    color:         var(--text-secondary);
+    cursor:        pointer;
+    font-size:     0.875rem;
+    font-weight:   500;
+    padding:       0.65rem 1.25rem;
+    transition:    border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.pef-cancel-btn:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    color:        var(--text-primary);
+}
+
+.pef-save-btn { position: relative; }
+
+.pef-save-btn .pef-save-spinner {
+    align-items: center;
+    display:     flex;
+    gap:         0.4rem;
+}
+
+.pef-inline-error {
+    border-radius: 8px;
+    font-size:     0.82rem;
+    margin-bottom: 0.5rem;
+    padding:       0.6rem 0.875rem;
+}
+
+/* ── Password strength meter ─────────────────────────────── */
+.sf-strength {
+    align-items: center;
+    display:     flex;
+    gap:         0.5rem;
+    margin-top:  0.4rem;
+}
+
+.sf-strength-bars {
+    display: flex;
+    flex:    1;
+    gap:     4px;
+}
+
+.sf-strength-bar {
+    background-color: #e5e7eb;
+    border-radius:    2px;
+    flex:             1;
+    height:           4px;
+    transition:       background-color 0.25s ease;
+}
+
+.sf-bar--red    { background-color: #ef4444; }
+.sf-bar--orange { background-color: #f97316; }
+.sf-bar--yellow { background-color: #eab308; }
+.sf-bar--green  { background-color: #22c55e; }
+
+.sf-strength-label {
+    color:       #6b7280;
+    font-weight: 600;
+    min-width:   3.5rem;
+    transition:  color 0.25s ease;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .pef-fields       { grid-template-columns: 1fr; }
+    .pef-field--full  { grid-column: 1; }
+}
+
+@media (max-width: 480px) {
+    .pef-actions     { align-items: stretch; flex-direction: column; }
+    .pef-cancel-btn,
+    .pef-save-btn    { justify-content: center; width: 100%; }
+}

@@ -1,0 +1,15 @@
+/* ============================================================
+   GRID — Display & position utility classes.
+   Domain-agnostic layout helpers shared across all pages.
+   ============================================================ */
+
+.hidden   { display: none       !important; }
+.block    { display: block;                 }
+.flex     { display: flex;                  }
+.grid     { display: grid;                  }
+.relative { position: relative;             }
+.absolute { position: absolute;             }
+.fixed    { position: fixed;                }
+.border   { border:     1px solid var(--border-color); }
+.shadow   { box-shadow: var(--shadow-md);              }
+.transform { transform: translateZ(0); }

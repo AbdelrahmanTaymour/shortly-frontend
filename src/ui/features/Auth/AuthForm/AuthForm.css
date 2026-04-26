@@ -1,0 +1,164 @@
+/* ============================================================
+   AUTH FORM — Shared authentication form shell.
+   Lives at: src/ui/features/auth/AuthForm/AuthForm.css
+   Scope: form container card, header, social buttons, divider,
+          success/error states, tab switcher (login/register).
+   ============================================================ */
+
+/* ── Form layout ─────────────────────────────────────────── */
+.form-base {
+    display:        flex;
+    flex-direction: column;
+    gap:            1.25rem;
+}
+
+.form-side-base {
+    align-items:     center;
+    display:         flex;
+    flex:            1;
+    justify-content: center;
+    padding:         2rem;
+    position:        relative;
+}
+
+/* ── Glassmorphism card shell ────────────────────────────── */
+.form-container-base {
+    backdrop-filter: blur(20px);
+    background:      var(--card-bg);
+    border:          1px solid var(--border-color);
+    border-radius:   18px;
+    box-shadow:      0 20px 40px rgba(0, 0, 0, 0.3);
+    max-width:       400px;
+    overflow:        hidden;
+    padding:         2.5rem;
+    position:        relative;
+    transform:       translateY(0);
+    transition:      var(--transition-base);
+    width:           100%;
+    z-index:         1;
+}
+
+/* Top gradient accent line */
+.form-container-base::before {
+    background: var(--accent-gradient);
+    content:    "";
+    height:     1px;
+    left:       0;
+    opacity:    0.5;
+    position:   absolute;
+    right:      0;
+    top:        0;
+    transition: opacity var(--transition-base);
+}
+
+.form-container-base:hover {
+    border-color: hsla(0, 0%, 100%, 0.2);
+    box-shadow:   0 30px 60px rgba(0, 0, 0, 0.4);
+    transform:    translateY(-5px);
+}
+
+.form-container-base:hover::before { opacity: 1; }
+
+/* ── Header ──────────────────────────────────────────────── */
+.form-header-base {
+    margin-bottom: 2rem;
+    text-align:    center;
+}
+
+.form-title-base {
+    background:              var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip:         text;
+    font-size:               1.75rem;
+    font-weight:             700;
+    -webkit-text-fill-color: transparent;
+    margin-bottom:           0.5rem;
+}
+
+.form-subtitle-base {
+    color:     var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* ── Tabs (Login / Register switcher) ────────────────────── */
+.form-tabs {
+    display:         flex;
+    gap:             1rem;
+    justify-content: center;
+    margin-bottom:   2rem;
+    padding:         0.25rem;
+}
+
+.tab-btn {
+    align-items:     center;
+    background:      transparent;
+    border:          1px solid var(--border-color);
+    border-radius:   10px;
+    color:           var(--text-secondary);
+    cursor:          pointer;
+    display:         flex;
+    font-size:       0.9rem;
+    gap:             0.5rem;
+    justify-content: center;
+    padding:         0.8rem 1.5rem;
+    transition:      var(--transition-base);
+}
+
+.tab-btn.active {
+    background: var(--primary-gradient);
+    color:      #fff;
+}
+
+.tab-btn:hover:not(.active) {
+    background:   hsla(0, 0%, 100%, 0.05);
+    border-color: hsla(0, 0%, 100%, 0.2);
+    color:        var(--text-primary);
+    transform:    translateY(-1px);
+}
+
+/* ── Divider ─────────────────────────────────────────────── */
+.divider {
+    align-items: center;
+    color:       var(--text-secondary);
+    display:     flex;
+    font-size:   0.9rem;
+    gap:         1rem;
+    margin:      1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+    background: var(--border-color);
+    content:    "";
+    flex:       1;
+    height:     1px;
+}
+
+/* ── Footer link ─────────────────────────────────────────── */
+.form-link-base {
+    color:      var(--text-secondary);
+    font-size:  0.9rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.form-link-base a {
+    background:              var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip:         text;
+    color:                   var(--text-primary);
+    font-weight:             600;
+    text-decoration:         none;
+    -webkit-text-fill-color: transparent;
+    transition:              var(--transition-base);
+}
+
+.form-link-base a:hover { text-decoration: underline; }
+
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .form-side-base      { padding: 0; width: 100%; }
+    .form-container-base { margin: 15px; }
+    .form-title-base     { font-size: 1.8rem; }
+}

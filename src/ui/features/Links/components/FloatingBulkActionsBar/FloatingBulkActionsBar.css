@@ -1,0 +1,259 @@
+.fbar-portal {
+    position: fixed;
+    bottom: 1.75rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    z-index: 300; /* Above filters (100) and bulk-bar (150), below modals (1000) */
+    width: calc(100% - 2rem);
+    max-width: 740px;
+
+    /* Hidden by default — transitions to visible on .fbar--visible */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fbar-portal.fbar--visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+
+/* ── Inner container (the visible "pill") ───────────────────── */
+.fbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 0;
+    padding: 0.45rem 0.6rem;
+    background: rgba(13, 12, 23, 0.88);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgb(107 112 213);
+    border-radius: var(--radius-lg, 14px);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+
+/* ── Left section: deselect button + counter ────────────────── */
+.fbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.2rem 0.75rem 0.2rem 0.35rem;
+    flex-shrink: 0;
+}
+
+.fbar-deselect-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    flex-shrink: 0;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+
+    color: var(--text-muted, #888);
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: color 0.12s ease,
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.fbar-deselect-btn:hover {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #ef4444;
+}
+
+.fbar-count-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    white-space: nowrap;
+}
+
+.fbar-count {
+    font-size: 0.925rem;
+    font-weight: 700;
+    color: #d4cfec;
+    font-variant-numeric: tabular-nums;
+    min-width: 1ch;
+    display: inline-block;
+    transition: transform 0.1s ease;
+}
+
+.fbar-count-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #a0a0b8);
+    font-weight: 500;
+}
+
+/* Pulse animation on count update */
+.fbar-count--pulse .fbar-count {
+    animation: fbarCountPop 0.22s ease;
+}
+
+
+/* ── Centre divider ──────────────────────────────────────────── */
+.fbar-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
+    flex-shrink: 0;
+    margin: 0 0.35rem;
+}
+
+
+/* ── Action buttons group ────────────────────────────────────── */
+.fbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0 0.25rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    /* Hide scrollbar on mobile while keeping scroll */
+    scrollbar-width: none;
+}
+
+.fbar-actions::-webkit-scrollbar {
+    display: none;
+}
+
+/* Thin separator between normal actions and delete */
+.fbar-action-sep {
+    width: 1px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 1px;
+    flex-shrink: 0;
+    margin: 0 0.2rem;
+}
+
+.fbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    padding: 0.42rem 0.7rem;
+    flex-shrink: 0;
+
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm, 8px);
+
+    color: var(--text-secondary, #a0a0b8);
+    font-size: 0.8rem;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition: color 0.12s ease,
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.fbar-btn i {
+    font-size: 0.78rem;
+    flex-shrink: 0;
+}
+
+.fbar-btn:hover {
+    color: var(--text-primary, #e8e8f0);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.fbar-btn:active {
+    background: rgba(255, 255, 255, 0.04);
+    transform: scale(0.97);
+}
+
+/* Danger variant — delete button */
+.fbar-btn--danger {
+    color: var(--text-muted, #888);
+}
+
+.fbar-btn--danger:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.28);
+}
+
+.fbar-btn--danger:active {
+    background: rgba(239, 68, 68, 0.06);
+}
+
+
+/* ── Keyframes ────────────────────────────────────────────────── */
+@keyframes fbarCountPop {
+    0% {
+        transform: scale(1);
+    }
+    40% {
+        transform: scale(1.32);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* ── Responsive — tablet (≤ 768px) ──────────────────────────── */
+@media (max-width: 768px) {
+    .fbar-portal {
+        bottom: 1.25rem;
+        width: calc(100% - 1.5rem);
+    }
+
+    .fbar-inner {
+        padding: 0.4rem 0.5rem;
+    }
+
+    .fbar-left {
+        padding-right: 0.6rem;
+    }
+}
+
+
+/* ── Responsive — mobile (≤ 540px): hide text labels ─────────── */
+@media (max-width: 540px) {
+    .fbar-portal {
+        bottom: 1rem;
+        max-width: none;
+        width: calc(100% - 1rem);
+    }
+
+    /* Collapse to icon-only buttons on small screens */
+    .fbar-btn-label {
+        display: none;
+    }
+
+    .fbar-btn {
+        padding: 0.42rem 0.55rem;
+    }
+
+    .fbar-btn i {
+        font-size: 0.85rem;
+    }
+
+    .fbar-count-label {
+        display: none;
+    }
+
+    .fbar-left {
+        padding-right: 0.5rem;
+    }
+}

@@ -1,0 +1,395 @@
+/* ============================================================
+   CLICKS CHART — Chart card, ranked lists, tab viewport.
+   Lives at: src/ui/features/Analytics/ClicksChart/ClicksChart.css
+   Scope: .stats-chart-card, .stats-tab-*, .stats-ranked-list,
+          .ranked-item, colour swatches, bar fills.
+   ============================================================ */
+
+/* ── Chart card ──────────────────────────────────────────── */
+.stats-chart-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg, 16px);
+    margin-bottom: 1.25rem;
+    padding: 1.375rem;
+    position: relative;
+}
+
+.chart-card-header {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: space-between;
+    margin-bottom: 0.875rem;
+}
+
+.chart-card-header h3 {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.chart-badge {
+    background: hsla(0, 0%, 100%, 0.06);
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    white-space: nowrap;
+}
+
+/* ── Chart legend ────────────────────────────────────────── */
+.chart-legend {
+    align-items: center;
+    color: var(--text-muted);
+    display: flex;
+    font-size: 0.75rem;
+    gap: 0.875rem;
+}
+
+.chart-legend-item {
+    align-items: center;
+    color: var(--text-muted);
+    display: flex;
+    font-size: 0.75rem;
+    gap: 0.35rem;
+}
+
+.chart-legend-dot {
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 8px;
+    width: 8px;
+}
+
+/* ── Tab viewport ────────────────────────────────────────── */
+.stats-tab-viewport {
+    position: relative;
+}
+
+.stats-tab-panel {
+    display: none;
+}
+
+.stats-tab-panel.active {
+    animation: tabFadeIn 0.2s ease;
+    display: block;
+}
+
+@keyframes tabFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Ranked list ─────────────────────────────────────────── */
+.stats-ranked-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.ranked-item {
+    align-items: center;
+    display: grid;
+    gap: 0.625rem;
+    grid-template-columns: 24px 28px 1fr;
+}
+
+.ranked-item:has(.ranked-flag) {
+    grid-template-columns: 24px 28px 1fr;
+}
+
+.ranked-item.compact {
+    gap: 0.5rem;
+    grid-template-columns: 28px 1fr;
+}
+
+.ranked-pos {
+    align-items: center;
+    color: var(--text-muted);
+    display: flex;
+    font-size: 0.75rem;
+    font-weight: 700;
+    justify-content: center;
+    min-width: 24px;
+}
+
+.ranked-flag {
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    line-height: 1;
+    text-align: center;
+    width: 28px;
+}
+
+.color-swatch {
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 10px;
+    width: 10px;
+}
+
+.device-icon-wrap {
+    align-items: center;
+    background: hsla(0, 0%, 100%, 0.04);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    display: flex;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    height: 28px;
+    justify-content: center;
+    width: 28px;
+}
+
+.referrer-favicon {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    height: 20px;
+    justify-content: center;
+    width: 20px;
+}
+
+.referrer-favicon img {
+    height: 16px;
+    object-fit: contain;
+    width: 16px;
+}
+
+/* ── Ranked body ─────────────────────────────────────────── */
+.ranked-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.ranked-row {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+}
+
+.ranked-label {
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ranked-value {
+    align-items: center;
+    color: var(--text-primary);
+    display: flex;
+    flex-shrink: 0;
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    gap: 0.35rem;
+}
+
+.ranked-value em {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* ── Progress bar ────────────────────────────────────────── */
+.ranked-bar {
+    background: hsla(0, 0%, 100%, 0.06);
+    border-radius: 2px;
+    height: 4px;
+    overflow: hidden;
+}
+
+.ranked-bar-fill {
+    border-radius: 2px;
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.bar-purple {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.bar-blue {
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+}
+
+.bar-teal {
+    background: linear-gradient(90deg, #34d399, #4ade80);
+}
+
+/* ── Mini empty state ────────────────────────────────────── */
+.stats-empty-mini {
+    align-items: center;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    font-size: 0.82rem;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 2.5rem 1rem;
+    text-align: center;
+}
+
+.stats-empty-mini i {
+    font-size: 1.4rem;
+    opacity: 0.4;
+}
+
+/* ── Refetch overlay ─────────────────────────────────────── */
+.stats-refetch-overlay {
+    align-items: flex-start;
+    backdrop-filter: blur(2px);
+    background: hsla(0, 0%, 4%, 0.45);
+    border-radius: var(--radius-lg, 16px);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    padding-top: 5rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 0.2s ease;
+    z-index: 50;
+}
+
+.stats-refetch-overlay.hidden {
+    display: none;
+}
+
+.stats-refetch-spinner {
+    align-items: center;
+    background: rgba(20, 20, 35, 0.9);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full, 50px);
+    box-shadow: var(--shadow-lg);
+    color: var(--text-secondary);
+    display: flex;
+    font-size: 0.85rem;
+    gap: 0.6rem;
+    padding: 0.7rem 1.25rem;
+}
+
+.stats-refetch-spinner i {
+    color: var(--accent-purple);
+}
+
+/* ── Analytics refetch overlay (Analytics page variant) ──── */
+.analytics-refetch-overlay {
+    align-items: center;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    background: rgba(10, 9, 20, 0.55);
+    border-radius: var(--radius-lg);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+
+.analytics-refetch-overlay.hidden {
+    display: none;
+}
+
+.analytics-refetch-spinner {
+    align-items: center;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    color: var(--text-primary);
+    display: flex;
+    font-size: 0.875rem;
+    gap: 0.625rem;
+    padding: 0.875rem 1.5rem;
+}
+
+.analytics-refetch-spinner i {
+    color: #667eea;
+    font-size: 1rem;
+}
+
+/* ── Sub-section dividers ────────────────────────────────── */
+.stats-sub-section {
+    margin-bottom: 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.stats-sub-section:last-child {
+    margin-bottom: 0;
+}
+
+.stats-sub-section:first-child {
+    margin-top: 0;
+}
+
+.stats-sub-title {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.625rem;
+    text-transform: uppercase;
+}
+
+/* ── Loading / skeleton states ───────────────────────────── */
+.skeleton-card,
+.skeleton-chart {
+    animation: shimmer 1.4s ease-in-out infinite;
+    background: linear-gradient(90deg, hsla(0, 0%, 100%, 0.04) 25%, hsla(0, 0%, 100%, 0.08) 50%, hsla(0, 0%, 100%, 0.04) 75%);
+    background-size: 800px 100%;
+    border-radius: var(--radius-md);
+}
+
+.analytics-skeleton {
+    padding: 0.25rem 0;
+}
+
+.skeleton-cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin-bottom: 1.5rem;
+}
+
+.skeleton-card {
+    border-radius: var(--radius-lg);
+    height: 100px;
+}
+
+.skeleton-chart {
+    border-radius: var(--radius-lg);
+    height: 220px;
+}
+
+.tab-loading-state {
+    align-items: center;
+    color: var(--text-muted);
+    display: flex;
+    font-size: 0.875rem;
+    gap: 0.625rem;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.tab-loading-state i {
+    color: #667eea;
+    font-size: 1.1rem;
+}

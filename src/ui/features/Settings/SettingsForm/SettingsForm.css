@@ -1,0 +1,182 @@
+/* ============================================================
+   SETTINGS FORM — Shared field styles for all settings panels.
+   ============================================================ */
+
+/* ── Field ───────────────────────────────────────────────── */
+.sf-field {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.35rem;
+}
+
+/* ── Label ───────────────────────────────────────────────── */
+.sf-label {
+    color:          var(--text-secondary);
+    font-size:      0.8rem;
+    font-weight:    600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.sf-label-hint {
+    color:          var(--text-muted);
+    font-size:      0.75rem;
+    font-weight:    400;
+    letter-spacing: 0;
+    margin-top:     0.1rem;
+    text-transform: none;
+}
+
+/* ── Password toggle ─────────────────────────────────────── */
+.sf-toggle-pw {
+    align-items: center;
+    background:  transparent;
+    border:      none;
+    color:       var(--text-muted);
+    cursor:      pointer;
+    display:     flex;
+    font-size:   0.85rem;
+    padding:     0.25rem;
+    position:    absolute;
+    right:       0.75rem;
+    transition:  color var(--transition-fast);
+}
+
+.sf-toggle-pw:hover { color: var(--text-primary); }
+
+/* ── Strength bar ────────────────────────────────────────── */
+.sf-strength {
+    align-items: center;
+    display:     flex;
+    gap:         0.6rem;
+    margin-top:  0.3rem;
+}
+
+.sf-strength-bars {
+    display: flex;
+    flex:    1;
+    gap:     3px;
+}
+
+.sf-strength-bar {
+    background:    hsla(0, 0%, 100%, 0.08);
+    border-radius: 2px;
+    flex:          1;
+    height:        4px;
+    transition:    background var(--transition-fast);
+}
+
+.sf-bar--red    { background: #ef4444; }
+.sf-bar--orange { background: #f59e0b; }
+.sf-bar--yellow { background: #eab308; }
+.sf-bar--green  { background: #4ade80; }
+
+.sf-strength-label {
+    color:       var(--text-muted);
+    flex-shrink: 0;
+    font-size:   0.72rem;
+    text-align:  right;
+    width:       50px;
+}
+
+/* ── Confirm password hint ───────────────────────────────── */
+.sf-match-hint { font-size: 0.75rem; margin-top: 0.15rem; }
+.sf-match--ok  { color: #4ade80; }
+.sf-match--bad { color: #f87171; }
+
+/* ── Alert / feedback strip ──────────────────────────────── */
+.sf-feedback {
+    border-radius: 10px;
+    font-size:     0.82rem;
+    line-height:   1.4;
+    padding:       0.65rem 0.875rem;
+}
+
+/* ── Actions row ─────────────────────────────────────────── */
+.sf-actions {
+    align-items: center;
+    display:     flex;
+    gap:         0.75rem;
+    padding-top: 0.25rem;
+}
+
+.sf-submit-btn {
+    align-items: center;
+    display:     inline-flex;
+    gap:         0.45rem;
+}
+
+.sf-btn-spinner {
+    align-items: center;
+    display:     flex;
+    gap:         0.4rem;
+}
+
+/* ── Current value display row ───────────────────────────── */
+.sf-current-info {
+    align-items:   center;
+    background:    hsla(0, 0%, 100%, 0.03);
+    border:        1px solid var(--border-color);
+    border-radius: 10px;
+    display:       flex;
+    gap:           0.6rem;
+    padding:       0.6rem 0.875rem;
+}
+
+.sf-current-info__label {
+    color:       var(--text-muted);
+    flex-shrink: 0;
+    font-size:   0.75rem;
+}
+
+.sf-current-info__value {
+    color:       var(--text-primary);
+    font-size:   0.875rem;
+    font-weight: 500;
+    word-break:  break-all;
+}
+
+/* ── Success notice ──────────────────────────────────────── */
+.sf-success-notice {
+    align-items:    center;
+    background:     rgba(74, 222, 128, 0.06);
+    border:         1px solid rgba(74, 222, 128, 0.2);
+    border-radius:  12px;
+    display:        flex;
+    flex-direction: column;
+    gap:            0.5rem;
+    padding:        1.5rem;
+    text-align:     center;
+}
+
+.sf-success-notice__icon  { color: #4ade80; font-size: 2rem; margin-bottom: 0.25rem; }
+.sf-success-notice__title { color: var(--text-primary); font-size: 1rem; font-weight: 600; }
+
+.sf-success-notice__body {
+    color:     var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    max-width: 380px;
+}
+
+.sf-success-notice__hint { color: var(--text-muted); font-size: 0.8rem; }
+
+/* ── Inline link button ──────────────────────────────────── */
+.sf-link-btn {
+    background:      transparent;
+    border:          none;
+    color:           #a5b4fc;
+    cursor:          pointer;
+    font-family:     inherit;
+    font-size:       inherit;
+    padding:         0;
+    text-decoration: underline;
+}
+
+.sf-link-btn:hover { color: var(--text-primary); }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .sf-actions    { align-items: stretch; flex-direction: column; }
+    .sf-submit-btn { justify-content: center; width: 100%; }
+}

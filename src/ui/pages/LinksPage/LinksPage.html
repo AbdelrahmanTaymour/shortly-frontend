@@ -1,0 +1,38 @@
+<!--
+    LinksPage.html — Links management page skeleton.
+
+    CHANGE from previous version:
+      The inline .Links-section-header block is replaced by a DashboardPageHeader
+      mount point. LinksPage.js mounts DashboardPageHeader into this container
+      and puts the "Create link" button into the right slot.
+
+    All other IDs are unchanged.
+-->
+
+<!-- DashboardPageHeader mounts here (renders .stats-page-header--compact) -->
+<div id="linksPageHeaderMount"></div>
+
+<div class="links-page">
+
+    <!-- Filters Bar -->
+    <div class="filters-bar-mount" id="filtersBarContainer"></div>
+
+    <!-- Bulk Actions Bar -->
+    <div aria-live="polite" class="bulk-actions-bar-mount hidden" id="bulkActionsBarContainer"></div>
+
+    <!-- Links List -->
+    <div class="links-table-mount" id="linksTableContainer"></div>
+
+    <!-- Pagination -->
+    <div aria-label="Pagination" class="pagination-mount" id="paginationContainer"></div>
+
+    <!-- Empty State -->
+    <div aria-live="polite" class="empty-state-mount hidden" id="emptyStateContainer" role="status"></div>
+
+</div>
+
+<!-- Modal mount points -->
+<div aria-label="Create link modal" id="createLinkModalContainer" role="region"></div>
+<div aria-label="Edit link modal" id="editLinkModalContainer" role="region"></div>
+<div aria-label="Confirm action modal" id="confirmModalContainer" role="region"></div>
+<div aria-label="Set expiration modal" id="bulkExpirationModalContainer" role="region"></div>

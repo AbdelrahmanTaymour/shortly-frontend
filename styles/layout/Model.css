@@ -1,0 +1,98 @@
+/* ============================================================
+   MODAL — Generic modal shell with overlay.
+   Lives at: src/ui/components/feedback/Modal/Modal.css
+   No domain content lives here — only the structural shell.
+   ============================================================ */
+
+.hide { display: none; }
+
+/* --- Overlay backdrop --- */
+.modal-overlay {
+    align-items:     center;
+    backdrop-filter: blur(4px);
+    background:      rgba(0, 0, 0, 0.7);
+    bottom:          0;
+    display:         none;
+    justify-content: center;
+    left:            0;
+    padding:         2rem;
+    position:        fixed;
+    right:           0;
+    top:             0;
+    z-index:         var(--z-fixed);
+}
+
+.modal-overlay.open { display: flex; }
+
+/* --- Modal container --- */
+.modal-container {
+    animation:     modalSlideIn 0.3s ease;
+    background:    #1a1a2e;
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    max-height:    90vh;
+    max-width:     600px;
+    overflow-y:    auto;
+    -ms-overflow-style: auto;
+    scrollbar-color:    hsla(0, 0%, 100%, 0.1) transparent;
+    scrollbar-width:    thin;
+    width:         100%;
+}
+
+.modal-container::-webkit-scrollbar        { display: block; width: 6px; }
+.modal-container::-webkit-scrollbar-track  { background: transparent; margin: 10px 0; }
+.modal-container::-webkit-scrollbar-thumb  { background: hsla(0, 0%, 100%, 0.1); border-radius: 10px; transition: var(--transition-base); }
+.modal-container::-webkit-scrollbar-thumb:hover  { background: hsla(0, 0%, 100%, 0.2); cursor: pointer; }
+.modal-container::-webkit-scrollbar-thumb:active { background: var(--primary-gradient); }
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0)       scale(1);   }
+}
+
+/* --- Header --- */
+.modal-header {
+    align-items:     center;
+    border-bottom:   1px solid var(--border-color);
+    display:         flex;
+    justify-content: space-between;
+    padding:         1.5rem;
+}
+
+.modal-title {
+    color:       var(--text-primary);
+    font-size:   1.25rem;
+    font-weight: 600;
+}
+
+.modal-close-btn {
+    align-items:     center;
+    background:      transparent;
+    border:          none;
+    border-radius:   var(--radius-sm);
+    color:           var(--text-secondary);
+    cursor:          pointer;
+    display:         flex;
+    font-size:       1.2rem;
+    height:          36px;
+    justify-content: center;
+    transition:      var(--transition-base);
+    width:           36px;
+}
+
+.modal-close-btn:hover {
+    background: hsla(0, 0%, 100%, 0.05);
+    color:      var(--text-primary);
+}
+
+/* --- Body & footer --- */
+.modal-body,
+.modal-footer { padding: 1.5rem; }
+
+.modal-footer {
+    align-items:     center;
+    border-top:      1px solid var(--border-color);
+    display:         flex;
+    gap:             1rem;
+    justify-content: flex-end;
+}

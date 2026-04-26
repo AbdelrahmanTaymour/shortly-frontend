@@ -1,0 +1,133 @@
+<!-- ProfilePage.html — src/ui/pages/ProfilePage/ProfilePage.html -->
+
+<!--
+  DashboardPageHeader mount point.
+  Sits OUTSIDE the skeleton/content toggle containers, so the page title
+  ("My Profile") is always visible — even while data is loading or if
+  an error occurs. ProfilePage.js mounts DashboardPageHeader here first,
+  before triggering the skeleton.
+-->
+<div id="profilePageHeaderMount"></div>
+
+<div aria-label="Profile page" class="profile-page">
+
+    <!-- ── Skeleton ──────────────────────────────────────────────────────── -->
+    <!--
+      The skeleton-page-header block has been REMOVED from this revision.
+      DashboardPageHeader (above) renders the real title immediately —
+      there is nothing to a skeleton-load for a static heading.
+      The skeleton now covers only the two-column content layout.
+    -->
+    <div aria-hidden="true" class="profile-skeleton" id="profileSkeleton">
+        <div class="profile-layout profile-layout--skeleton">
+            <div class="profile-left">
+                <div class="skeleton-card">
+                    <div class="skeleton-avatar"></div>
+                    <div class="skeleton-block skeleton-block--name"></div>
+                    <div class="skeleton-block skeleton-block--line"></div>
+                    <div class="skeleton-block skeleton-block--line skeleton-block--short"></div>
+                    <div class="skeleton-block skeleton-block--tags"></div>
+                </div>
+            </div>
+            <div class="profile-right">
+                <div class="skeleton-card skeleton-card--form">
+                    <div class="skeleton-block skeleton-block--label"></div>
+                    <div class="skeleton-block skeleton-block--input"></div>
+                    <div class="skeleton-block skeleton-block--label"></div>
+                    <div class="skeleton-block skeleton-block--input"></div>
+                    <div class="skeleton-grid">
+                        <div>
+                            <div class="skeleton-block skeleton-block--label"></div>
+                            <div class="skeleton-block skeleton-block--input"></div>
+                        </div>
+                        <div>
+                            <div class="skeleton-block skeleton-block--label"></div>
+                            <div class="skeleton-block skeleton-block--input"></div>
+                        </div>
+                    </div>
+                    <div class="skeleton-block skeleton-block--btn"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Error state ───────────────────────────────────────────────────── -->
+    <div class="hidden" id="profileError" role="alert"></div>
+
+    <!-- ── Content ───────────────────────────────────────────────────────── -->
+    <!--
+      Note: .Profile-page-header has been REMOVED from inside #profileContent.
+      DashboardPageHeader (the #profilePageHeaderMount div above) replaces it.
+      ProfilePage.js renders the title there immediately on mount(), so no
+      toggle or skeleton logic is needed for the heading.
+    -->
+    <div class="hidden animate-fade-in" id="profileContent">
+
+        <!-- Two-column layout -->
+        <div class="profile-layout">
+
+            <!-- Left column: identity card -->
+            <aside class="profile-left">
+                <div id="profileHeaderCardContainer"></div>
+            </aside>
+
+            <!-- Right column: tabs (Edit / Quota) -->
+            <section class="profile-right">
+
+                <!-- Tab nav -->
+                <div
+                        aria-label="Profile sections"
+                        class="profile-tabs-nav"
+                        id="profileTabsNav"
+                        role="tablist"
+                >
+                    <button
+                            aria-controls="profileTabEdit"
+                            aria-selected="true"
+                            class="profile-tab-btn active"
+                            data-tab="edit"
+                            id="profileTabBtnEdit"
+                            role="tab"
+                            tabindex="0"
+                    >
+                        <i aria-hidden="true" class="fa-solid fa-pen-to-square"></i>
+                        Edit Profile
+                    </button>
+                    <button
+                            aria-controls="profileTabQuota"
+                            aria-selected="false"
+                            class="profile-tab-btn"
+                            data-tab="quota"
+                            id="profileTabBtnQuota"
+                            role="tab"
+                            tabindex="-1"
+                    >
+                        <i aria-hidden="true" class="fa-solid fa-gauge-high"></i>
+                        Usage &amp; Quota
+                    </button>
+                </div>
+
+                <!-- Tab: Edit Profile -->
+                <div
+                        aria-labelledby="profileTabBtnEdit"
+                        class="profile-tab-panel active"
+                        id="profileTabEdit"
+                        role="tabpanel"
+                >
+                    <div id="profileEditFormContainer"></div>
+                </div>
+
+                <!-- Tab: Quota -->
+                <div
+                        aria-labelledby="profileTabBtnQuota"
+                        class="profile-tab-panel hidden"
+                        id="profileTabQuota"
+                        role="tabpanel"
+                >
+                    <div id="profileQuotaContainer"></div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+/* ============================================================
+   CONFIRM MODAL — Destructive-action confirmation dialog.
+   Lives at: src/ui/features/Links/modals/ConfirmModal/ConfirmModal.css
+   Scope: .confirm-modal-* elements inside the generic modal shell.
+   ============================================================ */
+
+.confirm-modal-title-row {
+    align-items: center;
+    display: flex;
+    gap: 0.625rem;
+    min-width: 0;
+}
+
+.confirm-modal-icon {
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.confirm-modal-message {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-line;
+}

@@ -1,0 +1,94 @@
+/* ============================================================
+   VARIABLES — Design tokens (CSS custom properties)
+   All values are design-system primitives shared across every
+   layer of the UI. No component-specific values belong here.
+   ============================================================ */
+
+:root {
+    /* --- Gradients --- */
+    --primary-gradient:   linear-gradient(135deg, #667eea, #764ba2);
+    --secondary-gradient: linear-gradient(135deg, #f093fb, #f5576c);
+    --accent-gradient:    linear-gradient(135deg, #1e7bc9, #0891b2);
+    --success-gradient:   linear-gradient(135deg, #22c55e, #16a34a);
+    --warning-gradient:   linear-gradient(135deg, #f59e0b, #d97706);
+    --error-gradient:     linear-gradient(135deg, #ef4444, #dc2626);
+    --danger-gradient:    linear-gradient(135deg, #e11d48, #be123c);
+
+    /* --- Palette --- */
+    --dark-bg:        #0a0a0a;
+    --card-bg:        hsla(0, 0%, 100%, 0.05);
+    --text-primary:   #fff;
+    --text-secondary: hsla(0, 0%, 100%, 0.7);
+    --text-muted:     hsla(0, 0%, 100%, 0.5);
+    --border-color:   hsla(0, 0%, 100%, 0.1);
+
+    /* --- Semantic colours --- */
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --error-color:   #ef4444;
+    --info-color:    #1e7bc9;
+    --danger-color:  #dc2626;
+
+    /* --- Accent palette (analytics / cards) --- */
+    --accent-purple: #667eea;
+    --accent-blue:   #4facfe;
+    --accent-teal:   #2dd4bf;
+    --accent-amber:  #fbbf24;
+    --accent-green:  #4ade80;
+    --accent-pink:   #f472b6;
+
+    /* --- Shadows --- */
+    --shadow-sm: 0 2px 4px  rgba(0, 0, 0, 0.10);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.20);
+    --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.25);
+
+    /* --- Border radii --- */
+    --radius-sm:   8px;
+    --radius-md:   12px;
+    --radius-lg:   16px;
+    --radius-xl:   24px;
+    --radius-full: 50px;
+
+    /* --- Transitions --- */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.3s  ease;
+    --transition-slow: 0.5s  ease;
+
+    /* Shorthand aliases used in some components */
+    --t-fast: 0.12s ease;
+    --t-base: 0.20s ease;
+    --t-slow: 0.35s ease;
+
+    /* --- Z-index scale --- */
+    --z-dropdown: 50;
+    --z-sticky:   100;
+    --z-fixed:    1000;
+
+    /* --- Backdrop blur --- */
+    --backdrop-blur-sm: blur(5px);
+    --backdrop-blur-md: blur(10px);
+    --backdrop-blur-lg: blur(20px);
+
+    /* --- Misc --- */
+    --shine-width:  100%;
+    --shine-timing: 0.5s;
+
+    /* --- Z-index aliases used in links/analytics pages --- */
+    --z-card-dropdown:      var(--z-dropdown, 50);
+    --z-card-dropdown-open: 200;
+    --z-filter-popover:     var(--z-sticky, 100);
+    --z-bulk-bar:           150;
+    --z-modal:              var(--z-fixed, 1000);
+    --z-toast:              1100;
+
+    /* --- Chart colour bars --- */
+    --bar-purple: linear-gradient(90deg, #667eea80, #667eea);
+    --bar-blue:   linear-gradient(90deg, #4facfe80, #4facfe);
+    --bar-teal:   linear-gradient(90deg, #2dd4bf80, #2dd4bf);
+    --bar-amber:  linear-gradient(90deg, #fbbf2480, #fbbf24);
+
+    /* --- Chart surface --- */
+    --chart-bg:     hsla(0, 0%, 100%, 0.025);
+    --chart-border: hsla(0, 0%, 100%, 0.07);
+}

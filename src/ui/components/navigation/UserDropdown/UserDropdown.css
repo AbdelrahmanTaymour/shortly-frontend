@@ -1,0 +1,160 @@
+/* ============================================================
+   DROPDOWN — Generic dropdown menu shell.
+   Lives at: src/ui/ProfileHeaderCard/primitives/Dropdown/Dropdown.css
+   Scope: .dropdown-menu (generic), .filter-popover
+   ============================================================ */
+
+.dropdown-menu {
+    backdrop-filter: blur(10px);
+    background: #1f1e2a;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    display: none;
+    min-width: 180px;
+    padding: 0.5rem 0;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    z-index: var(--z-fixed);
+}
+
+.dropdown-menu a {
+    align-items: center;
+    color: var(--text-primary);
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.dropdown-menu a:hover {
+    background: var(--primary-gradient);
+}
+
+.dropdown-menu hr {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 0.5rem 0;
+}
+
+/* --- Tooltip (generic, shared) --- */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::before {
+    background: #1f1e2c;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    bottom: calc(100% + 6px);
+    color: var(--text-primary);
+    content: attr(data-tooltip);
+    font-size: 0.72rem;
+    left: 50%;
+    opacity: 0;
+    padding: 0.4rem 0.65rem;
+    pointer-events: none;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: opacity var(--t-fast), visibility var(--t-fast);
+    visibility: hidden;
+    white-space: nowrap;
+    z-index: calc(var(--z-filter-popover) + 10);
+}
+
+.tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- QR code container (re-used in link modals) --- */
+.qr-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.qr-code {
+    background: hsla(0, 0%, 100%, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+/* --- Icon spin helper --- */
+.fa-spin {
+    animation: fa-spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes fa-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+
+/* ============================================================
+   USER DROPDOWN — Authenticated user avatar + dropdown menu.
+   Lives at: src/ui/ProfileHeaderCard/navigation/UserDropdown/UserDropdown.css
+   Scope: .user-menu, .user-info, .user-avatar
+   ============================================================ */
+.user-menu {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    position: relative;
+}
+
+.user-menu.open {
+    display: flex;
+}
+
+.user-info {
+    margin-right: 10px;
+    text-align: left;
+}
+
+.user-name {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.user-email {
+    color: var(--text-secondary);
+    display: block;
+    font-size: 0.8rem;
+}
+
+.user-avatar {
+    align-items: center;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    font-weight: 700;
+    height: 40px;
+    justify-content: center;
+    transition: var(--transition-base);
+    width: 40px;
+}
+
+.user-avatar:hover {
+    background: var(--primary-gradient);
+    transform: scale(1.05);
+}
+
+.user-avatar i {
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+

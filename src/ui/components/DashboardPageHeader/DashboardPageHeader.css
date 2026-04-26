@@ -1,0 +1,748 @@
+/**
+ * DashboardPageHeader.css
+ *
+ * Contains:
+ *   1. DashboardPageHeader component styles (additions to LinksPage.css .stats-page-header)
+ *   2. StatsOverviewCards  — .stats-overview-grid / .stats-overview-card (missing from LinksPage.css)
+ *   3. EngagementPanel     — .engagement-panel / .engagement-grid / .dow-chart etc.
+ *   4. Ranked lists        — .stats-ranked-list / .ranked-item etc. (GeoPanel / TrafficPanel / DevicesPanel)
+ *   5. Analytics skeleton & overlays
+ *   6. Stats tab viewport  — .stats-tab-panel / .stats-tab-viewport
+ *   7. Chart mounts        — .chart-mount / .donut-mount
+ *   8. Misc                — .stats-empty-mini / .chart-badge / device + source icons
+ *
+ * NOTE: .stats-page-header, .stats-back-btn, .stats-link-favicon, .stats-link-details,
+ *       .stats-nav-tabs, .stats-nav-tab, .stats-chart-card are already defined in LinksPage.css.
+ *       This file ONLY adds what is missing from the uploaded CSS files.
+ */
+
+/* ── 1. DASHBOARD PAGE HEADER ADDITIONS ──────────────────────────────────────
+   LinksPage.css defines .stats-page-header but not its inner layout helpers.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/**
+ * Left side of .stats-page-header — groups back-button + link-info.
+ * flex: 1 so it takes remaining space; right slot sits alongside it.
+ */
+.stats-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
+}
+
+/**
+ * Right slot — the parent page puts any content here:
+ * date presets, a create-link button, etc.
+ * ml: auto pushes it to the right edge naturally when .stats-header-left
+ * already has flex: 1 (it's just a sibling, no extra rule needed).
+ */
+.page-header-right-slot {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/**
+ * Subtitle URL area — used by LinkStatsPage and AnalyticsPage.
+ */
+.stats-link-urls {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    margin-top: 0.1rem;
+    min-width: 0;
+}
+
+.url-divider {
+    color: var(--text-muted);
+    flex-shrink: 0;
+    font-size: 0.78rem;
+}
+
+.favicon-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/**
+ * Compact variant — LinksPage sits before the FiltersBar which has its own
+ * spacing, so a tighter bottom margin looks better.
+ */
+.stats-page-header--compact {
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1.25rem;
+}
+
+
+/* ── 2. STATS OVERVIEW CARDS ─────────────────────────────────────────────────
+   Used by StatsOverviewCards (LinkStatsPage) and UserOverviewCards (AnalyticsPage).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.stats-overview-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.stats-overview-card:hover {
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* Coloured top-bar accent */
+.stats-overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #667eea;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.stats-overview-card.accent-purple::before {
+    background: #667eea;
+}
+
+.stats-overview-card.accent-blue::before {
+    background: #4facfe;
+}
+
+.stats-overview-card.accent-teal::before {
+    background: #4ade80;
+}
+
+.stats-overview-card.accent-amber::before {
+    background: #fbbf24;
+}
+
+.stats-overview-card.accent-green::before {
+    background: var(--accent-green, #4ade80);
+}
+
+.stats-overview-card.accent-pink::before {
+    background: var(--accent-pink, #f472b6);
+}
+
+.overview-icon-wrap {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin-bottom: 0.875rem;
+    flex-shrink: 0;
+
+    /* Default: purple */
+    background: rgba(102, 126, 234, 0.12);
+    color: #667eea;
+}
+
+.accent-purple .overview-icon-wrap {
+    background: rgba(102, 126, 234, .12);
+    color: #667eea;
+}
+
+.accent-blue .overview-icon-wrap {
+    background: rgba(79, 172, 254, .12);
+    color: #4facfe;
+}
+
+.accent-teal .overview-icon-wrap {
+    background: rgba(74, 222, 128, .12);
+    color: #4ade80;
+}
+
+.accent-amber .overview-icon-wrap {
+    background: rgba(251, 191, 36, .12);
+    color: #fbbf24;
+}
+
+.accent-green .overview-icon-wrap {
+    background: rgba(74, 222, 128, .15);
+    color: var(--accent-green, #4ade80);
+}
+
+.accent-pink .overview-icon-wrap {
+    background: rgba(244, 114, 182, .15);
+    color: var(--accent-pink, #f472b6);
+}
+
+.overview-value {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.15;
+    margin-bottom: 0.2rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.overview-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.overview-sub {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+/* User overview Analytics variant — 4-col grid */
+.user-overview-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+
+/* ──────────────────────────────────────────────────────────────
+   PAGE HEADER
+   ────────────────────────────────────────────────────────────── */
+.stats-page-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-bottom: 1.5rem;
+}
+
+.stats-link-info {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.stats-back-btn {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color var(--t-fast), background var(--t-fast);
+}
+
+.stats-back-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+}
+
+.stats-link-favicon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: var(--radius-sm, 8px);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.stats-link-favicon img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.favicon-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.stats-link-details {
+    min-width: 0;
+}
+
+.stats-link-details h2 {
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stats-link-urls a {
+    font-size: 0.78rem;
+    color: var(--accent-blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+}
+
+.stats-link-urls a i {
+    font-size: 0.65rem;
+    opacity: 0.7;
+}
+
+.stats-link-urls a:hover {
+    text-decoration: underline;
+}
+
+.url-divider {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.stats-origin-url {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+}
+
+
+/* ── 6. STATS TAB VIEWPORT (LinkStatsPage) ───────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.stats-tab-viewport {
+    position: relative;
+}
+
+.stats-tab-panel {
+    display: none;
+}
+
+.stats-tab-panel.active {
+    display: block;
+}
+
+/* Loading state inside a tab panel */
+.tab-loading-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.tab-loading-state i {
+    font-size: 1.1rem;
+    color: #667eea;
+}
+
+/* Refetch overlay (shown during date-range reload — LinkStatsPage) */
+.stats-refetch-overlay {
+    position: absolute;
+    inset: 0;
+    top: -0.5rem;
+    background: rgba(10, 9, 20, 0.6);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+.stats-refetch-overlay.hidden {
+    display: none;
+}
+
+.stats-refetch-spinner {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.875rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.stats-refetch-spinner i {
+    color: #667eea;
+    font-size: 1rem;
+}
+
+
+/* ── 7. LOADING SKELETON ─────────────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Shimmer animation */
+@keyframes shimmer {
+    0% {
+        background-position: -400px 0;
+    }
+    100% {
+        background-position: 400px 0;
+    }
+}
+
+.skeleton-header-row,
+.skeleton-card,
+.skeleton-chart,
+.skeleton-btn,
+.skeleton-title {
+    background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.04) 25%,
+            rgba(255, 255, 255, 0.08) 50%,
+            rgba(255, 255, 255, 0.04) 75%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+    border-radius: var(--radius-md);
+}
+
+.analytics-skeleton {
+    padding: 0.25rem 0;
+}
+
+.skeleton-header-row {
+    height: 72px;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius-lg);
+}
+
+.skeleton-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.skeleton-card {
+    height: 100px;
+    border-radius: var(--radius-lg);
+}
+
+.skeleton-chart {
+    height: 220px;
+    border-radius: var(--radius-lg);
+}
+
+.skeleton-title {
+    height: 28px;
+    width: 180px;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-presets {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.skeleton-btn {
+    height: 32px;
+    width: 52px;
+    border-radius: 100px;
+}
+
+/* Stats page skeleton */
+.stats-skeleton .skeleton-header {
+    height: 80px;
+    background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.04) 25%,
+            rgba(255, 255, 255, 0.08) 50%,
+            rgba(255, 255, 255, 0.04) 75%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+    border-radius: var(--radius-lg);
+    margin-bottom: 1.5rem;
+}
+
+.stats-skeleton .skeleton-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stats-skeleton .skeleton-chart {
+    height: 220px;
+    background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.04) 25%,
+            rgba(255, 255, 255, 0.08) 50%,
+            rgba(255, 255, 255, 0.04) 75%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+    border-radius: var(--radius-lg);
+}
+
+
+/* ── 8. TOP LINKS PANEL ──────────────────────────────────────────────────────
+   Supplements AnalyticsPage.css .top-link-row and adds missing utility classes.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Active/inactive badges on top-link rows */
+.top-link-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.1rem 0.45rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.badge-active {
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--success-color, #4ade80);
+}
+
+.badge-inactive {
+    background: rgba(251, 191, 36, 0.12);
+    color: var(--warning-color, #fbbf24);
+}
+
+/* Bar track inside top-link-row */
+.top-link-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+}
+
+.top-link-bar-track {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.top-link-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+/* Title row (title + badge) */
+.top-link-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 0;
+    margin-bottom: 0.25rem;
+}
+
+
+/* ── 9. COMPARISON BANNER (supplements AnalyticsPage.css) ───────────────────
+   AnalyticsPage.css already defines .comparison-banner and __items/__trend.
+   Adding only what was missing.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Banner-level trend colour variants */
+.comparison-banner--up {
+    border-color: rgba(74, 222, 128, 0.25);
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.comparison-banner--down {
+    border-color: rgba(248, 113, 113, 0.25);
+    background: rgba(248, 113, 113, 0.05);
+}
+
+.comparison-banner--stable { /* uses default */
+}
+
+.comp-trend-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.comp-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+}
+
+.comp-period {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.comp-stats {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.comp-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.comp-stat strong {
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+}
+
+.comparison-banner--up .comp-stat strong {
+    color: var(--accent-green, #4ade80);
+}
+
+.comparison-banner--down .comp-stat strong {
+    color: var(--error-color, #f87171);
+}
+
+
+/* ── 10. ERROR CONTAINERS ────────────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.error-state i {
+    font-size: 1.75rem;
+    color: var(--error-color, #f87171);
+    opacity: 0.8;
+}
+
+.error-state p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+/* error-container is used by BasePage.renderError() */
+.error-container {
+    padding: 3rem 1rem;
+    text-align: center;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+
+/* ── 11. ANALYTICS PAGE WRAPPER ─────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.analytics-page-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.analytics-page-title h1 {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.2rem;
+}
+
+.analytics-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Date filter component in Analytics header */
+.analytics-date-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Mount points (no own styling; size determined by child) */
+.analytics-overview-mount,
+.analytics-comparison-mount,
+.analytics-chart-mount,
+.analytics-engagement-mount,
+.analytics-top-links-mount,
+.analytics-lazy-mount {
+    /* intentionally empty — children provide their own layout */
+}
+
+
+/* ── 12. RESPONSIVE ──────────────────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .stats-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Stats */
+    .stats-page-header {
+        padding: 1rem;
+    }
+
+    .page-header-right-slot {
+        width: 100%;
+    }
+
+    .stats-header-left {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+
+}

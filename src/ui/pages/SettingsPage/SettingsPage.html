@@ -1,0 +1,130 @@
+<!-- SettingsPage.html — src/ui/pages/SettingsPage/SettingsPage.html -->
+
+<!--
+  DashboardPageHeader mount point.
+  Sits OUTSIDE the skeleton/content toggle so "Settings" title is always
+  visible — even while security status is loading or if an error occurs.
+  SettingsPage.js mounts DashboardPageHeader here before skeleton is shown.
+-->
+<div id="settingsPageHeaderMount"></div>
+
+<div aria-label="Settings page" class="settings-page">
+
+    <!-- ── Skeleton ──────────────────────────────────────────────────────── -->
+    <!--
+      skeleton-page-header REMOVED — DashboardPageHeader (above) renders the
+      real title immediately; there is nothing to skeleton-load for a heading.
+      Skeleton now covers only the sidebar + card layout.
+    -->
+    <div aria-hidden="true" class="settings-skeleton" id="settingsSkeleton">
+        <div class="settings-layout">
+            <aside class="settings-sidebar">
+                <div class="skeleton-block skeleton-block--nav-item"></div>
+                <div class="skeleton-block skeleton-block--nav-item"></div>
+                <div class="skeleton-block skeleton-block--nav-item"></div>
+                <div class="skeleton-block skeleton-block--nav-item skeleton-block--nav-danger"></div>
+            </aside>
+            <main class="settings-main">
+                <div class="skeleton-card">
+                    <div class="skeleton-block skeleton-block--title"></div>
+                    <div class="skeleton-block skeleton-block--label"></div>
+                    <div class="skeleton-block skeleton-block--input"></div>
+                    <div class="skeleton-block skeleton-block--label"></div>
+                    <div class="skeleton-block skeleton-block--input"></div>
+                    <div class="skeleton-block skeleton-block--btn"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ── Error state ───────────────────────────────────────────────────── -->
+    <div class="hidden" id="settingsError" role="alert"></div>
+
+    <!-- ── Content ───────────────────────────────────────────────────────── -->
+    <!--
+      Note: .Settings-page-header has been REMOVED from inside #settingsContent.
+      DashboardPageHeader (the #settingsPageHeaderMount div above) replaces it.
+      The heading is always rendered immediately — no toggle/skeleton needed.
+    -->
+    <div class="hidden animate-fade-in" id="settingsContent">
+
+        <div class="settings-layout">
+
+            <!-- ── Left: section navigation ─────────────────────────────────── -->
+            <aside aria-label="Settings sections" class="settings-sidebar" id="settingsSidebar">
+
+                <!-- Mobile: horizontal pill tabs -->
+                <div class="settings-mobile-tabs" id="settingsMobileTabs">
+                    <button aria-current="page" class="settings-nav-item active" data-section="account">
+                        <i aria-hidden="true" class="fa-solid fa-user-shield"></i>
+                        <span>Account</span>
+                    </button>
+                    <button class="settings-nav-item" data-section="email-verification">
+                        <i aria-hidden="true" class="fa-solid fa-envelope"></i>
+                        <span>Email</span>
+                    </button>
+                    <button class="settings-nav-item" data-section="security">
+                        <i aria-hidden="true" class="fa-solid fa-lock"></i>
+                        <span>Security</span>
+                    </button>
+                    <button class="settings-nav-item settings-nav-item--danger" data-section="danger">
+                        <i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
+                        <span>Danger</span>
+                    </button>
+                </div>
+
+                <!-- Desktop: full-label nav -->
+                <nav aria-label="Settings navigation" class="settings-desktop-nav">
+                    <button aria-current="page" class="settings-nav-item active" data-section="account">
+                        <i aria-hidden="true" class="fa-solid fa-fingerprint"></i>
+                        <span class="settings-nav-label">Account Security</span>
+                        <i aria-hidden="true" class="fa-solid fa-chevron-right settings-nav-arrow"></i>
+                    </button>
+                    <button class="settings-nav-item" data-section="email-verification">
+                        <i aria-hidden="true" class="fa-solid fa-envelope"></i>
+                        <span class="settings-nav-label">Email Verification</span>
+                        <i aria-hidden="true" class="fa-solid fa-chevron-right settings-nav-arrow"></i>
+                    </button>
+                    <button class="settings-nav-item" data-section="security">
+                        <i aria-hidden="true" class="fa-solid fa-user-shield"></i>
+                        <span class="settings-nav-label">Security Status</span>
+                        <i aria-hidden="true" class="fa-solid fa-chevron-right settings-nav-arrow"></i>
+                    </button>
+                    <div class="settings-nav-divider"></div>
+                    <button class="settings-nav-item settings-nav-item--danger" data-section="danger">
+                        <i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
+                        <span class="settings-nav-label">Danger Zone</span>
+                        <i aria-hidden="true" class="fa-solid fa-chevron-right settings-nav-arrow"></i>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- ── Right: section content ─────────────────────────────────── -->
+            <main class="settings-main">
+
+                <!-- Account Security (password + email change) -->
+                <section aria-label="Account security" class="settings-section active" id="settingsSectionAccount">
+                    <div id="sChangePasswordContainer"></div>
+                    <div id="sChangeEmailContainer"></div>
+                </section>
+
+                <!-- Email Verification -->
+                <section aria-label="Email verification" class="settings-section hidden"
+                         id="settingsSectionEmailVerification">
+                    <div id="sEmailVerifyContainer"></div>
+                </section>
+
+                <!-- Security Status -->
+                <section aria-label="Security status" class="settings-section hidden" id="settingsSectionSecurity">
+                    <div id="sSecurityStatusContainer"></div>
+                </section>
+
+                <!-- Danger Zone -->
+                <section aria-label="Danger zone" class="settings-section hidden" id="settingsSectionDanger">
+                    <div id="sDangerZoneContainer"></div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+</div>

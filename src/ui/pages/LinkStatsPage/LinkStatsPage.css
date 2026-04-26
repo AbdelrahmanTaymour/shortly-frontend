@@ -1,0 +1,272 @@
+/* ============================================================
+   LINK STATS PAGE — Per-link statistics view.
+   Lives at: src/ui/pages/LinkStatsPage/LinkStatsPage.css
+   Scope: .stats-page-header, .stats-link-*, summary grid,
+          tab navigation, content sections, skeleton.
+   ============================================================ */
+
+/* ── Page header card ────────────────────────────────────── */
+.stats-page-header {
+    align-items:   center;
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    display:       flex;
+    flex-wrap:     wrap;
+    gap:           1rem;
+    margin-bottom: 1.5rem;
+    padding:       1.25rem 1.5rem;
+}
+
+.stats-page-header--compact { margin-bottom: 0.5rem; padding: 0.75rem 1.25rem; }
+
+.stats-header-left {
+    align-items: center;
+    display:     flex;
+    flex:        1;
+    gap:         0.75rem;
+    min-width:   0;
+}
+
+.page-header-right-slot {
+    align-items: center;
+    display:     flex;
+    flex-shrink: 0;
+}
+
+/* ── Back button ─────────────────────────────────────────── */
+.stats-back-btn {
+    align-items:     center;
+    background:      transparent;
+    border:          1px solid var(--border-color);
+    border-radius:   var(--radius-sm);
+    color:           var(--text-secondary);
+    cursor:          pointer;
+    display:         flex;
+    flex-shrink:     0;
+    height:          38px;
+    justify-content: center;
+    transition:      color var(--t-fast), background var(--t-fast);
+    width:           38px;
+}
+
+.stats-back-btn:hover {
+    background: hsla(0, 0%, 100%, 0.12);
+    color:      var(--text-primary);
+}
+
+/* ── Link info row ───────────────────────────────────────── */
+.stats-link-info {
+    align-items: center;
+    display:     flex;
+    flex:        1;
+    gap:         0.875rem;
+    min-width:   0;
+}
+
+.stats-link-favicon {
+    align-items:     center;
+    background:      hsla(0, 0%, 100%, 0.06);
+    border:          1px solid var(--border-color);
+    border-radius:   var(--radius-sm, 8px);
+    display:         flex;
+    flex-shrink:     0;
+    height:          44px;
+    justify-content: center;
+    overflow:        hidden;
+    width:           44px;
+}
+
+.stats-link-favicon img { object-fit: contain; height: 26px; width: 26px; }
+
+.favicon-fallback {
+    align-items:     center;
+    color:           var(--text-muted);
+    display:         flex;
+    font-size:       1.1rem;
+    height:          100%;
+    justify-content: center;
+    width:           100%;
+}
+
+.stats-link-details { min-width: 0; }
+
+.stats-link-details h2 {
+    color:         var(--text-primary);
+    font-size:     clamp(0.9rem, 2vw, 1.05rem);
+    font-weight:   600;
+    margin:        0 0 0.25rem;
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+}
+
+.stats-link-urls {
+    align-items: center;
+    display:     flex;
+    flex-wrap:   wrap;
+    font-size:   0.82rem;
+    gap:         0.35rem;
+    margin-top:  0.1rem;
+    min-width:   0;
+}
+
+.stats-link-urls a {
+    align-items:     center;
+    color:           var(--accent-blue);
+    display:         flex;
+    font-size:       0.78rem;
+    gap:             0.3rem;
+    text-decoration: none;
+    white-space:     nowrap;
+}
+
+.stats-link-urls a i { font-size: 0.65rem; opacity: 0.7; }
+.stats-link-urls a:hover { text-decoration: underline; }
+
+.stats-origin-url {
+    color:         var(--text-muted);
+    font-size:     0.75rem;
+    max-width:     280px;
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+}
+
+.url-divider { color: var(--text-muted); flex-shrink: 0; font-size: 0.78rem; }
+
+/* ── Summary grid ────────────────────────────────────────── */
+.stats-summary-grid {
+    display:               grid;
+    gap:                   0.875rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    margin-bottom:         1.5rem;
+}
+
+.stats-summary-card {
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding:       1.125rem;
+    text-align:    center;
+}
+
+.stats-summary-card .value {
+    background:              linear-gradient(135deg, #667eea, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip:         text;
+    font-size:               clamp(1.5rem, 4vw, 2rem);
+    font-weight:             700;
+    line-height:             1.2;
+    margin-bottom:           0.2rem;
+    -webkit-text-fill-color: transparent;
+}
+
+.stats-summary-card .label {
+    color:          var(--text-secondary);
+    font-size:      0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ── Tab navigation ──────────────────────────────────────── */
+.stats-nav-tabs {
+    background:    var(--card-bg);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    display:       flex;
+    gap:           0.25rem;
+    margin-bottom: 1.5rem;
+    -ms-overflow-style: none;
+    overflow-x:    auto;
+    padding:       0.35rem;
+    scrollbar-width: none;
+}
+
+.stats-nav-tabs::-webkit-scrollbar { display: none; }
+
+.stats-nav-tab {
+    align-items:   center;
+    background:    transparent;
+    border:        none;
+    border-bottom: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    color:         var(--text-muted);
+    cursor:        pointer;
+    display:       flex;
+    font-family:   inherit;
+    font-size:     0.85rem;
+    font-weight:   500;
+    gap:           0.45rem;
+    margin-bottom: -1px;
+    padding:       0.65rem 1rem;
+    transition:    color var(--transition-fast), border-color var(--transition-fast);
+    white-space:   nowrap;
+}
+
+.stats-nav-tab:hover {
+    background: hsla(0, 0%, 100%, 0.05);
+    color:      var(--text-primary);
+}
+
+.stats-nav-tab.active {
+    background:         linear-gradient(135deg, #667eea, #764ba2);
+    border-bottom-color: var(--accent-purple);
+    color:              #fff;
+}
+
+/* ── Content sections ────────────────────────────────────── */
+.stats-content-section        { display: none; }
+.stats-content-section.active { display: block; }
+
+.stats-two-column {
+    display:               grid;
+    gap:                   1.25rem;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom:         1.25rem;
+}
+
+/* ── Activity list ───────────────────────────────────────── */
+.stats-list,
+.activity-list {
+    display:        flex;
+    flex-direction: column;
+}
+
+.stats-list    { gap: 0.625rem; }
+.activity-list { gap: 0.5rem; }
+
+/* ── Skeleton states ─────────────────────────────────────── */
+.stats-skeleton .skeleton-header {
+    animation:       shimmer 1.4s ease-in-out infinite;
+    background:      linear-gradient(90deg, hsla(0, 0%, 100%, 0.04) 25%, hsla(0, 0%, 100%, 0.08) 50%, hsla(0, 0%, 100%, 0.04) 75%);
+    background-size: 800px 100%;
+    border-radius:   var(--radius-lg);
+    height:          80px;
+    margin-bottom:   1.5rem;
+}
+
+.stats-skeleton .skeleton-cards {
+    gap:                   1rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    margin-bottom:         1.5rem;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) { .stats-two-column { grid-template-columns: 1fr; } }
+@media (max-width: 900px)  { .stats-two-column { grid-template-columns: 1fr; } }
+
+@media (max-width: 768px) {
+    .stats-page-header  { align-items: flex-start; flex-direction: column; padding: 1rem; }
+    .page-header-right-slot,
+    .stats-header-left  { width: 100%; }
+    .stats-summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-origin-url   { display: none; }
+    .stats-nav-tab span { display: none; }
+    .stats-nav-tab      { padding: 0.55rem 0.75rem; }
+    .stats-nav-tabs     { gap: 0.2rem; }
+}
+
+@media (max-width: 480px) {
+    .stats-summary-grid { grid-template-columns: 1fr; }
+}

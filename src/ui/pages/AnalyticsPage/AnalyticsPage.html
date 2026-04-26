@@ -1,0 +1,116 @@
+<!--
+    AnalyticsPage.html — Analytics dashboard skeleton.
+
+    CHANGE from previous version:
+      The inline .stats-page-header block (icon + title + date buttons) is
+      replaced by a DashboardPageHeader mount point. AnalyticsPage.js mounts
+      the generic header and puts StatsDateFilter into the right slot.
+
+    IDs used by AnalyticsPage.js (must not be renamed):
+      #analyticsPageHeaderMount   — DashboardPageHeader mounts here
+      #analyticsSkeletonLoader    — shown while initial data loads
+      #analyticsContent           — hidden during initial load, shown after
+      #analyticsRefetchOverlay    — overlay during date-range refresh
+      #analyticsError             — shown on mount failure
+      #overviewCardsContainer     — UserOverviewCards
+      #comparisonBannerContainer  — ComparisonBanner
+      #analyticsNavTabs           — tab button strip
+      Tab panels: #tabOverview, #tabToplinks, #tabGeography, #tabTraffic, #tabDevices
+      Component mount points: #clicksChartContainer, #engagementContainer,
+                               #topLinksContainer, #geoPanelContainer,
+                               #trafficPanelContainer, #devicesPanelContainer
+-->
+
+<!-- DashboardPageHeader mounts here -->
+<div id="analyticsPageHeaderMount"></div>
+
+<!-- Loading skeleton -->
+<div class="analytics-skeleton" id="analyticsSkeletonLoader">
+    <div class="skeleton-cards">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+    </div>
+    <div class="skeleton-chart"></div>
+</div>
+
+<!-- Error state -->
+<div class="hidden" id="analyticsError" role="alert"></div>
+
+<!-- Main content (hidden until data is ready) -->
+<div class="analytics-page hidden" id="analyticsContent">
+
+    <!-- Comparison banner -->
+    <div id="comparisonBannerContainer"></div>
+
+    <!-- Refetch overlay -->
+    <div aria-hidden="true" class="analytics-refetch-overlay hidden" id="analyticsRefetchOverlay">
+        <div class="analytics-refetch-spinner">
+            <i aria-hidden="true" class="fa-solid fa-circle-notch fa-spin"></i>
+            <span>Updating…</span>
+        </div>
+    </div>
+
+    <!-- Tab navigation -->
+    <div aria-label="Analytics sections" class="stats-nav-tabs" id="analyticsNavTabs" role="tablist">
+        <button aria-controls="tabOverview" aria-selected="true"
+                class="stats-nav-tab active" data-tab="overview" role="tab" tabindex="0">
+            <i aria-hidden="true" class="fa-solid fa-chart-line"></i>
+            <span>Overview</span>
+        </button>
+        <button aria-controls="tabTopUrls" aria-selected="false"
+                class="stats-nav-tab" data-tab="topUrls" role="tab" tabindex="-1">
+            <i aria-hidden="true" class="fa-solid fa-trophy"></i>
+            <span>Top Links</span>
+        </button>
+        <button aria-controls="tabGeography" aria-selected="false"
+                class="stats-nav-tab" data-tab="geography" role="tab" tabindex="-1">
+            <i aria-hidden="true" class="fa-solid fa-globe"></i>
+            <span>Countries</span>
+        </button>
+        <button aria-controls="tabTraffic" aria-selected="false"
+                class="stats-nav-tab" data-tab="traffic" role="tab" tabindex="-1">
+            <i aria-hidden="true" class="fa-solid fa-share-nodes"></i>
+            <span>Traffic</span>
+        </button>
+        <button aria-controls="tabDevices" aria-selected="false"
+                class="stats-nav-tab" data-tab="devices" role="tab" tabindex="-1">
+            <i aria-hidden="true" class="fa-solid fa-laptop"></i>
+            <span>Devices</span>
+        </button>
+    </div>
+
+    <!-- Overview tab -->
+    <div aria-labelledby="analyticsNavTabs" class="analytics-tab-panel active" id="tabOverview"
+         role="tabpanel">
+        <div id="clicksChartContainer"></div>
+        <div id="engagementPanelContainer"></div>
+    </div>
+
+    <!-- Top Links tab -->
+    <div class="analytics-tab-panel" id="tabTopUrls" role="tabpanel">
+        <div class="stats-chart-card">
+            <div class="chart-card-header">
+                <h3>Top Performing Links</h3>
+            </div>
+            <div id="topUrlsPanelContainer"></div>
+        </div>
+    </div>
+
+    <!-- Geography tab (lazy) -->
+    <div class="analytics-tab-panel" id="tabGeography" role="tabpanel">
+        <div id="geoPanelContainer"></div>
+    </div>
+
+    <!-- Traffic tab (lazy) -->
+    <div class="analytics-tab-panel" id="tabTraffic" role="tabpanel">
+        <div id="trafficPanelContainer"></div>
+    </div>
+
+    <!-- Devices tab (lazy) -->
+    <div class="analytics-tab-panel" id="tabDevices" role="tabpanel">
+        <div id="devicesPanelContainer"></div>
+    </div>
+
+</div>

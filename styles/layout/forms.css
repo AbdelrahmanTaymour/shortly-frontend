@@ -1,0 +1,116 @@
+/* ============================================
+   COMPONENTS: Forms & Fieldsets
+   ============================================ */
+
+.form-base {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group-base {
+    flex: 1;
+}
+
+
+/* Form Side (Full Height Layout) */
+.form-side-base {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+}
+
+/* Form Options (Remember Me, Forgot Password) */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.remember-me:hover {
+    color: var(--text-primary);
+}
+
+.forgot-password {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.forgot-password:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+/* Form Link (Sign in / Sign up) */
+.form-link-base {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.form-link-base a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: var(--transition-base);
+}
+
+.form-link-base a:hover {
+    text-decoration: underline;
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .form-side-base {
+        width: 100%;
+        padding: 0;
+    }
+
+    .form-container-base {
+        margin: 15px;
+    }
+
+    .form-title-base {
+        font-size: 1.8rem;
+    }
+}

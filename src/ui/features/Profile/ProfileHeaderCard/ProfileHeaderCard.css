@@ -1,0 +1,154 @@
+/* ============================================================
+   PROFILE EDIT FORM — Inline Profile editing form card.
+   Lives at: src/ui/features/Profile/ProfileHeaderCard/ProfileHeaderCard.css
+   Scope: .Profile-* (Profile Edit Form prefix)
+   ============================================================ */
+
+/* Avatar */
+.profile-avatar-wrap {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    margin-bottom: 0.5rem;
+}
+
+.profile-avatar-img,
+.profile-avatar-initials {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-gradient);
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    user-select: none;
+}
+
+.profile-avatar-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 18px;
+    height: 18px;
+    background: var(--success-color, #4ade80);
+    border: 2px solid var(--dark-bg, #0f0f0f);
+    border-radius: 50%;
+}
+
+/* Identity */
+.profile-card-identity {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.profile-card-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+    word-break: break-word;
+}
+
+.profile-card-email {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.profile-card-bio {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-top: 0.6rem;
+    word-break: break-word;
+}
+
+.profile-card-bio--empty {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Meta tags */
+.profile-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    width: 100%;
+}
+
+.profile-meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    padding: 0.25rem 0.6rem;
+    white-space: nowrap;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-meta-tag--link {
+    color: var(--accent-blue, #4facfe);
+    text-decoration: none;
+    transition: background var(--transition-fast);
+}
+
+.profile-meta-tag--link:hover {
+    background: rgba(79, 172, 254, 0.08);
+}
+
+.profile-card-updated {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+
+    .profile-avatar-wrap {
+        flex-shrink: 0;
+    }
+
+    .profile-card-email {
+        justify-content: flex-start;
+    }
+
+    .profile-card-meta {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .profile-card-email {
+        justify-content: center;
+    }
+
+    .profile-card-meta {
+        justify-content: center;
+    }
+
+}

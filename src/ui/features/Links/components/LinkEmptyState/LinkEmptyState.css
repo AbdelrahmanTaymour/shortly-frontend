@@ -1,0 +1,62 @@
+/* ============================================================
+   EMPTY STATE — Generic zero-data placeholder UI.
+   Lives at: src/ui/ProfileHeaderCard/primitives/LinkEmptyState/LinkEmptyState.css
+   ============================================================ */
+
+.empty-state {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: clamp(2.5rem, 8vw, 4.5rem) 1.5rem;
+    text-align: center;
+}
+
+.empty-state-icon {
+    color: var(--text-muted);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 1.25rem;
+    opacity: 0.6;
+}
+
+.empty-state h3 {
+    color: var(--text-primary);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    margin: 0 0 0.5rem;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0 0 1.5rem;
+}
+
+/* --- Error state variant --- */
+.error-state {
+    align-items: center;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    font-size: 0.875rem;
+    gap: 0.625rem;
+    padding: 2.5rem 1rem;
+    text-align: center;
+}
+
+.error-state i {
+    color: var(--error-color, #f87171);
+    font-size: 1.75rem;
+    opacity: 0.8;
+}
+
+.error-state p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.error-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 3rem 1rem;
+    text-align: center;
+}

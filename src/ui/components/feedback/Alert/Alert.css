@@ -1,0 +1,200 @@
+/* ============================================
+   COMPONENTS: Alerts & Messages
+   ============================================ */
+
+/* Error Message */
+.error-message {
+    background: rgba(245, 87, 108, 0.1);
+    border: 1px solid rgba(245, 87, 108, 0.3);
+    border-radius: 8px;
+    color: #f5576c;
+    font-size: 0.9rem;
+    transform: translateY(-10px);
+    transition: var(--transition-base);
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Success Message */
+.success-message {
+    background: rgba(126, 211, 33, 0.1);
+    border: 1px solid rgba(126, 211, 33, 0.3);
+    border-radius: 8px;
+    color: #7ed321;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: var(--transition-base);
+}
+
+.success-message.show {
+    display: block;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Success Content (Success Page) */
+
+/* Loading States */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading-inline {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+
+.loading-spinner.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-color);
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+/* ── Feedback states ─────────────────────────────────────── */
+.error-message {
+    background: rgba(245, 87, 108, 0.1);
+    border: 1px solid rgba(245, 87, 108, 0.3);
+    border-radius: 8px;
+    color: #f5576c;
+    display: none;
+    font-size: 0.9rem;
+    transform: translateY(-10px);
+    transition: var(--transition-base);
+}
+
+.error-message.show {
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 1;
+    padding: 0.8rem;
+    transform: translateY(0);
+}
+
+
+.success-content {
+    display: none;
+    text-align: center;
+}
+
+.success-content.show {
+    display: block;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon {
+    align-items: center;
+    animation: pulse 2s ease-in-out infinite;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    margin: 0 auto 25px;
+    position: relative;
+    width: 80px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(79, 172, 254, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 20px rgba(79, 172, 254, 0);
+    }
+}
+
+.success-icon svg {
+    animation: checkmark 0.6s ease-in-out 0.3s both;
+    color: #fff;
+    height: 40px;
+    width: 40px;
+}
+
+@keyframes checkmark {
+    from {
+        opacity: 0;
+        transform: scale(0) rotate(45deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.success-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.success-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.success-email {
+    background: rgba(79, 172, 254, 0.1);
+    border: 1px solid rgba(79, 172, 254, 0.2);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: monospace;
+    font-size: 0.9rem;
+    margin: 20px 0;
+    padding: 12px 16px;
+}
