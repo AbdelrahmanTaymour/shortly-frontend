@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const Dotenv = require('dotenv-webpack'); // Added this
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // NEW
+const Dotenv = require('dotenv-webpack');
 
 const PATHS = {
     src: path.join(__dirname, 'src')
@@ -14,7 +15,7 @@ module.exports = (env, argv) => {
     const isProduction = argv.mode === 'production';
 
     return {
-        mode: isProduction ? 'production' : 'development', // Dynamic mode
+        mode: isProduction ? 'production' : 'development',
         entry: './src/main.js',
         output: {
             publicPath: '/',
@@ -27,7 +28,6 @@ module.exports = (env, argv) => {
                 {
                     test: /\.css$/i,
                     use: [
-                        // Use MiniCss for prod, style-loader for faster dev
                         isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                         'css-loader'
                     ],
@@ -57,7 +57,12 @@ module.exports = (env, argv) => {
             },
         },
         devServer: {
-            historyApiFallback: true, // Critical for SPAs on Vercel
+            static: {
+                directory: path.resolve(__dirname, 'src'),
+                publicPath: '/',
+                watch: true, // Live-reload when template HTML files change
+            },
+            historyApiFallback: true,
             port: 3000,
             hot: true,
             open: true,
@@ -68,12 +73,30 @@ module.exports = (env, argv) => {
                 inject: 'body',
             }),
             new Dotenv({
-                systemvars: true, // This allows Vercel's Environment Variables to work!
+                systemvars: true,
             }),
             new MiniCssExtractPlugin({
                 filename: 'css/[name].[contenthash].css',
             }),
-            // Only run PurgeCSS in production to keep dev builds fast
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: path.resolve(__dirname, 'src/ui'),
+                        to:   path.resolve(__dirname, 'dist/ui'),
+                        globOptions: {
+                            ignore: ['**/*.js'], // Bundled by webpack; don't duplicate
+                        },
+                        noErrorOnMissing: true,
+                    },
+                    {
+                        from: path.resolve(__dirname, 'src/styles'),
+                        to:   path.resolve(__dirname, 'dist/styles'),
+                        noErrorOnMissing: true,
+                    },
+                ],
+            }),
+
+            // PurgeCSS only in production — keep dev builds fast
             ...(isProduction ? [
                 new PurgeCSSPlugin({
                     paths: glob.sync([

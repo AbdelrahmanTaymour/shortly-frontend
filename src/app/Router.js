@@ -18,30 +18,6 @@
  *   ❌ Know about business logic
  *   ❌ Import or reference any service class (AuthService, LinksService, etc.)
  *   ❌ Contain page-specific methods
- *
- * ─── AUTH GUARD — DEPENDENCY INVERSION ───────────────────────────────────────
- *
- * The guard needs to know "is the user authenticated right now?" but Router must
- * not know that AuthService exists — it lives in core infrastructure, one layer
- * below the service layer.
- *
- * Solution: setAuthGuard(fn) accepts a plain zero-argument predicate function.
- * The caller (main.js) owns the closure that captures authService:
- *
- *   router.setAuthGuard(() => authService.isAuthenticated);
- *
- * Router only sees a () => boolean. It has zero knowledge of AuthService,
- * its tokens, its state shape, or anything else about authentication internals.
- *
- * This is the Dependency Inversion Principle applied at the module boundary:
- *   - Router depends on an abstraction  (a function type)
- *   - main.js provides the concrete implementation (the closure)
- *
- * ─── DEPENDENCY GRAPH ────────────────────────────────────────────────────────
- *
- *   Router  ──depends on──►  EventBus   (core infra)
- *           ──depends on──►  () => bool (pure abstraction — no service import)
- *           ──depends on──►  fetch      (browser API)
  */
 class Router {
     constructor(eventBus) {
@@ -118,7 +94,7 @@ class Router {
         const {config: route, urlParams} = match;
         const combinedParams = {...urlParams, ...params};
 
-        // ── AuthPages guard ────────────────────────────────────────────────────────
+        // ── Auth guard ─────────────────────────────────────────────────────────
         // route.public === false means the route requires authentication.
         // this._authGuard() is the injected predicate — Router knows nothing
         // about *how* authentication works, only the boolean result.
@@ -134,7 +110,17 @@ class Router {
 
             let template = '';
             if (route.templatePath) {
-                template = await this._loadTemplate(route.templatePath);
+                try {
+                    template = await this._loadTemplate(route.templatePath);
+                } catch (templateError) {
+                    console.warn(
+                        `Router: Template "${route.templatePath}" could not be loaded — ` +
+                        `mounting "${path}" without pre-loaded HTML. ` +
+                        `PageClass.mount() must render its own content.`,
+                        templateError.message
+                    );
+                    // template stays ''
+                }
             }
 
             if (updateHistory) {
@@ -151,7 +137,7 @@ class Router {
                 params: combinedParams,
                 template,
                 pageClass: route.pageClass,
-                public: route.public,    // FIX: Application reads data.public to decide which layout shell to render
+                public: route.public,    // Application reads this to pick the layout shell
             });
 
         } catch (error) {
