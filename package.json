@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production && cp vercel.json dist/ 2>/dev/null || :"
   },
   "keywords": [],
   "author": "",
