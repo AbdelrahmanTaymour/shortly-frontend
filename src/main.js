@@ -109,13 +109,22 @@ async function initializeApp() {
     headerController.initialize();
 
     // Route Registration
+    // 1. Register routes and init UI managers
     _setupRoutes(router);
     UIEventManager.initialize(router);
 
-    // Session Restore & Initial Navigation
-    await authService.restoreSession();
-
+    // 2. Identify where we want to go
     const targetPath = _normalizeInitialPath(window.location.pathname);
+
+    // 3. START the session restore, but DON'T await it yet if you want the UI to show up
+    // Or, better yet, wrap it so the UI mounts regardless of auth success
+    try {
+        await authService.restoreSession();
+    } catch (e) {
+        console.warn("User is a guest");
+    }
+
+    // 4. Finally, navigate
     await router.navigate(targetPath, {updateHistory: false});
 
     if (process.env.NODE_ENV === 'development') window.__app = app;
