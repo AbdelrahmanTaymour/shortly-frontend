@@ -1,11 +1,7 @@
 /**
  * EmailVerificationCard  –  src/ui/ProfileHeaderCard/Settings/EmailVerificationCard.js
- *
- * Allows the user to send/resend an email verification link.
- * Emits 'send' → {}
  */
 
-import './EmailVerificationCard.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 
 class EmailVerificationCard extends BaseComponent {

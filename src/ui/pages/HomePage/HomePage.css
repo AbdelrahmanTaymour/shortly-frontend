@@ -179,14 +179,6 @@
     transform: translateX(3px);
 }
 
-/* ── KPI grid (stat cards) ───────────────────────────────── */
-/* Reuses .stats-grid from global — add home-specific override */
-.home-kpi-grid {
-    display:               grid;
-    gap:                   1rem;
-    grid-template-columns: repeat(4, 1fr);
-    margin-bottom:         1.5rem;
-}
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 1100px) {
@@ -199,16 +191,9 @@
     }
 }
 
-@media (max-width: 900px) {
-    .home-kpi-grid { grid-template-columns: repeat(2, 1fr); }
-}
 
 @media (max-width: 768px) {
     .home-welcome-banner  { align-items: flex-start; flex-direction: column; }
     .home-welcome-cta     { justify-content: center; width: 100%; }
     .home-quick-actions   { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 480px) {
-    .home-kpi-grid { grid-template-columns: 1fr; }
 }

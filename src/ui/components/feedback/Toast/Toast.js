@@ -2,7 +2,6 @@
  * Toast - Notification component
  */
 
-import './Toast.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 
 class Toast extends BaseComponent {

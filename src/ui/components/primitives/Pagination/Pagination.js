@@ -9,7 +9,6 @@
  * users, or any Shortly-specific concept. It only understands numbers.
  */
 
-import './Pagination.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 
 class Pagination extends BaseComponent {

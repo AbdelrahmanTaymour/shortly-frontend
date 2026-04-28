@@ -1,17 +1,7 @@
 /**
  * EngagementPanel — Engagement metrics + Day-of-week activity pattern.
- *
- * Shared by both LinkStatsPage and AnalyticsPage.
- *
- * PROPS:
- *   engagement  — engagement metrics object
- *   timeSeries  — timeSeries object (optional; used for day-of-week chart)
- *
- * PUBLIC API:
- *   update({ engagement, timeSeries? }) — update data in-place without remount
  */
 
-import './EngagementPanel.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 import {formatDuration} from "../../../../utils/formatting";
 

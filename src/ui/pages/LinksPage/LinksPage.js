@@ -2,7 +2,6 @@
  * LinksPage — Link management page controller.
  */
 
-import './LinksPage.css';
 import BasePage from '../BasePage.js';
 import DashboardPageHeader from '../../components/DashboardPageHeader/DashboardPageHeader.js';
 import FiltersBar from '../../features/Links/components/FiltersBar/FiltersBar.js';

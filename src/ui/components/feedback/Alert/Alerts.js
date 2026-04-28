@@ -3,7 +3,7 @@
  * @param {Object|HTMLElement} target - The Page object (this) or the actual DOM element
  */
 
-import './Alert.css';
+
 export function showError(target, message) {
     // If the target is the page object, get its errorBox property.
     // Otherwise, assume the target IS the error box.

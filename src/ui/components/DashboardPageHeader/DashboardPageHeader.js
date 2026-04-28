@@ -1,10 +1,5 @@
 /**
  * DashboardPageHeader — Generic dashboard page header component.
- *
- * Replaces the three different ad-hoc header patterns that previously existed:
- *   • LinksPage:        .links-section-header   (h1 + create button)
- *   • AnalyticsPage:    .stats-page-header       (icon + title + date filter)
- *   • LinkStatsPage:    .stats-page-header       (back btn + favicon + title + date filter)
  */
 
 import BaseComponent from '../../base/BaseComponent.js';

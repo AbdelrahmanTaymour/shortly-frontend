@@ -1,10 +1,7 @@
 /**
  * SecurityStatusCard  –  src/ui/ProfileHeaderCard/Settings/SecurityStatusCard.js
- *
- * Read-only view of the user's security status: lock state, failed attempts, reason.
  */
 
-import './SecurityStatusCard.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 
 class SecurityStatusCard extends BaseComponent {

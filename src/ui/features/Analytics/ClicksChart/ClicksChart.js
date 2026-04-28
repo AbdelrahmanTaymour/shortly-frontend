@@ -1,19 +1,17 @@
 /**
- * ClicksChart  –  src/ui/ProfileHeaderCard/Analytics/ClicksChart.js
+ * ClicksChart  —  src/ui/features/Analytics/ClicksChart/ClicksChart.js
  */
 
-import './ClicksChart.css';
 import BaseComponent from '../../../base/BaseComponent.js';
-import {loadChartJs} from '../../../../utils/ChartLoader.js';
 
 class ClicksChart extends BaseComponent {
     constructor(container, props = {}) {
         super(container, props);
-        this._chart = null;
-        this._canvasId = `cc-${Math.random().toString(36).slice(2, 8)}`;
+        this._chart     = null;
+        this._isLoading = false;
     }
 
-    // ─── lifecycle ──────────────────────────────────────────────────────────
+    // ─── Lifecycle ───────────────────────────────────────────────────────────
 
     render() {
         const title = this.props.title || 'Clicks Over Time';
@@ -32,37 +30,33 @@ class ClicksChart extends BaseComponent {
                         </span>
                     </div>
                 </div>
-                <div class="chart-canvas-wrap" style="position:relative;height:260px">
-                    <canvas id="${this._canvasId}"></canvas>
-                </div>
+                <div class="chart-canvas-wrap" style="min-height:260px"></div>
             </div>`;
     }
 
     async mount() {
         await super.mount();
+
+        // Register chart destruction exactly once for the full component lifetime.
+        // BaseComponent.unmount() will call this automatically — no override needed.
+        this.addCleanupTask(() => {
+            if (this._chart) {
+                this._chart.destroy();
+                this._chart = null;
+            }
+        });
+
         await this._initChart();
     }
 
-    async unmount() {
-        this._destroyChart();
-        await super.unmount();
-    }
+    // unmount() and destroy() are intentionally absent.
+    // BaseComponent handles both via the cleanup task registered above.
 
-    async destroy() {
-        this._destroyChart();
-        await super.destroy();
-    }
-
-    // ─── chart ──────────────────────────────────────────────────────────────
-
-    _destroyChart() {
-        if (this._chart) {
-            this._chart.destroy();
-            this._chart = null;
-        }
-    }
+    // ─── Chart Initialisation ─────────────────────────────────────────────────
 
     async _initChart() {
+        if (this._isLoading || this._chart) return;
+
         const trend = this._buildTrend();
 
         if (!trend.length) {
@@ -71,112 +65,139 @@ class ClicksChart extends BaseComponent {
         }
 
         try {
-            const Chart = await loadChartJs();
-            const canvas = this.querySelector(`#${this._canvasId}`);
-            if (!canvas) return;
+            this._isLoading = true;
 
-            const ctx = canvas.getContext('2d');
-            const gP = ctx.createLinearGradient(0, 0, 0, 260);
-            gP.addColorStop(0, 'rgba(102,126,234,0.35)');
-            gP.addColorStop(0.7, 'rgba(102,126,234,0.05)');
-            gP.addColorStop(1, 'rgba(102,126,234,0)');
+            const { default: ApexCharts } = await import('apexcharts');
 
-            const gB = ctx.createLinearGradient(0, 0, 0, 260);
-            gB.addColorStop(0, 'rgba(79,172,254,0.25)');
-            gB.addColorStop(0.7, 'rgba(79,172,254,0.03)');
-            gB.addColorStop(1, 'rgba(79,172,254,0)');
+            // Safety check: user may have navigated away while the library downloaded.
+            const wrap = this.querySelector('.chart-canvas-wrap');
+            if (!this.isMounted || !wrap || this._chart) return;
 
-            this._chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: trend.map(t => t.label),
-                    datasets: [
-                        {
-                            label: 'Total Clicks',
-                            data: trend.map(t => t.clicks),
-                            borderColor: '#667eea',
-                            backgroundColor: gP,
-                            fill: true,
-                            tension: 0.4,
-                            borderWidth: 2,
-                            pointRadius: 3,
-                            pointHoverRadius: 6,
-                            pointBackgroundColor: '#667eea',
-                        },
-                        {
-                            label: 'Unique Clicks',
-                            data: trend.map(t => t.unique),
-                            borderColor: '#4facfe',
-                            backgroundColor: gB,
-                            fill: true,
-                            tension: 0.4,
-                            borderWidth: 2,
-                            pointRadius: 3,
-                            pointHoverRadius: 6,
-                            pointBackgroundColor: '#4facfe',
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animations: trend.length > 100 ? false : { duration: 1000 },
-                    interaction: {intersect: false, mode: 'index'},
-                    plugins: {
-                        legend: {display: false},
-                        tooltip: {
-                            backgroundColor: 'rgba(10,10,30,0.95)',
-                            borderColor: 'rgba(255,255,255,0.08)',
-                            borderWidth: 1,
-                            titleColor: '#fff',
-                            bodyColor: 'rgba(255,255,255,0.65)',
-                            padding: 12,
-                            cornerRadius: 8,
-                            callbacks: {
-                                label: ctx => ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}`
-                            }
-                        },
-                    },
-                    scales: {
-                        x: {
-                            grid: {color: 'rgba(255,255,255,0.04)'},
-                            ticks: {color: 'rgba(255,255,255,0.4)', maxTicksLimit: 10, font: {size: 11}},
-                            border: {color: 'rgba(255,255,255,0.06)'},
-                        },
-                        y: {
-                            grid: {color: 'rgba(255,255,255,0.04)'},
-                            ticks: {color: 'rgba(255,255,255,0.4)', font: {size: 11}},
-                            border: {color: 'rgba(255,255,255,0.06)'},
-                            beginAtZero: true,
-                        },
-                    },
-                },
-            });
+            wrap.innerHTML = ''; // clear any previous empty-state markup
+
+            this._chart = new ApexCharts(wrap, this._buildOptions(trend));
+            await this._chart.render();
+
         } catch (err) {
             console.error('[ClicksChart] init failed:', err);
             this._showEmpty('Chart unavailable');
+        } finally {
+            this._isLoading = false;
         }
     }
 
-    // ─── data normalization ─────────────────────────────────────────────────
+    // ─── ApexCharts Config ────────────────────────────────────────────────────
+
+    /**
+     * Builds the full ApexCharts options object.
+     * Produces per-series gradient fills that replicate the original Chart.js
+     * canvas gradient feel (purple → transparent for Total, blue → transparent for Unique).
+     * @param {Array<{label:string, clicks:number, unique:number}>} trend
+     * @returns {Object}
+     */
+    _buildOptions(trend) {
+        return {
+            chart: {
+                type: 'area',
+                height: 260,
+                background: 'transparent',
+                toolbar: { show: false },
+                fontFamily: 'inherit',
+                animations: {
+                    enabled: trend.length <= 100,
+                    speed: 1000,
+                    easing: 'easeinout',
+                },
+                zoom: { enabled: false },
+            },
+            theme: { mode: 'dark' },
+            series: [
+                { name: 'Total Clicks',  data: trend.map(t => t.clicks) },
+                { name: 'Unique Clicks', data: trend.map(t => t.unique) },
+            ],
+            colors: ['#667eea', '#4facfe'],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    type: 'vertical',
+                    // colorStops lets us set independent opacity curves per series,
+                    // matching the original createLinearGradient() behaviour.
+                    colorStops: [
+                        [
+                            { offset: 0,   color: '#667eea', opacity: 0.35 },
+                            { offset: 70,  color: '#667eea', opacity: 0.05 },
+                            { offset: 100, color: '#667eea', opacity: 0.00 },
+                        ],
+                        [
+                            { offset: 0,   color: '#4facfe', opacity: 0.25 },
+                            { offset: 70,  color: '#4facfe', opacity: 0.03 },
+                            { offset: 100, color: '#4facfe', opacity: 0.00 },
+                        ],
+                    ],
+                },
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 2,
+            },
+            markers: {
+                size: 3,
+                hover: { size: 6 },
+            },
+            dataLabels: { enabled: false },
+            legend:     { show: false },
+            xaxis: {
+                categories: trend.map(t => t.label),
+                axisBorder: { show: false },
+                axisTicks:  { show: false },
+                labels: {
+                    rotate: 0,
+                    style:  { colors: 'rgba(255,255,255,0.4)', fontSize: '11px' },
+                },
+                tooltip: { enabled: false },
+            },
+            yaxis: {
+                min: 0,
+                labels: {
+                    style: { colors: 'rgba(255,255,255,0.4)', fontSize: '11px' },
+                    formatter: v =>
+                        v >= 1000 ? `${(v / 1000).toFixed(1)}k` : String(Math.round(v)),
+                },
+            },
+            grid: {
+                borderColor: 'rgba(255,255,255,0.04)',
+                xaxis: { lines: { show: false } },
+                yaxis: { lines: { show: true  } },
+            },
+            tooltip: {
+                theme: 'dark',
+                shared: true,
+                intersect: false,
+                style: { fontSize: '12px' },
+                y: { formatter: v => v.toLocaleString() },
+            },
+        };
+    }
+
+    // ─── Data Normalisation ───────────────────────────────────────────────────
 
     _buildTrend() {
         const raw = this.props.trend || [];
 
         if (raw.length) {
             return raw.map(t => ({
-                label: this._fmtDate(t.timestamp),
-                clicks: Number(t.clicks) || 0,
+                label:  this._fmtDate(t.timestamp),
+                clicks: Number(t.clicks)       || 0,
                 unique: Number(t.uniqueClicks) || 0,
             }));
         }
 
-        // Fallback: build from dailyClicks dict if provided
+        // Fallback: synthesise from dailyClicks dict if provided
         const daily = this.props.dailyClicks || {};
         return Object.entries(daily)
             .sort(([a], [b]) => a.localeCompare(b))
             .map(([date, clicks]) => ({
-                label: this._fmtDate(date),
+                label:  this._fmtDate(date),
                 clicks: Number(clicks) || 0,
                 unique: 0,
             }));
@@ -185,7 +206,9 @@ class ClicksChart extends BaseComponent {
     _fmtDate(ts) {
         if (!ts) return '';
         try {
-            return new Date(ts).toLocaleDateString('en-US', {month: 'short', day: 'numeric'});
+            return new Date(ts).toLocaleDateString('en-US', {
+                month: 'short', day: 'numeric',
+            });
         } catch {
             return String(ts).slice(0, 10);
         }
@@ -202,13 +225,59 @@ class ClicksChart extends BaseComponent {
         }
     }
 
-    // ─── public API ─────────────────────────────────────────────────────────
+    // ─── Public API ───────────────────────────────────────────────────────────
 
-    async updateData({trend, dailyClicks}) {
-        this.props.trend = trend;
-        this.props.dailyClicks = dailyClicks;
-        this._destroyChart();
-        if (this.isMounted) await this._initChart();
+    /**
+     * Update the chart with a new trend array.
+     *
+     * Called by AnalyticsPage's store subscriber on every analytics state change
+     * (e.g. after a date-filter preset change):
+     *   if (this.#clicksChart?.isMounted) this.#clicksChart.update(state.timeSeries?.trend ?? []);
+     *
+     * When the chart is already rendered, uses ApexCharts' in-place update APIs
+     * (updateOptions for categories + updateSeries for data) so the DOM is not
+     * torn down and rebuilt — far cheaper than a full destroy/reinit.
+     *
+     * When the chart was previously in an empty state (no data) and new data
+     * arrives, _initChart() is called to render it from scratch.
+     *
+     * @param {Array} trend - Raw trend array from timeSeries.trend
+     */
+    async update(trend) {
+        this.props.trend       = trend ?? [];
+        this.props.dailyClicks = {};   // clear the fallback dict
+
+        if (!this.isMounted) return;
+
+        const built = this._buildTrend();
+
+        // Transitioning to empty state
+        if (!built.length) {
+            if (this._chart) {
+                this._chart.destroy();
+                this._chart = null;
+            }
+            this._showEmpty();
+            return;
+        }
+
+        // Transitioning from empty state → has data
+        if (!this._chart) {
+            await this._initChart();
+            return;
+        }
+
+        // Fast in-place update — chart already rendered
+        // Step 1: sync x-axis labels (non-animated, immediate)
+        await this._chart.updateOptions({
+            xaxis: { categories: built.map(t => t.label) },
+        }, false /* redrawPaths */, false /* animate */);
+
+        // Step 2: swap series data (animated)
+        this._chart.updateSeries([
+            { name: 'Total Clicks',  data: built.map(t => t.clicks) },
+            { name: 'Unique Clicks', data: built.map(t => t.unique) },
+        ], true /* animate */);
     }
 }
 

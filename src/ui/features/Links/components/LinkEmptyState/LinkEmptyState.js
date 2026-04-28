@@ -4,7 +4,6 @@
  * RESPONSIBILITY: Render an empty state message with an optional action button.
  */
 
-import './LinkEmptyState.css';
 import BaseComponent from '../../../../base/BaseComponent.js';
 
 export default class LinkEmptyState extends BaseComponent {

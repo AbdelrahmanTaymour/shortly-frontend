@@ -2,7 +2,6 @@
  * ConfirmModal — Generic confirmation dialog.
  */
 
-import './ConfirmModal.css';
 import BaseComponent from '../../../../base/BaseComponent.js';
 
 export default class ConfirmModal extends BaseComponent {

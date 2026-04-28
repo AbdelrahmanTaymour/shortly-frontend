@@ -7,7 +7,6 @@
  *                 'Profile' store slice, delegate user actions to ProfileService.
  */
 
-import './ProfilePage.css';
 import BasePage from '../BasePage.js';
 import DashboardPageHeader from '../../components/DashboardPageHeader/DashboardPageHeader.js';
 import ProfileHeaderCard from '../../features/Profile/ProfileHeaderCard/ProfileHeaderCard.js';

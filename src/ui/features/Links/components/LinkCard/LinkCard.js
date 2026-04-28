@@ -1,4 +1,4 @@
-import './LinkCard.css';
+
 import {formatNumber, formatRelativeTime, truncateUrl} from '../../../../../utils/formatting.js';
 import {escapeHtml} from '../../../../../utils/dom.js';
 import {getLinkStatus} from '../../../../../utils/ui-logic.js';

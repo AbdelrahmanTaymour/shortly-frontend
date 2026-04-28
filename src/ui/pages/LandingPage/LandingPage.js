@@ -1,4 +1,4 @@
-import './LandingPage.css';
+
 import BasePage from '../BasePage.js';
 import {isValidUrl} from '../../../utils/validation.js';
 import apiConfig from '../../../config/api.config.js';
@@ -241,7 +241,7 @@ class LandingPage extends BasePage {
         // Attach the listener to the window
         window.addEventListener('scroll', this._headerScrollHandler);
 
-        // Run once on load to check current position
+        // Run once on load to check the current position
         updateHeader();
     }
 

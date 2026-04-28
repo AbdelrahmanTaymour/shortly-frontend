@@ -1,11 +1,7 @@
 /**
  * DangerZoneCard  –  src/ui/ProfileHeaderCard/Settings/DangerZoneCard.js
- *
- * Account deletion section with a typed "DELETE" confirmation guard.
- * Emits 'deleteAccount' → {}
  */
 
-import './DangerZoneCard.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 
 const CONFIRM_WORD = 'DELETE';

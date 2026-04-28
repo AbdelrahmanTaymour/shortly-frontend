@@ -48,25 +48,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function initializeApp() {
     // Core Infrastructure
-    const eventBus = new EventBus();
+    const eventBus  = new EventBus();
     const apiClient = new ApiClient(apiConfig.baseUrl);
 
     // API Layer (pure HTTP wrappers) ─────────────────────────────────────
-    const authApi = new AuthApi(apiClient);
-    const linksApi = new LinksApi(apiClient);
+    const authApi     = new AuthApi(apiClient);
+    const linksApi    = new LinksApi(apiClient);
     const analyticsApi = new AnalyticsApi(apiClient);
-    const profileApi = new ProfileApi(apiClient);
+    const profileApi  = new ProfileApi(apiClient);
     const settingsApi = new SettingsApi(apiClient);
 
     // Service Layer
-    const router = new Router(eventBus);
-    const tokenManager = new TokenManager();
-    const authService = new AuthService(authApi, store, eventBus, tokenManager);
-    const linksService = new LinksService(linksApi, store, eventBus);
+    const router         = new Router(eventBus);
+    const tokenManager   = new TokenManager();
+    const authService    = new AuthService(authApi, store, eventBus, tokenManager);
+    const linksService   = new LinksService(linksApi, store, eventBus);
     const analyticsService = new AnalyticsService(analyticsApi, store, eventBus);
     const profileService = new ProfileService(profileApi, store, eventBus);
     const settingsService = new SettingsService(settingsApi, store, eventBus);
-    const toastService = new ToastService(eventBus);
+    const toastService   = new ToastService(eventBus);
 
     // Router auth guard
     router.setAuthGuard(() => authService.isAuthenticated);
@@ -75,8 +75,6 @@ async function initializeApp() {
     authService.setupInterceptors(apiClient);
 
     // OAuth redirect listener
-    // AuthService emits this event; the actual window.location mutation
-    // happens here in main.js (the only place allowed to touch the browser).
     eventBus.on(eventBus.EVENTS.AUTH_OAUTH_REDIRECT_REQUIRED, ({provider}) => {
         if (provider === 'google') {
             window.location.href = `${apiConfig.baseUrl}${apiConfig.endpoints.oauth.googleLogin}`;
@@ -84,23 +82,21 @@ async function initializeApp() {
     });
 
     // Session-expired listener
-    // The 401-retry interceptor emits this instead of calling router.navigate()
-    // directly — the service layer must not import the Router.
     eventBus.on(eventBus.EVENTS.AUTH_SESSION_EXPIRED, () => {
         router.navigate('/login');
     });
 
     // Application assembly
     const app = new Application(appConfig);
-    app.registerService('eventBus', eventBus);
-    app.registerService('router', router);
-    app.registerService('store', store);
-    app.registerService('auth', authService);
-    app.registerService('links', linksService);
-    app.registerService('analytics', analyticsService);
-    app.registerService('profile', profileService);
-    app.registerService('settings', settingsService);
-    app.registerService('toast', toastService);
+    app.registerService('eventBus',   eventBus);
+    app.registerService('router',     router);
+    app.registerService('store',      store);
+    app.registerService('auth',       authService);
+    app.registerService('links',      linksService);
+    app.registerService('analytics',  analyticsService);
+    app.registerService('profile',    profileService);
+    app.registerService('settings',   settingsService);
+    app.registerService('toast',      toastService);
 
     await app.init();
 
@@ -123,14 +119,24 @@ async function initializeApp() {
 
 // ─── Private Helpers ──────────────────────────────────────────────────────────
 
+/**
+ * Register all routes from config with the Router.
+ *
+ * Routes that have no pageLoader (null entries for unimplemented pages like
+ * /qr, /admin, /organization) are skipped — navigating to them will emit a
+ * 404 event, which is the same behaviour as before.
+ *
+ * CHANGED: guards on `route.pageLoader` (was `route.pageClass`).
+ *          passes `pageLoader` to addRoute (was `pageClass`).
+ */
 function _setupRoutes(router) {
     routesConfig.forEach(route => {
-        if (!route.pageClass) return;
+        if (!route.pageLoader) return;    // skip unimplemented routes
         router.addRoute(route.path, {
             templatePath: route.templatePath,
-            pageClass: route.pageClass,
-            title: route.title,
-            public: route.public,
+            pageLoader:   route.pageLoader, // factory, resolved by Router.navigate()
+            title:        route.title,
+            public:       route.public,
         });
     });
 }

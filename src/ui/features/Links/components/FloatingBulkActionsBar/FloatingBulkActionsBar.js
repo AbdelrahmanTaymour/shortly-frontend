@@ -11,7 +11,6 @@
  * FORBIDDEN: Service calls · store access · navigation · layout side-effects
  */
 
-import './FloatingBulkActionsBar.css';
 import BaseComponent from '../../../../base/BaseComponent.js';
 
 export default class FloatingBulkActionsBar extends BaseComponent {

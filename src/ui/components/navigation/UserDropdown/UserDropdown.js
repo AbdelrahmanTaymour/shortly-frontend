@@ -1,4 +1,3 @@
-import './UserDropdown.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 
 class UserDropdown extends BaseComponent {

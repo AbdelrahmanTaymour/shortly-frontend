@@ -1,11 +1,7 @@
 /**
  * HomePage — Dashboard Home page controller.
- *
- * RESPONSIBILITY: Orchestrate the dashboard view — KPI cards, recent Links,
- *                 quick actions, link CRUD modals.
  */
 
-import './HomePage.css';
 import BasePage from '../BasePage.js';
 import UserOverviewCards from '../../features/Analytics/UserOverviewCards/UserOverviewCards.js';
 import {RecentLinkCard} from '../../features/Links/components/RecentLinkCard.js';

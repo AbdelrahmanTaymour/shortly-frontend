@@ -1,11 +1,7 @@
 /**
  * ProfileHeaderCard  –  src/ui/ProfileHeaderCard/Profile/ProfileHeaderCard.js
- *
- * Displays the user's avatar (initials fallback), name, bio, and key metadata.
- * Emits 'editClick' when the user triggers edit mode.
  */
 
-import './ProfileHeaderCard.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 import {getCountryName} from "../../../../utils/Countries.js";
 

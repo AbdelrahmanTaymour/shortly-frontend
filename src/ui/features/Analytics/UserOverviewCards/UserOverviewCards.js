@@ -9,7 +9,6 @@
  *   which are available directly in UserOverviewMetrics.
  */
 
-import './UserOverviewCards.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 import {StatCard} from '../../Home/components/StatCard.js';
 import {formatNumber} from '../../../../utils/formatting.js';

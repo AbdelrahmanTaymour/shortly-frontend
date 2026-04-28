@@ -12,7 +12,6 @@
  * FORBIDDEN: Call services · navigate · store.dispatch()
  */
 
-import './AuthForm.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 import {isValidatePassword, isValidEmail, validateUsername,} from '../../../../utils/validation.js';
 

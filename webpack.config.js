@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const PATHS = {
     src:    path.resolve(__dirname, 'src'),
@@ -44,6 +45,12 @@ module.exports = (env, argv) => {
             splitChunks: {
                 chunks: 'all',
                 cacheGroups: {
+                    styles: {
+                        name: 'main',
+                        type: 'css/mini-extract',
+                        chunks: 'all',
+                        enforce: true,
+                    },
                     apexcharts: {
                         test: /[\\/]node_modules[\\/]apexcharts[\\/]/,
                         name: 'vendor-apexcharts',
@@ -83,27 +90,41 @@ module.exports = (env, argv) => {
             new Dotenv({
                 systemvars: true,
             }),
+
             new MiniCssExtractPlugin({
                 filename: 'css/[name].[contenthash].css',
+                chunkFilename: 'css/[id].[contenthash].css', // Ensures lazy CSS goes to /css/
             }),
+
 
             new CopyWebpackPlugin({
                 patterns: [
                     {
+                        from: path.join(PATHS.styles, 'fontawesome/css/all.min.css'),
+                        to: 'styles/fontawesome/css/all.min.css'
+                    },
+                    {
+                        from: path.join(PATHS.styles, 'fontawesome/webfonts'),
+                        to: 'styles/fontawesome/webfonts'
+                    },
+                    {
                         from: path.join(PATHS.src, 'ui'),
-                        to:   path.resolve(__dirname, 'dist/ui'),
-                        globOptions: {
-                            ignore: ['**/*.js'],
-                        },
+                        to: path.resolve(__dirname, 'dist/ui'),
+                        globOptions: { ignore: ['**/*.js'] },
                         noErrorOnMissing: true,
                     },
                     {
-                        from: PATHS.styles,                           // root styles/
-                        to:   path.resolve(__dirname, 'dist/styles'), // → dist/styles/
+                        from: PATHS.styles,
+                        to: path.resolve(__dirname, 'dist/styles'),
+                        globOptions: {
+                            // This is the critical line: do not copy the whole fontawesome folder again
+                            ignore: ['**/fontawesome/**']
+                        },
                         noErrorOnMissing: true,
                     },
                 ],
             }),
+
 
             ...(isProduction ? [
                 new PurgeCSSPlugin({
@@ -114,6 +135,11 @@ module.exports = (env, argv) => {
                     safelist: ['is-active', 'loaded']
                 })
             ] : []),
+
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static', // Generates an HTML file in 'dist'
+                openAnalyzer: false,    // Set to true to open automatically after build
+            }),
         ],
     };
 };

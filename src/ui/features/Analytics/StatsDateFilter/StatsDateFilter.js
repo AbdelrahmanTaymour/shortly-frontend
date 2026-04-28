@@ -1,22 +1,7 @@
 /**
  * StatsDateFilter — Date range preset selector (7D / 30D / 90D / All Time).
- *
- * ─── FIX ─────────────────────────────────────────────────────────────────────
- *
- * emit('dateChange', ...) → this.container.dispatchEvent(CustomEvent)
- *
- * LinkStatsPage listens via:
- *   this.attachListener(el, 'dateChange', handler)
- * which expects a DOM CustomEvent on el (the #dateFilterMount container).
- * BaseComponent.emit() dispatches to object-level .on() callbacks — never
- * reaches the DOM listener. Fixed by dispatching directly on the container.
- *
- * EXPORTS:
- * - default: StatsDateFilter class
- * - named:   getDateRange(preset) — utility consumed by LinkStatsPage
  */
 
-import './StatsDateFilter.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 
 export const PRESETS = [

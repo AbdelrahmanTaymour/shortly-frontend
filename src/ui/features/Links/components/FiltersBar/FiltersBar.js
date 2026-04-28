@@ -2,7 +2,6 @@
  * FiltersBar — Search + filter controls for the Links list.
  */
 
-import './FiltersBar.css';
 import BaseComponent from '../../../../base/BaseComponent.js';
 
 const EVT_CLOSE_FILTER = 'Links:closeFilterPopover';

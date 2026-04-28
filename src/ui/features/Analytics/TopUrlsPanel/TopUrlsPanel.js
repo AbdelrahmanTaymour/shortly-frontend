@@ -2,7 +2,6 @@
  * TopLinksPanel — Ranked list of top-performing URLs.
  */
 
-import './TopUrlsPanel.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 import {formatDate, formatNumber} from '../../../../utils/formatting.js';
 import appConfig from "../../../../config/app.config";

@@ -1,11 +1,7 @@
 /**
  * QuotaStatusCard  –  src/ui/ProfileHeaderCard/Profile/QuotaStatusCard.js
- *
- * Visualizes the user's monthly quota for Links and QR codes,
- * including progress bars, subscription plan, and reset dates.
  */
 
-import './QuotaStatusCard.css';
 import BaseComponent from '../../../base/BaseComponent.js';
 
 const PLAN_LABELS = {

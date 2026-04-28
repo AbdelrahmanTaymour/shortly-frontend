@@ -3,27 +3,8 @@
  *
  * RESPONSIBILITY: Own the #user-profile-slot DOM slice and keep it in sync
  *   with the current authentication state by listening to EventBus events.
- *
- * ALLOWED:
- *   ✅ Read auth state from AuthService
- *   ✅ Mount/unmount the UserDropdown component
- *   ✅ Subscribe to EventBus auth and navigation events
- *   ✅ Manipulate only the #user-profile-slot DOM node
- *
- * FORBIDDEN:
- *   ❌ Business logic (token refresh, login, logout operations)
- *   ❌ Direct API calls
- *   ❌ Navigation
- *   ❌ Accessing DOM nodes outside #user-profile-slot
- *   ❌ Knowing about other UI controllers or pages
- *
- * DEPENDS ON:
- *   - AuthService (read-only: isAuthenticated, currentUser)
- *   - EventBus (subscribe to USER_UPDATED, NAVIGATION_COMPLETED, USER_LOGGED_OUT)
- *   - UserDropdown (child component it mounts/unmounts)
  */
 
-import './Header.css';
 import UserDropdown from '../UserDropdown/UserDropdown.js';
 
 export default class HeaderController {

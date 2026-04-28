@@ -1,13 +1,7 @@
 /**
  * RegisterPage — Creates a new user account.
- *
- * RESPONSIBILITY: Mount AuthForm, pass callbacks, navigate on success.
- *
- * ALLOWED: Subscribe to Auth store · call authService.register() · navigate
- * FORBIDDEN: Validation · password strength · term state · form rendering
  */
 
-import '../AuthPages.css';
 import BasePage from '../../BasePage.js';
 import AuthForm from '../../../features/Auth/AuthForm/AuthForm.js';
 

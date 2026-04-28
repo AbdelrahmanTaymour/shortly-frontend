@@ -1,115 +1,117 @@
 /**
  * Routes Configuration
- * Defines all application routes and their associated pages
+ *
+ * ─── CHANGE FROM PREVIOUS VERSION ───────────────────────────────────────────
+ *
+ * Static page-class imports replaced with `pageLoader` factory functions.
+ *
+ * BEFORE:
+ *   import HomePage from '../ui/pages/HomePage/HomePage.js';
+ *   { path: '/home', pageClass: HomePage, ... }
+ *
+ * AFTER:
+ *   { path: '/home', pageLoader: () => import('../ui/pages/HomePage/HomePage.js'), ... }
+ *
+ * WHY THIS WORKS:
+ *   Each `() => import(...)` is a dynamic import expression. Webpack sees these
+ *   at build time and splits each page's module graph into its own async chunk.
+ *   The chunk is downloaded only when Router.navigate() calls pageLoader()
+ *   for the first time — i.e. when the user actually visits that route.
+ *
+ *   Subsequent visits to the same route are free: the browser has cached the
+ *   chunk and the module is already in the module registry.
+ *
+ * ROUTES WITH pageClass: null (qr, admin, organization):
+ *   These routes have no pageLoader. _setupRoutes() in main.js guards on
+ *   `!route.pageLoader` and skips them, so they remain unregistered
+ *   (navigating to them emits a 404 event, same as before).
+ *
+ * NO CHANGES REQUIRED IN:
+ *   Application.js   — receives a resolved class in NAVIGATION_COMPLETED, as always.
+ *   BasePage.js      — unchanged.
+ *   Any page class   — unchanged internally.
  */
 
-// Import page classes
-import LoginPage from '../ui/pages/AuthPages/LoginPage/LoginPage.js';
-import RegisterPage from '../ui/pages/AuthPages/RegisterPage/RegisterPage.js';
-import ForgotPasswordPage from '../ui/pages/AuthPages/ForgotPasswordPage/ForgotPasswordPage.js';
-import LandingPage from '../ui/pages/LandingPage/LandingPage.js';
-import HomePage from '../ui/pages/HomePage/HomePage.js';
-import LinksPage from '../ui/pages/LinksPage/LinksPage.js';
-import LinkStatsPage from '../ui/pages/LinkStatsPage/LinkStatsPage.js';
-import AnalyticsPage from '../ui/pages/AnalyticsPage/AnalyticsPage.js';
-import ProfilePage from '../ui/pages/ProfilePage/ProfilePage.js';
-import SettingsPage from '../ui/pages/SettingsPage/SettingsPage.js';
-
 const routesConfig = [
-    // Public routes
+
+    // ── Public routes ─────────────────────────────────────────────────────────
+
     {
         path: '/register',
         templatePath: '/ui/pages/AuthPages/RegisterPage/RegisterPage.html',
-        pageClass: RegisterPage,
+        pageLoader: () => import('../ui/pages/AuthPages/RegisterPage/RegisterPage.js'),
         title: 'Register - Shortly',
-        public: true
+        public: true,
     },
     {
         path: '/login',
         templatePath: '/ui/pages/AuthPages/LoginPage/LoginPage.html',
-        pageClass: LoginPage,
+        pageLoader: () => import('../ui/pages/AuthPages/LoginPage/LoginPage.js'),
         title: 'Login - Shortly',
-        public: true
+        public: true,
     },
     {
         path: '/forgot-password',
         templatePath: '/ui/pages/AuthPages/ForgotPasswordPage/ForgotPasswordPage.html',
-        pageClass: ForgotPasswordPage,
+        pageLoader: () => import('../ui/pages/AuthPages/ForgotPasswordPage/ForgotPasswordPage.js'),
         title: 'Forgot Password - Shortly',
-        public: true
+        public: true,
     },
 
-    // Protected routes
+    // ── Landing ───────────────────────────────────────────────────────────────
+
     {
         path: '/',
         templatePath: '/ui/pages/LandingPage/LandingPage.html',
-        pageClass: LandingPage,
+        pageLoader: () => import('../ui/pages/LandingPage/LandingPage.js'),
         title: 'Shortly - Track Your Success',
-        public: true
+        public: true,
     },
+
+    // ── Protected routes ──────────────────────────────────────────────────────
+
     {
         path: '/home',
         templatePath: '/ui/pages/HomePage/HomePage.html',
-        pageClass: HomePage,
+        pageLoader: () => import('../ui/pages/HomePage/HomePage.js'),
         title: 'Dashboard - Shortly',
-        public: false
+        public: false,
     },
     {
         path: '/links',
         templatePath: '/ui/pages/LinksPage/LinksPage.html',
-        pageClass: LinksPage,
+        pageLoader: () => import('../ui/pages/LinksPage/LinksPage.js'),
         title: 'Links - Shortly',
-        public: false
+        public: false,
     },
     {
         path: '/links/:id/stats',
         templatePath: null,
-        pageClass: LinkStatsPage,
+        pageLoader: () => import('../ui/pages/LinkStatsPage/LinkStatsPage.js'),
         title: 'Link Statistics - Shortly',
-        public: false
-    },
-    {
-        path: '/qr',
-        templatePath: 'sections/qr.html',
-        pageClass: null, // To be defined
-        title: 'QR Codes - Shortly',
-        public: false
+        public: false,
     },
     {
         path: '/analytics',
         templatePath: '/ui/pages/AnalyticsPage/AnalyticsPage.html',
-        pageClass: AnalyticsPage,
+        pageLoader: () => import('../ui/pages/AnalyticsPage/AnalyticsPage.js'),
         title: 'Analytics - Shortly',
-        public: false
+        public: false,
     },
     {
         path: '/profile',
         templatePath: '/ui/pages/ProfilePage/ProfilePage.html',
-        pageClass: ProfilePage,
+        pageLoader: () => import('../ui/pages/ProfilePage/ProfilePage.js'),
         title: 'Profile - Shortly',
-        public: false
+        public: false,
     },
     {
         path: '/settings',
         templatePath: '/ui/pages/SettingsPage/SettingsPage.html',
-        pageClass: SettingsPage,
+        pageLoader: () => import('../ui/pages/SettingsPage/SettingsPage.js'),
         title: 'Settings - Shortly',
-        public: false
+        public: false,
     },
-    {
-        path: '/admin',
-        templatePath: 'sections/admin.html',
-        pageClass: null, // To be defined
-        title: 'Admin Panel - Shortly',
-        public: false
-    },
-    {
-        path: '/organization',
-        templatePath: 'sections/organization.html',
-        pageClass: null, // To be defined
-        title: 'My Organization - Shortly',
-        public: false
-    }
 ];
 
 export default routesConfig;

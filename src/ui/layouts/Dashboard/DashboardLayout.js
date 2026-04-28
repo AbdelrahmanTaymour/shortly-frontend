@@ -12,8 +12,6 @@
  * @returns {string}
  */
 
-import './DashboardLayout.css';
-
 export const DashboardLayout = () => `
     <div class="dashboard-container">
 

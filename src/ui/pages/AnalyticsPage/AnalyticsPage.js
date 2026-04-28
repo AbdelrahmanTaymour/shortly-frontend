@@ -2,7 +2,6 @@
  * AnalyticsPage — Comprehensive Analytics dashboard page controller.
  */
 
-import './AnalyticsPage.css';
 import BasePage from '../BasePage.js';
 import DashboardPageHeader from '../../components/DashboardPageHeader/DashboardPageHeader.js';
 import StatsDateFilter from '../../features/Analytics/StatsDateFilter/StatsDateFilter.js';

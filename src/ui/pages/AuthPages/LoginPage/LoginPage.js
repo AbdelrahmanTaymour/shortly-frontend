@@ -7,7 +7,6 @@
  * FORBIDDEN: Validation · form rendering · global document.getElementById()
  */
 
-import '../AuthPages.css';
 import BasePage from '../../BasePage.js';
 import AuthForm from '../../../features/Auth/AuthForm/AuthForm.js';
 

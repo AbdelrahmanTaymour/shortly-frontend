@@ -2,7 +2,6 @@
  * LinkStatsPage — Link statistics and Analytics page.
  */
 
-import './LinkStatsPage.css';
 import BasePage from '../BasePage.js';
 import StatsDateFilter, {getDateRange} from '../../features/Analytics/StatsDateFilter/StatsDateFilter.js';
 import StatsOverviewCards from '../../features/Analytics/components/StatsOverviewCards.js';

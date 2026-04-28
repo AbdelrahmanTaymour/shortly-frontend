@@ -1,13 +1,7 @@
 /**
  * SettingsPage — Settings page controller.
- *
- * Location: src/ui/pages/SettingsPage/SettingsPage.js
- *
- * RESPONSIBILITY: Orchestrate Settings feature ProfileHeaderCard, subscribe to the
- *                 'Settings' store slice, delegate user actions to SettingsService.
  */
 
-import './SettingsPage.css';
 import BasePage from '../BasePage.js';
 import DashboardPageHeader from '../../components/DashboardPageHeader/DashboardPageHeader.js';
 import ChangePasswordForm from '../../features/Settings/components/ChangePasswordForm.js';
