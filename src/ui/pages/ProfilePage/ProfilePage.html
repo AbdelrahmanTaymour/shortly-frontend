@@ -1,23 +1,10 @@
-<!-- ProfilePage.html — src/ui/pages/ProfilePage/ProfilePage.html -->
 
-<!--
-  DashboardPageHeader mount point.
-  Sits OUTSIDE the skeleton/content toggle containers, so the page title
-  ("My Profile") is always visible — even while data is loading or if
-  an error occurs. ProfilePage.js mounts DashboardPageHeader here first,
-  before triggering the skeleton.
--->
 <div id="profilePageHeaderMount"></div>
 
 <div aria-label="Profile page" class="profile-page">
 
     <!-- ── Skeleton ──────────────────────────────────────────────────────── -->
-    <!--
-      The skeleton-page-header block has been REMOVED from this revision.
-      DashboardPageHeader (above) renders the real title immediately —
-      there is nothing to a skeleton-load for a static heading.
-      The skeleton now covers only the two-column content layout.
-    -->
+
     <div aria-hidden="true" class="profile-skeleton" id="profileSkeleton">
         <div class="profile-layout profile-layout--skeleton">
             <div class="profile-left">

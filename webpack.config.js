@@ -1,5 +1,5 @@
 const path = require('path');
-const glob = require('glob-all');
+const { globSync } = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -128,9 +128,9 @@ module.exports = (env, argv) => {
 
             ...(isProduction ? [
                 new PurgeCSSPlugin({
-                    paths: glob.sync([
-                        `${PATHS.src}/**/*`,
-                        `${path.join(__dirname, '_legacy')}/**/*`,
+                    paths: globSync([
+                        path.join(PATHS.src, '**/*'),
+                        path.join(__dirname, '_legacy', '**/*'),
                     ], { nodir: true }),
                     safelist: ['is-active', 'loaded']
                 })

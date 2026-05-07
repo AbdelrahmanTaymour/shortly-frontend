@@ -1,25 +1,3 @@
-<!--
-    AnalyticsPage.html — Analytics dashboard skeleton.
-
-    CHANGE from previous version:
-      The inline .stats-page-header block (icon + title + date buttons) is
-      replaced by a DashboardPageHeader mount point. AnalyticsPage.js mounts
-      the generic header and puts StatsDateFilter into the right slot.
-
-    IDs used by AnalyticsPage.js (must not be renamed):
-      #analyticsPageHeaderMount   — DashboardPageHeader mounts here
-      #analyticsSkeletonLoader    — shown while initial data loads
-      #analyticsContent           — hidden during initial load, shown after
-      #analyticsRefetchOverlay    — overlay during date-range refresh
-      #analyticsError             — shown on mount failure
-      #overviewCardsContainer     — UserOverviewCards
-      #comparisonBannerContainer  — ComparisonBanner
-      #analyticsNavTabs           — tab button strip
-      Tab panels: #tabOverview, #tabToplinks, #tabGeography, #tabTraffic, #tabDevices
-      Component mount points: #clicksChartContainer, #engagementContainer,
-                               #topLinksContainer, #geoPanelContainer,
-                               #trafficPanelContainer, #devicesPanelContainer
--->
 
 <!-- DashboardPageHeader mounts here -->
 <div id="analyticsPageHeaderMount"></div>

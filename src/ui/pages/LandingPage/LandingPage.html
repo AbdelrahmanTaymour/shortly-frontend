@@ -43,7 +43,7 @@
             </div>
             <div class="tab-content" id="urlTab">
                 <div class="form-group-base form-group-horizontal-base">
-                    <input
+                    <label for="urlInput" class="sr-only">Enter your long URL</label><input
                             class="form-input"
                             id="urlInput"
                             placeholder="Paste your long URL here..."
@@ -67,7 +67,7 @@
             </div>
             <div class="tab-content" id="qrTab" style="display: none">
                 <div class="form-group-base form-group-horizontal-base">
-                    <input
+                    <label for="qrUrlInput" class="sr-only">Enter your long URL</label><input
                             class="form-input"
                             id="qrUrlInput"
                             placeholder="Paste URL to generate QR code..."
@@ -289,11 +289,14 @@
                 <div class="contact-form">
                     <form>
                         <div class="form-group-base">
-                            <input placeholder="Your Name" required type="text"/>
-                            <input placeholder="Your Email" required type="email"/>
+                            <label for="contactName" class="sr-only">Name</label>
+                            <input id="contactName" placeholder="Your Name" required type="text"/>
+
+                            <label for="contactEmail" class="sr-only">Email</label>
+                            <input id="contactEmail" placeholder="Your Email" required type="email"/>
                         </div>
                         <div class="form-group-base">
-                            <select required>
+                            <label for="contactSubject" class="sr-only">Subject</label><select id="contactSubject" required>
                                 <option value="">Select Subject</option>
                                 <option value="general">General Inquiry</option>
                                 <option value="support">Technical Support</option>
@@ -302,7 +305,8 @@
                             </select>
                         </div>
                         <div class="form-group-base">
-                            <textarea placeholder="Your Message" required rows="5"></textarea>
+                            <label for="contactMessage" class="sr-only">Message</label>
+                            <textarea id="contactMessage" placeholder="Your Message" required rows="5"></textarea>
                         </div>
                         <button class="contact-btn" type="submit">Send Message</button>
                     </form>

@@ -1,21 +1,8 @@
-<!-- SettingsPage.html — src/ui/pages/SettingsPage/SettingsPage.html -->
 
-<!--
-  DashboardPageHeader mount point.
-  Sits OUTSIDE the skeleton/content toggle so "Settings" title is always
-  visible — even while security status is loading or if an error occurs.
-  SettingsPage.js mounts DashboardPageHeader here before skeleton is shown.
--->
 <div id="settingsPageHeaderMount"></div>
 
 <div aria-label="Settings page" class="settings-page">
 
-    <!-- ── Skeleton ──────────────────────────────────────────────────────── -->
-    <!--
-      skeleton-page-header REMOVED — DashboardPageHeader (above) renders the
-      real title immediately; there is nothing to skeleton-load for a heading.
-      Skeleton now covers only the sidebar + card layout.
-    -->
     <div aria-hidden="true" class="settings-skeleton" id="settingsSkeleton">
         <div class="settings-layout">
             <aside class="settings-sidebar">
@@ -102,7 +89,7 @@
             <!-- ── Right: section content ─────────────────────────────────── -->
             <main class="settings-main">
 
-                <!-- Account Security (password + email change) -->
+                <!-- Account Security (password and email change) -->
                 <section aria-label="Account security" class="settings-section active" id="settingsSectionAccount">
                     <div id="sChangePasswordContainer"></div>
                     <div id="sChangeEmailContainer"></div>
