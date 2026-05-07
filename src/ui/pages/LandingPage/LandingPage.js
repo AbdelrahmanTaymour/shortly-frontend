@@ -193,8 +193,10 @@ class LandingPage extends BasePage {
         if (!this.qrInput) return;
 
         const button = document.getElementById('qrGenerateButton');
-
         button?.addEventListener('click', () => this.generateQR());
+
+        const downloadBtn = document.getElementById('qrDownload');
+        downloadBtn?.addEventListener('click', () => this.downloadQR());
     }
 
     generateQR() {
@@ -211,8 +213,25 @@ class LandingPage extends BasePage {
             foreground: 'black'
         });
 
+        this.qrInput.dataset.lastQrValue = value;
         this.qrResult.style.display = 'block';
         this.qrInput.value = '';
+    }
+
+    downloadQR() {
+        if (!this.qrCanvas) return;
+
+        // Get the URL value to use as filename, fallback to 'qrcode'
+        const rawUrl = this.qrInput?.dataset?.lastQrValue || 'qrcode';
+        const filename = rawUrl
+            .replace(/^https?:\/\//, '')   // strip protocol
+            .replace(/[^a-zA-Z0-9._-]/g, '_') // sanitize
+            .slice(0, 50);
+
+        const link = document.createElement('a');
+        link.href = this.qrCanvas.toDataURL('image/png');
+        link.download = `${filename}.png`;
+        link.click();
     }
 
     /* -------------------------
