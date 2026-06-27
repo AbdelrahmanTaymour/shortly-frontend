@@ -165,7 +165,7 @@
 @media (max-width: 480px) {
     .form-options {
         align-items: flex-start;
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.5rem;
     }
 }
