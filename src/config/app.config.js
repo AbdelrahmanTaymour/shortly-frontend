@@ -8,7 +8,7 @@ const appConfig = {
     version: '2.0.0',
     description: 'URL Shortener Dashboard',
     url: 'https://shortly.runasp.net',
-    //url: 'https://localhost:5002',  // dev
+    // url: 'https://localhost:5002',  // dev
 
     // Environment
     environment: typeof process !== 'undefined' && process.env ? process.env.NODE_ENV : 'development',
